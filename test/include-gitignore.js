@@ -25,8 +25,8 @@ const json = {
 const expect = [
   'package.json',
   'elf.js',
-  'z/.gitignore',
-  'deps/foo/config/config.gypi'
+  'deps/foo/config/config.gypi',
+  'z/.gitignore'
 ]
 
 t.test('setup', t => {

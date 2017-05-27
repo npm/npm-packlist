@@ -126,8 +126,8 @@ const sort = (a, b) =>
   : b === 'package.json' ? 1
   : /^node_modules/.test(a) ? 1
   : /^node_modules/.test(b) ? -1
-  : a.split('/').length < b.split('/').length ? -1
-  : a.split('/').length > b.split('/').length ? 1
+  : path.dirname(a) === '.' && path.dirname(b) !== '.' ? -1
+  : path.dirname(b) === '.' && path.dirname(a) !== '.' ? 1
   : a.localeCompare(b)
 
 module.exports = walk
