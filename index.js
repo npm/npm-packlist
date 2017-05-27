@@ -3,8 +3,8 @@ const ignoreWalk = require('ignore-walk')
 const IgnoreWalker = ignoreWalk.Walker
 const IgnoreWalkerSync = ignoreWalk.WalkerSync
 
-const rootBuiltinRules = '././root-builtin-rules' //Symbol('root-builtin-rules')
-const packageNecessaryRules = '././package-necessary-rules' // Symbol('package-necessary-rules')
+const rootBuiltinRules = Symbol('root-builtin-rules')
+const packageNecessaryRules = Symbol('package-necessary-rules')
 
 // a decorator that applies our custom rules to an ignore walker
 const npmWalker = Class => class Walker extends Class {
