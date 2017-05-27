@@ -14,5 +14,8 @@
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
     "tap": "^10.3.2"
+  },
+  "scripts": {
+    "test": "tap test/*.js -J --100"
   }
 }
