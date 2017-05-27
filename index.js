@@ -113,11 +113,11 @@ const walk = (options, callback) => {
   const p = new Promise((resolve, reject) => {
     new Walker(options).on('done', resolve).on('error', reject).start()
   })
-  return callback ? p.then(res => callback(null, res.sort(sort)), callback) : p
+  return callback ? p.then(res => callback(null, res), callback) : p
 }
 
 const walkSync = options => {
-  return new WalkerSync(options).start().result.sort(sort)
+  return new WalkerSync(options).start().result
 }
 
 // package.json first, node_modules last, files before folders, alphasort
