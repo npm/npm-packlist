@@ -24,7 +24,7 @@ pack({ path: packageDir })
       'bundled-dependencies-in-node_modules',
       'this-is-optional-of-course'
     ]
-  }))
+  }, files))
   .then(_ => {
     // tarball has been created, continue with your day
   })

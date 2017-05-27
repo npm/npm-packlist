@@ -42,7 +42,7 @@ const npmWalker = Class => class Walker extends Class {
         '/.wafpickle-*',
         '/build/config.gypi',
         '/npm-debug.log',
-        '/.npmrc',
+        '**/.npmrc',
         '.*.swp',
         '.DS_Store',
         '._*',
