@@ -1,0 +1,10 @@
+{
+  "name": "npm-packlist",
+  "version": "0.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "ignore-walk": "^2.0.0"
+  },
+  "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
+  "license": "ISC"
+}
