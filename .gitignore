@@ -1,0 +1,6 @@
+.*.swp
+node_modules
+.nyc_output/
+coverage/
+test/fixtures/unpack
+benchmarks/extract/cwd
