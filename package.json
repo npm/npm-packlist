@@ -3,11 +3,16 @@
   "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
-    "ignore-walk": "^2.0.1"
+    "ignore-walk": "^2.0.2"
   },
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
   "license": "ISC",
   "files": [
     "index.js"
-  ]
+  ],
+  "devDependencies": {
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.1",
+    "tap": "^10.3.2"
+  }
 }

@@ -5,6 +5,7 @@ const IgnoreWalkerSync = ignoreWalk.WalkerSync
 
 const rootBuiltinRules = Symbol('root-builtin-rules')
 const packageNecessaryRules = Symbol('package-necessary-rules')
+const path = require('path')
 
 // a decorator that applies our custom rules to an ignore walker
 const npmWalker = Class => class Walker extends Class {
@@ -41,7 +42,7 @@ const npmWalker = Class => class Walker extends Class {
         '/.lock-wscript',
         '/.wafpickle-*',
         '/build/config.gypi',
-        '/npm-debug.log',
+        'npm-debug.log',
         '**/.npmrc',
         '.*.swp',
         '.DS_Store',
@@ -89,6 +90,10 @@ const npmWalker = Class => class Walker extends Class {
       }
     }
     return super.onReadIgnoreFile(file, data, then)
+  }
+
+  sort (a, b) {
+    return sort(a, b)
   }
 }
 
