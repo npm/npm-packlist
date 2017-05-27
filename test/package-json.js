@@ -19,7 +19,10 @@ module.exports = elf =>
 const json = {
   'name': 'test-package',
   'version': '3.1.4',
-  'main': 'elf.js'
+  'files': [
+    'elf.js',
+    'deps/foo/config/config.gypi'
+  ]
 }
 
 const expect = [
@@ -46,9 +49,10 @@ t.test('setup', t => {
     'packaged=false'
   )
 
+  // don't bother even reading this file, because we have files list
   fs.writeFileSync(
     path.join(pkg, '.npmignore'),
-    '.npmignore\ndummy\npackage.json'
+    '!.npmignore\n!dummy\npackage.json'
   )
 
   fs.writeFileSync(

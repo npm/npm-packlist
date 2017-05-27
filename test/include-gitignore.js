@@ -25,12 +25,19 @@ const json = {
 const expect = [
   'package.json',
   'elf.js',
+  'z/.gitignore',
   'deps/foo/config/config.gypi'
 ]
 
 t.test('setup', t => {
   rimraf.sync(pkg)
-  mkdirp.sync(pkg)
+  mkdirp.sync(pkg + '/z')
+
+  fs.writeFileSync(
+    path.join(pkg, 'z/.gitignore'),
+    '!.gitignore'
+  )
+
   fs.writeFileSync(
     path.join(pkg, 'package.json'),
     JSON.stringify(json, null, 2)

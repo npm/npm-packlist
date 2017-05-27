@@ -93,13 +93,14 @@ t.test('setup', t => {
 })
 
 t.test('follows npm package ignoring rules', function (t) {
+  process.chdir(pkg)
   const check = (files, t) => {
     t.same(files, expect)
     t.end()
   }
 
-  t.test('sync', t => check(pack.sync({ path: pkg }), t))
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
+  t.test('sync', t => check(pack.sync(), t))
+  t.test('async', t => pack().then(files => check(files, t)))
 
   t.end()
 })

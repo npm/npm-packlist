@@ -33,7 +33,7 @@ t.test('setup', t => {
   mkdirp.sync(pkg)
   fs.writeFileSync(
     path.join(pkg, 'package.json'),
-    JSON.stringify(json, null, 2)
+    "c'est ne pas une j'son"
   )
 
   fs.writeFileSync(
@@ -48,7 +48,7 @@ t.test('setup', t => {
 
   fs.writeFileSync(
     path.join(pkg, '.npmignore'),
-    '.npmignore\ndummy\npackage.json'
+    '.npmignore\ndummy\n# package.json'
   )
 
   fs.writeFileSync(
@@ -99,7 +99,7 @@ t.test('follows npm package ignoring rules', function (t) {
   }
 
   t.test('sync', t => check(pack.sync({ path: pkg }), t))
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
+  t.test('async', t => pack({ path: pkg }, (er, files) => check(files, t)))
 
   t.end()
 })

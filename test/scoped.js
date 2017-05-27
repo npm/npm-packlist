@@ -8,7 +8,7 @@ const mkdirp = require('mkdirp')
 const rimraf = require('rimraf')
 const t = require('tap')
 
-const pkg = path.join(__dirname, 'test-package-scoped')
+const pkg = path.join(__dirname, path.basename(__filename, '.js'))
 t.teardown(_ => rimraf.sync(pkg))
 
 const elfJS = `
