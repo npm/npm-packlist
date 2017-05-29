@@ -99,7 +99,8 @@ t.test('follows npm package ignoring rules', function (t) {
     t.end()
   }
 
-  t.test('sync', t => check(pack.sync(), t))
+  t.test('sync 1', t => check(new pack.WalkerSync().start().result, t))
+  t.test('sync 2', t => check(pack.sync(), t))
   t.test('async', t => pack().then(files => check(files, t)))
 
   t.end()
