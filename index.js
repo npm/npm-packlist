@@ -52,7 +52,7 @@ const npmWalker = Class => class Walker extends Class {
       packageNecessaryRules
     ]
 
-    opt.includeEmpty = true
+    opt.includeEmpty = false
     opt.path = opt.path || process.cwd()
     opt.follow = path.basename(opt.path) === 'node_modules'
     super(opt)

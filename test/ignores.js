@@ -56,6 +56,9 @@ t.test('setup', t => {
     'foo'
   )
 
+  // empty dir should be ignored
+  mkdirp.sync(pkg + '/this/dir/is/empty/and/ignored')
+
   const buildDir = path.join(pkg, 'build')
   mkdirp.sync(buildDir)
   fs.writeFileSync(
