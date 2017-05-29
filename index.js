@@ -34,7 +34,7 @@ const defaultRules = [
   '.*.swp',
   '.DS_Store',
   '._*',
-  '.*.orig',
+  '*.orig',
   '/test{,s}/',
   'package-lock.json'
 ]
