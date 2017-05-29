@@ -100,7 +100,7 @@ const npmWalker = Class => class Walker extends Class {
     ].filter(f => f).join('\n') + '\n'
     super.onReadIgnoreFile(packageNecessaryRules, rules, _=>_)
 
-    if (Array.isArray(pkg.files) && pkg.files.length)
+    if (Array.isArray(pkg.files))
       super.onReadIgnoreFile('package.json', '*\n' + pkg.files.map(
         f => '!' + f + '\n!' + f.replace(/\/+$/, '') + '/**'
       ).join('\n') + '\n', then)
