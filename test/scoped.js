@@ -38,12 +38,27 @@ t.test('setup', t => {
     elfJS
   )
 
-  const scopedDir = path.join(pkg, 'node_modules', '@npmwombat', 'scoped')
+  const scopedDir = path.join(pkg, 'node_modules/@npmwombat/scoped')
   mkdirp.sync(scopedDir)
   fs.writeFileSync(
     path.join(scopedDir, 'index.js'),
     "console.log('hello wombat')"
   )
+
+  const nobundle = path.join(pkg, 'node_modules/@ignore/scoped')
+  mkdirp.sync(nobundle)
+  fs.writeFileSync(
+    path.join(nobundle, 'index.js'),
+    "console.log('i do not want to be bundled')"
+  )
+
+  const nobundleWombat = path.join(pkg, 'node_modules/@npmwombat/no')
+  mkdirp.sync(nobundleWombat)
+  fs.writeFileSync(
+    path.join(nobundleWombat, 'wombat.js'),
+    "console.log('no bundle please')"
+  )
+
 
   t.end()
 })
