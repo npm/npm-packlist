@@ -158,8 +158,9 @@ class Walker extends npmWalker(IgnoreWalker) {
 }
 
 class WalkerSync extends npmWalker(IgnoreWalkerSync) {
-  walker (entry) {
+  walker (entry, then) {
     new WalkerSync(this.walkerOpt(entry)).start()
+    then()
   }
 }
 

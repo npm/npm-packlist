@@ -3,7 +3,7 @@
   "version": "1.1.5",
   "main": "index.js",
   "dependencies": {
-    "ignore-walk": "^2.0.2",
+    "ignore-walk": "^3.0.0",
     "npm-bundled": "^1.0.1"
   },
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
