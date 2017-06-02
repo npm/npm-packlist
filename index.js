@@ -134,6 +134,14 @@ const npmWalker = Class => class Walker extends Class {
       then()
   }
 
+  // override parent onstat function to nix all symlinks
+  onstat (st, entry, file, dir, then) {
+    if (st.isSymbolicLink())
+      then()
+    else
+      super.onstat(st, entry, file, dir, then)
+  }
+
   onReadIgnoreFile (file, data, then) {
     if (file === 'package.json')
       try {
