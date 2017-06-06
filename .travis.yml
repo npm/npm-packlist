@@ -1,7 +1,12 @@
 sudo: false
 language: node_js
 node_js:
+  - '4'
   - '6'
   - '8'
 notifications:
   email: false
+cache:
+  directories:
+    - $HOME/.npm
+    - node_modules
