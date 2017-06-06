@@ -1,5 +1,7 @@
 # npm-packlist
 
+[![Build Status](https://travis-ci.com/npm/npm-packlist.svg?token=hHeDp9pQmz9kvsgRNVHy&branch=master)](https://travis-ci.com/npm/npm-packlist)
+
 Get a list of the files to add from a folder into an npm package
 
 These can be handed to [tar](http://npm.im/tar) like so to make an npm
