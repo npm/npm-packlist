@@ -1,3 +1,4 @@
+'use strict'
 const t = require('tap')
 const Walker = require('../').Walker
 const sort = Walker.prototype.sort
