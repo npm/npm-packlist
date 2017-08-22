@@ -66,8 +66,10 @@ const npmWalker = Class => class Walker extends Class {
       const rules = defaultRules.join('\n') + '\n'
       this.packageJsonCache = opt.packageJsonCache || new Map()
       super.onReadIgnoreFile(rootBuiltinRules, rules, _=>_)
-    } else
+    } else {
+      this.bundled = []
       this.packageJsonCache = this.parent.packageJsonCache
+    }
   }
 
   filterEntry (entry, partial) {
