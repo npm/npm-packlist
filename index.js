@@ -68,6 +68,7 @@ const npmWalker = Class => class Walker extends Class {
       super.onReadIgnoreFile(rootBuiltinRules, rules, _=>_)
     } else {
       this.bundled = []
+      this.bundledScopes = []
       this.packageJsonCache = this.parent.packageJsonCache
     }
   }
