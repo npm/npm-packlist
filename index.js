@@ -124,7 +124,7 @@ const npmWalker = Class => class Walker extends Class {
     const rules = [
       pkg.browser ? '!' + pkg.browser : '',
       pkg.main ? '!' + pkg.main : '',
-      '!@(readme|license|licence|notice|changes|changelog|history){,.*}'
+      '!@(readme|license|licence|notice|changes|changelog|history){,.*[^~$]}'
     ].filter(f => f).join('\n') + '\n'
     super.onReadIgnoreFile(packageNecessaryRules, rules, _=>_)
 
