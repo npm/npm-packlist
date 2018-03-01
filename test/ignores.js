@@ -36,6 +36,13 @@ t.test('setup', t => {
     JSON.stringify(json, null, 2)
   )
 
+  const archPkgs = path.join(pkg, 'archived-packages')
+  mkdirp.sync(archPkgs)
+  fs.writeFileSync(
+    path.join(archPkgs, 'ignoreme'),
+    'this should be ignored'
+  )
+
   fs.writeFileSync(
     path.join(pkg, 'elf.js'),
     elfJS
