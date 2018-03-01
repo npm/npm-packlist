@@ -33,7 +33,8 @@ const defaultRules = [
   '.DS_Store',
   '._*',
   '*.orig',
-  'package-lock.json'
+  'package-lock.json',
+  'archived-packages',
 ]
 
 // a decorator that applies our custom rules to an ignore walker
