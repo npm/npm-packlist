@@ -62,14 +62,14 @@ const npmWalker = Class => class Walker extends Class {
       this.bundledScopes = Array.from(new Set(
         this.bundled.filter(f => /^@/.test(f))
         .map(f => f.split('/')[0])))
-      const rules = defaultRules.join('\n') + '\n'
       this.packageJsonCache = opt.packageJsonCache || new Map()
-      super.onReadIgnoreFile(rootBuiltinRules, rules, _=>_)
     } else {
       this.bundled = []
       this.bundledScopes = []
       this.packageJsonCache = this.parent.packageJsonCache
     }
+    const rules = defaultRules.join('\n') + '\n'
+    super.onReadIgnoreFile(rootBuiltinRules, rules, _=>_)
   }
 
   filterEntry (entry, partial) {
