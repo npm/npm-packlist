@@ -21,6 +21,7 @@ const defaultRules = [
   '.npmignore',
   '.gitignore',
   '**/.git/',
+  '**/.git',
   '**/.svn/',
   '**/.hg/',
   '**/CVS/',
