@@ -46,9 +46,12 @@ t.test('setup', t => {
     'packaged=false'
   )
 
+  // the '!**/non.existent' rule is important as it tests if the default rules
+  // block .git contents even if it's accidentally 'unlocked'.
+  // see https://npm.community/t/1805
   fs.writeFileSync(
     path.join(pkg, '.npmignore'),
-    '.npmignore\ndummy\npackage.json'
+    '.npmignore\ndummy\npackage.json\n!**/non.existent'
   )
 
   fs.writeFileSync(
