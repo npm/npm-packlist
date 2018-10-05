@@ -73,6 +73,9 @@ t.test('setup', t => {
     "i_will_be_included='with any luck'"
   )
 
+  const gitFile = path.join(pkg, 'deps/.git')
+  fs.writeFileSync(gitFile, 'do not include me\n')
+
   fs.writeFileSync(
     path.join(buildDir, 'npm-debug.log'),
     '0 lol\n'
