@@ -132,8 +132,9 @@ const npmWalker = Class => class Walker extends Class {
   onPackageJson (ig, pkg, then) {
     this.packageJsonCache.set(ig, pkg)
 
-    // if there's a browser or main, make sure we don't ignore it
+    // if there's a bin, browser or main, make sure we don't ignore it
     const rules = [
+      pkg.bin ? '!' + (typeof pkg.bin === "object" ? Object.values(pkg.bin)[0] : pkg.bin) : '',
       pkg.browser ? '!' + pkg.browser : '',
       pkg.main ? '!' + pkg.main : '',
       '!@(readme|copying|license|licence|notice|changes|changelog|history){,.*}'
