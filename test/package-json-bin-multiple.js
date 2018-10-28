@@ -24,7 +24,10 @@ module.exports = elf =>
 const json = {
   name: 'test-package',
   version: '1.6.2',
-  bin: { 'test-program': '__bin' },
+  bin: {
+    bar: '__bin_bar',
+    foo: '__bin_foo'
+  },
   files: [
     'lib'
   ]
@@ -32,7 +35,8 @@ const json = {
 
 const expect = [
   'package.json',
-  '__bin',
+  '__bin_bar',
+  '__bin_foo',
   'lib/elf.js'
 ]
 
@@ -45,7 +49,12 @@ t.test('setup', t => {
   )
 
   fs.writeFileSync(
-    path.join(pkg, '__bin'),
+    path.join(pkg, '__bin_foo'),
+    bin
+  )
+
+  fs.writeFileSync(
+    path.join(pkg, '__bin_bar'),
     bin
   )
 
