@@ -159,7 +159,8 @@ const npmWalker = Class => class Walker extends Class {
   onReadIgnoreFile (file, data, then) {
     if (file === 'package.json')
       try {
-        this.onPackageJson(file, JSON.parse(data), then)
+        const ig = path.resolve(this.path, file)
+        this.onPackageJson(ig, JSON.parse(data), then)
       } catch (er) {
         // ignore package.json files that are not json
         then()
