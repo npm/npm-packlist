@@ -38,6 +38,7 @@ const defaultRules = [
   '._*',
   '*.orig',
   'package-lock.json',
+  'yarn.lock',
   'archived-packages/**',
 ]
 
