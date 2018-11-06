@@ -177,7 +177,8 @@ const npmWalker = Class => class Walker extends Class {
   onReadIgnoreFile (file, data, then) {
     if (file === 'package.json')
       try {
-        this.onPackageJson(file, JSON.parse(data), then)
+        const ig = path.resolve(this.path, file)
+        this.onPackageJson(ig, JSON.parse(data), then)
       } catch (er) {
         // ignore package.json files that are not json
         then()
@@ -207,12 +208,13 @@ class WalkerSync extends npmWalker(IgnoreWalkerSync) {
 const walk = (options, callback) => {
   options = options || {}
   const p = new Promise((resolve, reject) => {
-    const bw = new BundleWalker(options).start()
+    const bw = new BundleWalker(options)
     bw.on('done', bundled => {
       options.bundled = bundled
       options.packageJsonCache = bw.packageJsonCache
       new Walker(options).on('done', resolve).on('error', reject).start()
     })
+    bw.start()
   })
   return callback ? p.then(res => callback(null, res), callback) : p
 }
