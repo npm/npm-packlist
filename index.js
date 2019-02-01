@@ -136,13 +136,21 @@ const npmWalker = Class => class Walker extends Class {
   onPackageJson (ig, pkg, then) {
     this.packageJsonCache.set(ig, pkg)
 
-    // if there's a browser or main, make sure we don't ignore it
+    // if there's a bin, browser or main, make sure we don't ignore it
     const rules = [
       pkg.browser ? '!' + pkg.browser : '',
       pkg.main ? '!' + pkg.main : '',
       '!@(readme|copying|license|licence|notice|changes|changelog|history){,.*}'
-    ].filter(f => f).join('\n') + '\n'
-    super.onReadIgnoreFile(packageNecessaryRules, rules, _=>_)
+    ]
+    if (pkg.bin)
+      if (typeof pkg.bin === "object")
+        for (const key in pkg.bin)
+          rules.push('!' + pkg.bin[key])
+      else
+        rules.push('!' + pkg.bin)
+
+    const data = rules.filter(f => f).join('\n') + '\n'
+    super.onReadIgnoreFile(packageNecessaryRules, data, _=>_)
 
     if (Array.isArray(pkg.files))
       super.onReadIgnoreFile('package.json', '*\n' + pkg.files.map(
