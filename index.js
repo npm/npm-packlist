@@ -146,7 +146,7 @@ const npmWalker = Class => class Walker extends Class {
     const rules = [
       pkg.browser ? '!' + pkg.browser : '',
       pkg.main ? '!' + pkg.main : '',
-      '!@(readme|copying|license|licence|notice|changes|changelog|history){,.*}'
+      '!@(readme|copying|license|licence|notice|changes|changelog|history){,.*[^~$]}'
     ]
     if (pkg.bin)
       if (typeof pkg.bin === "object")

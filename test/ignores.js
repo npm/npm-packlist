@@ -25,6 +25,7 @@ const json = {
 const expect = [
   'package.json',
   'elf.js',
+  'readme.md',
   'deps/foo/config/config.gypi'
 ]
 
@@ -58,12 +59,22 @@ t.test('setup', t => {
   // see https://npm.community/t/1805
   fs.writeFileSync(
     path.join(pkg, '.npmignore'),
-    '.npmignore\ndummy\npackage.json\n!**/non.existent'
+    '.npmignore\ndummy\npackage.json\n!**/non.existent\nreadme.md\n*~'
   )
 
   fs.writeFileSync(
     path.join(pkg, 'dummy'),
     'foo'
+  )
+
+  fs.writeFileSync(
+    path.join(pkg, 'readme.md'),
+    'Elf package readme included even if ignored'
+  )
+
+  fs.writeFileSync(
+    path.join(pkg, 'readme.md~'),
+    'Editor backup file should not be auto-included'
   )
 
   // empty dir should be ignored
