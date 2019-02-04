@@ -20,10 +20,14 @@ const path = require('path')
 const defaultRules = [
   '.npmignore',
   '.gitignore',
-  '**/.git/',
-  '**/.svn/',
-  '**/.hg/',
-  '**/CVS/',
+  '**/.git',
+  '**/.svn',
+  '**/.hg',
+  '**/CVS',
+  '**/.git/**',
+  '**/.svn/**',
+  '**/.hg/**',
+  '**/CVS/**',
   '/.lock-wscript',
   '/.wafpickle-*',
   '/build/config.gypi',
@@ -33,7 +37,8 @@ const defaultRules = [
   '.DS_Store',
   '._*',
   '*.orig',
-  'package-lock.json'
+  'package-lock.json',
+  'archived-packages/**',
 ]
 
 // a decorator that applies our custom rules to an ignore walker
@@ -52,7 +57,11 @@ const npmWalker = Class => class Walker extends Class {
 
     opt.includeEmpty = false
     opt.path = opt.path || process.cwd()
-    opt.follow = path.basename(opt.path) === 'node_modules'
+    const dirName = path.basename(opt.path)
+    const parentName = path.basename(path.dirname(opt.path))
+    opt.follow =
+      dirName === 'node_modules' ||
+      (parentName === 'node_modules' && /^@/.test(dirName))
     super(opt)
 
     // ignore a bunch of things by default at the root level.
@@ -76,7 +85,11 @@ const npmWalker = Class => class Walker extends Class {
     // get the partial path from the root of the walk
     const p = this.path.substr(this.root.length + 1)
     const pkgre = /^node_modules\/(@[^\/]+\/?[^\/]+|[^\/]+)(\/.*)?$/
-    const pkg = pkgre.test(entry) ? entry.replace(pkgre, '$1') : null
+    const isRoot = !this.parent
+    const pkg = isRoot && pkgre.test(entry) ?
+      entry.replace(pkgre, '$1') : null
+    const rootNM = isRoot && entry === 'node_modules'
+    const rootPJ = isRoot && entry === 'package.json'
 
     return (
       // if we're in a bundled package, check with the parent.
@@ -86,14 +99,17 @@ const npmWalker = Class => class Walker extends Class {
       // if package is bundled, all files included
       // also include @scope dirs for bundled scoped deps
       // they'll be ignored if no files end up in them.
+      // However, this only matters if we're in the root.
+      // node_modules folders elsewhere, like lib/node_modules,
+      // should be included normally unless ignored.
       : pkg ? -1 !== this.bundled.indexOf(pkg) ||
         -1 !== this.bundledScopes.indexOf(pkg)
 
       // only walk top node_modules if we want to bundle something
-      : entry === 'node_modules' && !this.parent ? !!this.bundled.length
+      : rootNM ? !!this.bundled.length
 
       // always include package.json at the root.
-      : entry === 'package.json' && !this.parent ? true
+      : rootPJ ? true
 
       // otherwise, follow ignore-walk's logic
       : super.filterEntry(entry, partial)
@@ -120,13 +136,21 @@ const npmWalker = Class => class Walker extends Class {
   onPackageJson (ig, pkg, then) {
     this.packageJsonCache.set(ig, pkg)
 
-    // if there's a browser or main, make sure we don't ignore it
+    // if there's a bin, browser or main, make sure we don't ignore it
     const rules = [
       pkg.browser ? '!' + pkg.browser : '',
       pkg.main ? '!' + pkg.main : '',
-      '!@(readme|license|licence|notice|changes|changelog|history){,.*[^~$]}'
-    ].filter(f => f).join('\n') + '\n'
-    super.onReadIgnoreFile(packageNecessaryRules, rules, _=>_)
+      '!@(readme|copying|license|licence|notice|changes|changelog|history){,.*[^~$]}'
+    ]
+    if (pkg.bin)
+      if (typeof pkg.bin === "object")
+        for (const key in pkg.bin)
+          rules.push('!' + pkg.bin[key])
+      else
+        rules.push('!' + pkg.bin)
+
+    const data = rules.filter(f => f).join('\n') + '\n'
+    super.onReadIgnoreFile(packageNecessaryRules, data, _=>_)
 
     if (Array.isArray(pkg.files))
       super.onReadIgnoreFile('package.json', '*\n' + pkg.files.map(

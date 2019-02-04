@@ -25,23 +25,33 @@ const json = {
 const expect = [
   'package.json',
   'elf.js',
-  'readme.md',
-  'deps/foo/config/config.gypi'
+  'deps/foo/config/config.gypi',
+  'lib/node_modules/foo/package.json'
 ]
 
 t.test('setup', t => {
   rimraf.sync(pkg)
   mkdirp.sync(pkg)
+
+  fs.writeFileSync(
+    path.join(pkg, '.gitignore'),
+    '*'
+  )
+
+  fs.writeFileSync(
+    path.join(pkg, '.npmignore'),
+    ''
+  )
+
+  mkdirp.sync(path.join(pkg, 'lib/node_modules/foo'))
+  fs.writeFileSync(
+    path.join(pkg, 'lib/node_modules/foo/package.json'),
+    '{"name":"just a test","version":"bugbear"}'
+  )
+
   fs.writeFileSync(
     path.join(pkg, 'package.json'),
     JSON.stringify(json, null, 2)
-  )
-
-  const archPkgs = path.join(pkg, 'archived-packages')
-  mkdirp.sync(archPkgs)
-  fs.writeFileSync(
-    path.join(archPkgs, 'ignoreme'),
-    'this should be ignored'
   )
 
   fs.writeFileSync(
@@ -53,32 +63,6 @@ t.test('setup', t => {
     path.join(pkg, '.npmrc'),
     'packaged=false'
   )
-
-  // the '!**/non.existent' rule is important as it tests if the default rules
-  // block .git contents even if it's accidentally 'unlocked'.
-  // see https://npm.community/t/1805
-  fs.writeFileSync(
-    path.join(pkg, '.npmignore'),
-    '.npmignore\ndummy\npackage.json\n!**/non.existent\nreadme.md\n*~'
-  )
-
-  fs.writeFileSync(
-    path.join(pkg, 'dummy'),
-    'foo'
-  )
-
-  fs.writeFileSync(
-    path.join(pkg, 'readme.md'),
-    'Elf package readme included even if ignored'
-  )
-
-  fs.writeFileSync(
-    path.join(pkg, 'readme.md~'),
-    'Editor backup file should not be auto-included'
-  )
-
-  // empty dir should be ignored
-  mkdirp.sync(pkg + '/this/dir/is/empty/and/ignored')
 
   const buildDir = path.join(pkg, 'build')
   mkdirp.sync(buildDir)
@@ -93,9 +77,6 @@ t.test('setup', t => {
     path.join(depscfg, 'config.gypi'),
     "i_will_be_included='with any luck'"
   )
-
-  const gitFile = path.join(pkg, 'deps/.git')
-  fs.writeFileSync(gitFile, 'do not include me\n')
 
   fs.writeFileSync(
     path.join(buildDir, 'npm-debug.log'),
