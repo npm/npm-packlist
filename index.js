@@ -41,6 +41,8 @@ const defaultRules = [
   'yarn.lock',
   'archived-packages/**',
   'core',
+  '!core/',
+  '!**/core/',
   '*.core',
   '*.vgcore',
   'vgcore.*',
