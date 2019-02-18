@@ -145,9 +145,11 @@ const npmWalker = Class => class Walker extends Class {
     this.packageJsonCache.set(ig, pkg)
 
     // if there's a bin, browser or main, make sure we don't ignore it
+    // also, don't ignore the package.json itself!
     const rules = [
       pkg.browser ? '!' + pkg.browser : '',
       pkg.main ? '!' + pkg.main : '',
+      '!package.json',
       '!@(readme|copying|license|licence|notice|changes|changelog|history){,.*[^~$]}'
     ]
     if (pkg.bin)
