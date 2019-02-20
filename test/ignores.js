@@ -68,6 +68,19 @@ t.test('setup', t => {
   )
 
   fs.writeFileSync(
+    path.join(pkg, 'core'),
+    'foo'
+  )
+
+  fs.mkdirSync(
+    path.join(pkg, '.DS_Store')
+  )
+  fs.writeFileSync(
+    path.join(pkg, '.DS_Store', 'foo'),
+    'foo'
+  )
+
+  fs.writeFileSync(
     path.join(pkg, 'readme.md'),
     'Elf package readme included even if ignored'
   )
