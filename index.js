@@ -165,7 +165,10 @@ const npmWalker = Class => class Walker extends Class {
 
     if (Array.isArray(pkg.files))
       super.onReadIgnoreFile('package.json', '*\n' + pkg.files.map(
-        f => '!' + f + '\n!' + f.replace(/\/+$/, '') + '/**'
+        // to support excluding specific file patterns, don't append "/**" if f ends in "**/!(pattern)"
+        f => /\*\*\/!\([^/]+\)$/.test(f)
+          ? '!' + f
+          : '!' + f + '\n!' + f.replace(/\/+$/, '') + '/**'
       ).join('\n') + '\n', then)
     else
       then()
