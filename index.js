@@ -51,6 +51,9 @@ const defaultRules = [
   'core.+([0-9])',
 ]
 
+// There may be others, but :?|<> are handled by node-tar
+const nameIsBadForWindows = file => /\*/.test(file)
+
 // a decorator that applies our custom rules to an ignore walker
 const npmWalker = Class => class Walker extends Class {
   constructor (opt) {
@@ -189,6 +192,16 @@ const npmWalker = Class => class Walker extends Class {
       ).join('\n') + '\n', then)
     else
       then()
+  }
+
+  // override parent stat function to completely skip any filenames
+  // that will break windows entirely.
+  // XXX(isaacs) Next major version should make this an error instead.
+  stat (entry, file, dir, then) {
+    if (nameIsBadForWindows(entry))
+      then()
+    else
+      super.stat(entry, file, dir, then)
   }
 
   // override parent onstat function to nix all symlinks
