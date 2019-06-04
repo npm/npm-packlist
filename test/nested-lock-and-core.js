@@ -42,15 +42,8 @@ t.test('setup', t => {
 
 
 t.test('follows npm package ignoring rules', function (t) {
-  const expect = [
-    'package.json',
-    'core/include-me.txt',
-    'lib/package-lock.json',
-    'lib/yarn.lock',
-  ]
-
   const check = (files, t) => {
-    t.same(files, expect)
+    t.matchSnapshot(files)
     t.end()
   }
 

@@ -22,12 +22,6 @@ const json = {
   'main': 'elf.js'
 }
 
-const expect = [
-  'package.json',
-  'elf.js',
-  'deps/foo/config/config.gypi'
-]
-
 t.test('setup', t => {
   rimraf.sync(pkg)
   mkdirp.sync(pkg)
@@ -95,7 +89,7 @@ t.test('setup', t => {
 t.test('follows npm package ignoring rules', function (t) {
   process.chdir(pkg)
   const check = (files, t) => {
-    t.same(files, expect)
+    t.matchSnapshot(files)
     t.end()
   }
 

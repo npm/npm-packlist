@@ -28,13 +28,8 @@ t.test('setup', t => {
 })
 
 t.test('includes nested package.json file', function (t) {
-  const expect = [
-    'package.json',
-    'nest/index.js',
-    'nest/package.json',
-  ]
   const check = (files, t) => {
-    t.same(files, expect)
+    t.matchSnapshot(files)
     t.end()
   }
 

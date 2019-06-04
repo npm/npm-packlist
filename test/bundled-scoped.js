@@ -25,13 +25,6 @@ const json = {
   ]
 }
 
-const expect = [
-  'package.json',
-  'elf.js',
-  'node_modules/@npmwombat/history/index.js',
-  'node_modules/@npmwombat/history/package.json'
-]
-
 t.test('setup', t => {
   rimraf.sync(pkg)
   mkdirp.sync(pkg)
@@ -71,7 +64,7 @@ t.test('setup', t => {
 
 t.test('includes bundled dependency', function (t) {
   const check = (files, t) => {
-    t.same(files, expect)
+    t.matchSnapshot(files)
     t.end()
   }
 

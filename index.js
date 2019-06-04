@@ -249,15 +249,20 @@ const walkSync = options => {
   return walker.result
 }
 
-// package.json first, node_modules last, files before folders, alphasort
-const sort = (a, b) =>
-  a === 'package.json' ? -1
-  : b === 'package.json' ? 1
-  : /^node_modules/.test(a) && !/^node_modules/.test(b) ? 1
-  : /^node_modules/.test(b) && !/^node_modules/.test(a) ? -1
-  : path.dirname(a) === '.' && path.dirname(b) !== '.' ? -1
-  : path.dirname(b) === '.' && path.dirname(a) !== '.' ? 1
-  : a.localeCompare(b)
+// optimize for compressibility
+// extname, then basename, then locale alphabetically
+// https://twitter.com/isntitvacant/status/1131094910923231232
+const sort = (a, b) => {
+  const exta = path.extname(a).toLowerCase()
+  const extb = path.extname(b).toLowerCase()
+  const basea = path.basename(a).toLowerCase()
+  const baseb = path.basename(b).toLowerCase()
+
+  return exta.localeCompare(extb) ||
+    basea.localeCompare(baseb) ||
+    a.localeCompare(b)
+}
+
 
 module.exports = walk
 walk.sync = walkSync

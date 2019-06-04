@@ -63,15 +63,9 @@ t.test('setup', t => {
   t.end()
 })
 
-const expect = [
-  'package.json',
-  'elf.js',
-  path.join('node_modules', '@npmwombat', 'scoped', 'index.js')
-]
-
 t.test('includes bundledDependencies', function (t) {
   const check = (files, t) => {
-    t.same(files, expect)
+    t.matchSnapshot(files)
     t.end()
   }
 
