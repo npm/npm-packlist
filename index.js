@@ -170,6 +170,7 @@ const npmWalker = Class => class Walker extends Class {
       pkg.browser ? '!' + pkg.browser : '',
       pkg.main ? '!' + pkg.main : '',
       '!package.json',
+      '!npm-shrinkwrap.json',
       '!@(readme|copying|license|licence|notice|changes|changelog|history){,.*[^~$]}'
     ]
     if (pkg.bin)

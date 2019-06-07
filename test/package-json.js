@@ -28,6 +28,12 @@ const json = {
 t.test('setup', t => {
   rimraf.sync(pkg)
   mkdirp.sync(pkg)
+
+  fs.writeFileSync(
+    path.join(pkg, 'npm-shrinkwrap.json'),
+    JSON.stringify({shrink:'wrap'}, null, 2)
+  )
+
   fs.writeFileSync(
     path.join(pkg, 'package.json'),
     JSON.stringify(json, null, 2)

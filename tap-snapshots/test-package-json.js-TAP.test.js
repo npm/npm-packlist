@@ -9,6 +9,7 @@ exports[`test/package-json.js TAP follows npm package ignoring rules async > mus
 Array [
   "deps/foo/config/config.gypi",
   "elf.js",
+  "npm-shrinkwrap.json",
   "package.json",
 ]
 `
@@ -17,6 +18,7 @@ exports[`test/package-json.js TAP follows npm package ignoring rules sync > must
 Array [
   "deps/foo/config/config.gypi",
   "elf.js",
+  "npm-shrinkwrap.json",
   "package.json",
 ]
 `
