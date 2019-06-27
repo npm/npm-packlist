@@ -121,6 +121,12 @@ t.test('setup', t => {
     path.join(gitDir, 'gitstub'),
     "won't fool git, also won't be included"
   )
+  const gitDeep = path.join(pkg, '.git/logs/refs/remotes/name')
+  mkdirp.sync(gitDeep)
+  fs.writeFileSync(
+    path.join(gitDeep, 'readme'),
+    'please do not include git dirs (or even walk to them)'
+  )
 
   const historyDir = path.join(pkg, 'node_modules/history')
   mkdirp.sync(historyDir)

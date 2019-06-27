@@ -90,6 +90,12 @@ const npmWalker = Class => class Walker extends Class {
     }
   }
 
+  onReaddir (entries) {
+    if (!this.parent)
+      entries = entries.filter(e => e !== '.git')
+    return super.onReaddir(entries)
+  }
+
   filterEntry (entry, partial) {
     // get the partial path from the root of the walk
     const p = this.path.substr(this.root.length + 1)
@@ -147,6 +153,14 @@ const npmWalker = Class => class Walker extends Class {
 
     // if there's a bin, browser or main, make sure we don't ignore it
     // also, don't ignore the package.json itself!
+    //
+    // Weird side-effect of this: a readme (etc) file will be included
+    // if it exists anywhere within a folder with a package.json file.
+    // The original intent was only to include these files in the root,
+    // but now users in the wild are dependent on that behavior for
+    // localized documentation and other use cases.  Adding a `/` to
+    // these rules, while tempting and arguably more "correct", is a
+    // breaking change.
     const rules = [
       pkg.browser ? '!' + pkg.browser : '',
       pkg.main ? '!' + pkg.main : '',
