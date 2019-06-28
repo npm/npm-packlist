@@ -39,6 +39,11 @@ t.test('setup', t => {
   )
 
   fs.writeFileSync(
+    path.join(pkg, '/.DS_Store'),
+    'do not include me'
+  )
+
+  fs.writeFileSync(
     path.join(pkg, 'package.json'),
     JSON.stringify(json, null, 2)
   )

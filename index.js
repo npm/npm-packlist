@@ -34,6 +34,7 @@ const defaultRules = [
   'npm-debug.log',
   '**/.npmrc',
   '.*.swp',
+  '.DS_Store',
   '**/.DS_Store/**',
   '._*',
   '**/._*/**',
