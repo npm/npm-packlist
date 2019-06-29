@@ -92,8 +92,12 @@ const npmWalker = Class => class Walker extends Class {
   }
 
   onReaddir (entries) {
-    if (!this.parent)
-      entries = entries.filter(e => e !== '.git')
+    if (!this.parent) {
+      entries = entries.filter(e =>
+        e !== '.git' &&
+        !(e === 'node_modules' && this.bundled.length === 0)
+      )
+    }
     return super.onReaddir(entries)
   }
 
