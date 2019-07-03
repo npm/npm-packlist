@@ -41,14 +41,7 @@ const defaultRules = [
   '*.orig',
   '/package-lock.json',
   '/yarn.lock',
-  'archived-packages/**',
-  'core',
-  '!core/',
-  '!**/core/',
-  '*.core',
-  '*.vgcore',
-  'vgcore.*',
-  'core.+([0-9])',
+  '/archived-packages/**',
 ]
 
 // There may be others, but :?|<> are handled by node-tar
