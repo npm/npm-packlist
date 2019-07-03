@@ -41,14 +41,7 @@ const defaultRules = [
   '*.orig',
   '/package-lock.json',
   '/yarn.lock',
-  'archived-packages/**',
-  'core',
-  '!core/',
-  '!**/core/',
-  '*.core',
-  '*.vgcore',
-  'vgcore.*',
-  'core.+([0-9])',
+  '/archived-packages/**',
 ]
 
 // a decorator that applies our custom rules to an ignore walker
