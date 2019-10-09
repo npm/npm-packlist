@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "ignore-walk": "^3.0.1",
+    "ignore-walk": "^3.0.3",
     "npm-bundled": "^1.0.1"
   },
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
@@ -17,7 +17,9 @@
   ],
   "devDependencies": {
     "mkdirp": "^0.5.1",
-    "rimraf": "^2.6.1",
+    "mutate-fs": "^2.1.1",
+    "require-inject": "^1.4.4",
+    "rimraf": "^2.7.1",
     "tap": "^14.6.9"
   },
   "scripts": {
@@ -31,11 +33,11 @@
     "type": "git",
     "url": "git+https://github.com/npm/npm-packlist.git"
   },
-  "bugs": {
-    "url": "https://github.com/npm/npm-packlist/issues"
-  },
-  "homepage": "https://www.npmjs.com/package/npm-packlist",
   "tap": {
+    "check-coverage": true,
+    "nyc-arg": [
+      "--include=index.js"
+    ],
     "jobs": 1
   }
 }
