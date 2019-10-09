@@ -18,7 +18,7 @@
   "devDependencies": {
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
-    "tap": "^14.2.1"
+    "tap": "^14.6.9"
   },
   "scripts": {
     "test": "tap",
@@ -34,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/npm/npm-packlist/issues"
   },
-  "homepage": "https://www.npmjs.com/package/npm-packlist"
+  "homepage": "https://www.npmjs.com/package/npm-packlist",
+  "tap": {
+    "jobs": 1
+  }
 }
