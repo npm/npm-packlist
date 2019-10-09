@@ -137,7 +137,12 @@ const npmWalker = Class => class Walker extends Class {
       else
         files.push(pkg.bin)
     }
-    files.push(packageMustHaves, 'package.json', 'npm-shrinkwrap.json')
+    files.push(
+      packageMustHaves,
+      'package.json',
+      'npm-shrinkwrap.json',
+      '!package-lock.json'
+    )
     return files
   }
 
