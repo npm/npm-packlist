@@ -10,6 +10,7 @@ Array [
   "lib/for.js",
   "lib/one.js",
   "lib/tre.js",
+  "lib/two.js",
   "package.json",
 ]
 `
@@ -19,6 +20,7 @@ Array [
   "lib/for.js",
   "lib/one.js",
   "lib/tre.js",
+  "lib/two.js",
   "package.json",
 ]
 `

@@ -7,22 +7,20 @@
 'use strict'
 exports[`test/package-json-files-and-containing-dir.js TAP package with negated files > expect resolving Promise 1`] = `
 Array [
-  "lib/.DS_Store",
-  "lib/.npmignore",
   "lib/for.js",
   "lib/one.js",
   "lib/tre.js",
+  "lib/two.js",
   "package.json",
 ]
 `
 
 exports[`test/package-json-files-and-containing-dir.js TAP package with negated files > must match snapshot 1`] = `
 Array [
-  "lib/.DS_Store",
-  "lib/.npmignore",
   "lib/for.js",
   "lib/one.js",
   "lib/tre.js",
+  "lib/two.js",
   "package.json",
 ]
 `

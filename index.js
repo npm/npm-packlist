@@ -17,6 +17,20 @@ const rootBuiltinRules = Symbol('root-builtin-rules')
 const packageNecessaryRules = Symbol('package-necessary-rules')
 const path = require('path')
 
+// Weird side-effect of this: a readme (etc) file will be included
+// if it exists anywhere within a folder with a package.json file.
+// The original intent was only to include these files in the root,
+// but now users in the wild are dependent on that behavior for
+// localized documentation and other use cases.  Adding a `/` to
+// these rules, while tempting and arguably more "correct", is a
+// significant change that will break existing use cases.
+const packageMustHaves = '**/@(' +
+  'readme|copying|license|licence|notice|changes|changelog|history' +
+  '){,.*[^~$]}'
+
+const fs = require('fs')
+const glob = require('glob')
+
 const defaultRules = [
   '.npmignore',
   '.gitignore',
@@ -94,7 +108,96 @@ const npmWalker = Class => class Walker extends Class {
         !(e === 'node_modules' && this.bundled.length === 0)
       )
     }
-    return super.onReaddir(entries)
+
+    // if we have a package.json, then look in it for 'files'
+    if (!entries.includes('package.json')) {
+      return super.onReaddir(entries)
+    }
+
+    this.readPackageJson(entries)
+  }
+
+  onReadPackageJson (entries, er, pkg) {
+    if (er)
+      this.emit('error', er)
+    else
+      this.getPackageFiles(entries, pkg)
+  }
+
+  mustHaveFilesFromPackage (pkg) {
+    const files = []
+    if (pkg.browser)
+      files.push(pkg.browser)
+    if (pkg.main)
+      files.push(pkg.main)
+    if (pkg.bin) {
+      if (typeof pkg.bin === 'object')
+        for (const key in pkg.bin)
+          files.push(pkg.bin[key])
+      else
+        files.push(pkg.bin)
+    }
+    files.push(packageMustHaves, 'package.json', 'npm-shrinkwrap.json')
+    return files
+  }
+
+  getPackageFiles (entries, pkg) {
+    try {
+      pkg = JSON.parse(pkg.toString())
+    } catch (er) {
+      // not actually a valid package.json
+      return super.onReaddir(entries)
+    }
+
+    const ig = path.resolve(this.path, 'package.json')
+    this.packageJsonCache.set(ig, pkg)
+
+    // no files list
+    if (!Array.isArray(pkg.files))
+      return super.onReaddir(entries)
+
+    pkg.files.push(...this.mustHaveFilesFromPackage(pkg))
+
+    const patterns = Array.from(new Set(pkg.files)).reduce((set, pattern) => {
+      const excl = pattern.match(/^!+/)
+      if (excl)
+        pattern = pattern.substr(excl[0].length)
+      // strip off any / from the start of the pattern.  /foo => foo
+      pattern = pattern.replace(/^\/+/, '')
+      // an odd number of ! means a negated pattern.  !!foo ==> foo
+      const negate = excl && excl[0].length % 2 === 1
+      set.push({ pattern, negate })
+      return set
+    }, [])
+
+    let n = patterns.length
+    const set = new Set()
+    const negates = new Set()
+    const then = (pattern, negate, er, fileList) => {
+      if (er)
+        return this.emit('error', er)
+
+      if (negate) {
+        fileList.forEach(f => {
+          set.delete(f)
+          negates.add(f)
+        })
+      } else
+        fileList.forEach(f => set.add(f))
+
+      if (--n === 0) {
+        const list = Array.from(set)
+        // replace the files array with our computed explicit set
+        pkg.files = list.concat(Array.from(negates).map(f => '!' + f))
+        const rdResult = Array.from(new Set(
+          list.map(f => f.replace(/^\/+/, ''))
+        ))
+        super.onReaddir(rdResult)
+      }
+    }
+
+    patterns.forEach(({pattern, negate}) =>
+      this.globFiles(pattern, (er, res) => then(pattern, negate, er, res)))
   }
 
   filterEntry (entry, partial) {
@@ -133,9 +236,7 @@ const npmWalker = Class => class Walker extends Class {
   }
 
   filterEntries () {
-    if (this.ignoreRules['package.json'])
-      this.ignoreRules['.gitignore'] = this.ignoreRules['.npmignore'] = null
-    else if (this.ignoreRules['.npmignore'])
+    if (this.ignoreRules['.npmignore'])
       this.ignoreRules['.gitignore'] = null
     this.filterEntries = super.filterEntries
     super.filterEntries()
@@ -152,39 +253,19 @@ const npmWalker = Class => class Walker extends Class {
   onPackageJson (ig, pkg, then) {
     this.packageJsonCache.set(ig, pkg)
 
-    // if there's a bin, browser or main, make sure we don't ignore it
-    // also, don't ignore the package.json itself!
-    //
-    // Weird side-effect of this: a readme (etc) file will be included
-    // if it exists anywhere within a folder with a package.json file.
-    // The original intent was only to include these files in the root,
-    // but now users in the wild are dependent on that behavior for
-    // localized documentation and other use cases.  Adding a `/` to
-    // these rules, while tempting and arguably more "correct", is a
-    // breaking change.
-    const rules = [
-      pkg.browser ? '!' + pkg.browser : '',
-      pkg.main ? '!' + pkg.main : '',
-      '!package.json',
-      '!npm-shrinkwrap.json',
-      '!@(readme|copying|license|licence|notice|changes|changelog|history){,.*[^~$]}'
-    ]
-    if (pkg.bin)
-      if (typeof pkg.bin === "object")
-        for (const key in pkg.bin)
-          rules.push('!' + pkg.bin[key])
-      else
-        rules.push('!' + pkg.bin)
-
-    const data = rules.filter(f => f).join('\n') + '\n'
-    super.onReadIgnoreFile(packageNecessaryRules, data, _=>_)
-
-    if (Array.isArray(pkg.files))
-      super.onReadIgnoreFile('package.json', '*\n' + pkg.files.map(
-        f => '!' + f + '\n!' + f.replace(/\/+$/, '') + '/**'
+    if (Array.isArray(pkg.files)) {
+      // in this case we already included all the must-haves
+      super.onReadIgnoreFile('package.json', pkg.files.map(
+        f => '!' + f
       ).join('\n') + '\n', then)
-    else
-      then()
+    } else {
+      // if there's a bin, browser or main, make sure we don't ignore it
+      // also, don't ignore the package.json itself, or any files that
+      // must be included in the package.
+      const rules = this.mustHaveFilesFromPackage(pkg).map(f => `!${f}`)
+      const data = rules.join('\n') + '\n'
+      super.onReadIgnoreFile(packageNecessaryRules, data, then)
+    }
   }
 
   // override parent stat function to completely skip any filenames
@@ -206,7 +287,7 @@ const npmWalker = Class => class Walker extends Class {
   }
 
   onReadIgnoreFile (file, data, then) {
-    if (file === 'package.json')
+    if (file === 'package.json') {
       try {
         const ig = path.resolve(this.path, file)
         this.onPackageJson(ig, JSON.parse(data), then)
@@ -214,7 +295,7 @@ const npmWalker = Class => class Walker extends Class {
         // ignore package.json files that are not json
         then()
       }
-    else
+    } else
       super.onReadIgnoreFile(file, data, then)
   }
 
@@ -224,12 +305,34 @@ const npmWalker = Class => class Walker extends Class {
 }
 
 class Walker extends npmWalker(IgnoreWalker) {
+  globFiles (pattern, cb) {
+    glob(pattern, { dot: true, cwd: this.path, nocase: true }, cb)
+  }
+
+  readPackageJson (entries) {
+    fs.readFile(this.path + '/package.json', (er, pkg) =>
+      this.onReadPackageJson(entries, er, pkg))
+  }
+
   walker (entry, then) {
     new Walker(this.walkerOpt(entry)).on('done', then).start()
   }
 }
 
 class WalkerSync extends npmWalker(IgnoreWalkerSync) {
+  globFiles (pattern, cb) {
+    cb(null, glob.sync(pattern, { dot: true, cwd: this.path, nocase: true }))
+  }
+
+  readPackageJson (entries) {
+    const p = this.path + '/package.json'
+    try {
+      this.onReadPackageJson(entries, null, fs.readFileSync(p))
+    } catch (er) {
+      this.onReadPackageJson(entries, er)
+    }
+  }
+
   walker (entry, then) {
     new WalkerSync(this.walkerOpt(entry)).start()
     then()
