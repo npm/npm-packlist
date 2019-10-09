@@ -110,7 +110,12 @@ const npmWalker = Class => class Walker extends Class {
     }
 
     // if we have a package.json, then look in it for 'files'
-    if (!entries.includes('package.json')) {
+    // we _only_ do this in the root project, not bundled deps
+    // or other random folders.  Bundled deps are always assumed
+    // to be in the state the user wants to include them, and
+    // a package.json somewhere else might be a template or
+    // test or something else entirely.
+    if (this.parent || !entries.includes('package.json')) {
       return super.onReaddir(entries)
     }
 
@@ -127,21 +132,21 @@ const npmWalker = Class => class Walker extends Class {
   mustHaveFilesFromPackage (pkg) {
     const files = []
     if (pkg.browser)
-      files.push(pkg.browser)
+      files.push('/' + pkg.browser)
     if (pkg.main)
-      files.push(pkg.main)
+      files.push('/' + pkg.main)
     if (pkg.bin) {
       if (typeof pkg.bin === 'object')
         for (const key in pkg.bin)
-          files.push(pkg.bin[key])
+          files.push('/' + pkg.bin[key])
       else
-        files.push(pkg.bin)
+        files.push('/' + pkg.bin)
     }
     files.push(
       packageMustHaves,
-      'package.json',
-      'npm-shrinkwrap.json',
-      '!package-lock.json'
+      '/package.json',
+      '/npm-shrinkwrap.json',
+      '!/package-lock.json'
     )
     return files
   }
@@ -249,7 +254,9 @@ const npmWalker = Class => class Walker extends Class {
 
   addIgnoreFile (file, then) {
     const ig = path.resolve(this.path, file)
-    if (this.packageJsonCache.has(ig))
+    if (file === 'package.json' && this.parent)
+      then()
+    else if (this.packageJsonCache.has(ig))
       this.onPackageJson(ig, this.packageJsonCache.get(ig), then)
     else
       super.addIgnoreFile(file, then)
