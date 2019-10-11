@@ -19,7 +19,6 @@ fs.writeFileSync(pkg + '/readme.md', 'hello')
 
 const packlist = require('../')
 t.test('try to exclude package.json but cannot', async t => {
-  console.error(packlist.sync({path: pkg}))
   t.matchSnapshot(packlist.sync({path: pkg}))
   await t.resolveMatchSnapshot(packlist({path: pkg}))
 })
