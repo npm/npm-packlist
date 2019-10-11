@@ -37,7 +37,6 @@
     "check-coverage": true,
     "nyc-arg": [
       "--include=index.js"
-    ],
-    "jobs": 1
+    ]
   }
 }
