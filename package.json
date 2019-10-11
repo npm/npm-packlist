@@ -36,7 +36,8 @@
   "tap": {
     "check-coverage": true,
     "nyc-arg": [
-      "--include=index.js"
+      "--include=index.js",
+      "--include=bin/index.js"
     ]
   },
   "bin": "bin/index.js"
