@@ -24,9 +24,11 @@ const path = require('path')
 // localized documentation and other use cases.  Adding a `/` to
 // these rules, while tempting and arguably more "correct", is a
 // significant change that will break existing use cases.
-const packageMustHaves = '**/@(' +
-  'readme|copying|license|licence|notice|changes|changelog|history' +
-  '){,.*[^~$]}'
+const packageMustHaveFileNames =
+  'readme|copying|license|licence|notice|changes|changelog|history'
+
+const packageMustHaves = `@(${packageMustHaveFileNames}){,.*[^~$]}`
+const packageMustHavesRE = new RegExp(`^(${packageMustHaveFileNames})(\\..*[^~\$])?$`, 'i')
 
 const fs = require('fs')
 const glob = require('glob')
@@ -143,10 +145,10 @@ const npmWalker = Class => class Walker extends Class {
         files.push('/' + pkg.bin)
     }
     files.push(
-      packageMustHaves,
       '/package.json',
       '/npm-shrinkwrap.json',
-      '!/package-lock.json'
+      '!/package-lock.json',
+      packageMustHaves,
     )
     return files
   }
@@ -192,8 +194,12 @@ const npmWalker = Class => class Walker extends Class {
           set.delete(f)
           negates.add(f)
         })
-      } else
-        fileList.forEach(f => set.add(f))
+      } else {
+        fileList.forEach(f => {
+          set.add(f)
+          negates.delete(f)
+        })
+      }
 
       if (--n === 0) {
         const list = Array.from(set)
@@ -239,6 +245,16 @@ const npmWalker = Class => class Walker extends Class {
 
       // always include package.json at the root.
       : rootPJ ? true
+
+      // always include readmes etc in any included dir
+      : packageMustHavesRE.test(entry) ? true
+
+      // npm-shrinkwrap and package.json always included in the root pkg
+      : isRoot && (entry === 'npm-shrinkwrap.json' || entry === 'package.json')
+        ? true
+
+      // package-lock never included
+      : isRoot && entry === 'package-lock.json' ? false
 
       // otherwise, follow ignore-walk's logic
       : super.filterEntry(entry, partial)
