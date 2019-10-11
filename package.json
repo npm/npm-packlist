@@ -38,5 +38,6 @@
     "nyc-arg": [
       "--include=index.js"
     ]
-  }
+  },
+  "bin": "bin/index.js"
 }
