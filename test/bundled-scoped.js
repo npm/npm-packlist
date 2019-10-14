@@ -1,65 +1,35 @@
 'use strict'
-const fs = require('fs')
-const path = require('path')
-
-const mkdirp = require('mkdirp')
-const rimraf = require('rimraf')
 const t = require('tap')
-
 const pack = require('../')
-
-const pkg = path.join(__dirname, path.basename(__filename, '.js'))
-t.teardown(_ => rimraf.sync(pkg))
 
 const elfJS = `
 module.exports = elf =>
   console.log("i'm a elf")
 `
 
-const json = {
-  'name': 'test-package',
-  'version': '3.1.4',
-  'main': 'elf.js',
-  'bundleDependencies': [
-    '@npmwombat/history'
-  ]
-}
-
-t.test('setup', t => {
-  rimraf.sync(pkg)
-  mkdirp.sync(pkg)
-  fs.writeFileSync(
-    path.join(pkg, 'package.json'),
-    JSON.stringify(json, null, 2)
-  )
-
-  fs.writeFileSync(
-    path.join(pkg, 'elf.js'),
-    elfJS
-  )
-
-  fs.writeFileSync(
-    path.join(pkg, '.npmrc'),
-    'packaged=false'
-  )
-
-  const historyDir = path.join(pkg, 'node_modules/@npmwombat/history')
-  mkdirp.sync(historyDir)
-  fs.writeFileSync(
-    path.join(historyDir, 'package.json'),
-    JSON.stringify({
-      name: '@npmwombat/history',
-      version: '1.0.0',
-      main: 'index.js'
-    }, null, 2)
-  )
-
-  fs.writeFileSync(
-    path.join(historyDir, 'index.js'),
-    elfJS
-  )
-
-  t.end()
+const pkg = t.testdir({
+  'package.json': JSON.stringify({
+    'name': 'test-package',
+    'version': '3.1.4',
+    'main': 'elf.js',
+    'bundleDependencies': [
+      '@npmwombat/history'
+    ]
+  }),
+  'elf.js': elfJS,
+  '.npmrc': 'packaged=false',
+  node_modules: {
+    '@npmwombat': {
+      history: {
+        'package.json': JSON.stringify({
+          name: '@npmwombat/history',
+          version: '1.0.0',
+          main: 'index.js'
+        }),
+        'index.js': elfJS,
+      }
+    }
+  }
 })
 
 t.test('includes bundled dependency', function (t) {
