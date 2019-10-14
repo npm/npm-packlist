@@ -1,45 +1,36 @@
 'use strict'
-const fs = require('fs')
-const path = require('path')
-
-const mkdirp = require('mkdirp')
-const rimraf = require('rimraf')
 const t = require('tap')
 
 const pack = require('../')
 
-const pkg = path.join(__dirname, path.basename(__filename, '.js'))
-t.teardown(_ => rimraf.sync(pkg))
-
-t.test('setup', t => {
-  rimraf.sync(pkg)
-  mkdirp.sync(pkg + '/lib')
-  mkdirp.sync(pkg + '/core')
-  fs.writeFileSync(pkg + '/lib/core', 'excluded dump file')
-  fs.writeFileSync(pkg + '/package.json', JSON.stringify({
+const pkg = t.testdir({
+  'package.json': JSON.stringify({
     name: 'test-package',
     version: '1.2.3',
-  }))
-  fs.writeFileSync(pkg + '/package-lock.json', JSON.stringify({
+  }),
+  'package-lock.json': JSON.stringify({
+    lock: true,
+    include: false,
+  }),
+  'yarn.lock': JSON.stringify({
     lock: 'file',
     include: false,
-  }))
-  fs.writeFileSync(pkg + '/yarn.lock', JSON.stringify({
-    lock: 'file',
-    include: false,
-  }))
-  fs.writeFileSync(pkg + '/lib/package-lock.json', JSON.stringify({
-    lock: 'file',
-    include: true,
-  }))
-  fs.writeFileSync(pkg + '/lib/yarn.lock', JSON.stringify({
-    lock: 'file',
-    include: true,
-  }))
-  fs.writeFileSync(pkg + '/core/include-me.txt', 'please include me')
-  t.end()
+  }),
+  lib: {
+    core: 'no longer excluded dump file',
+    'package-lock.json': JSON.stringify({
+      lock: 'file',
+      include: true,
+    }),
+    'yarn.lock': JSON.stringify({
+      lock: 'file',
+      include: true,
+    }),
+  },
+  core: {
+    'include-me.txt': 'please include me',
+  },
 })
-
 
 t.test('follows npm package ignoring rules', function (t) {
   const check = (files, t) => {
