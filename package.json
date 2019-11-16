@@ -7,6 +7,7 @@
   },
   "main": "index.js",
   "dependencies": {
+    "glob": "^7.1.6",
     "ignore-walk": "^3.0.3",
     "npm-bundled": "^1.0.1"
   },
