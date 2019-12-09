@@ -1,6 +1,9 @@
 {
   "name": "npm-packlist",
   "version": "1.4.6",
+  "publishConfig": {
+    "tag": "legacy-v1"
+  },
   "description": "Get a list of the files to add from a folder into an npm package",
   "directories": {
     "test": "test"
