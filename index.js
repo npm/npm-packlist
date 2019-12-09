@@ -17,6 +17,8 @@ const rootBuiltinRules = Symbol('root-builtin-rules')
 const packageNecessaryRules = Symbol('package-necessary-rules')
 const path = require('path')
 
+const normalizePackageBin = require('npm-normalize-package-bin')
+
 // Weird side-effect of this: a readme (etc) file will be included
 // if it exists anywhere within a folder with a package.json file.
 // The original intent was only to include these files in the root,
@@ -138,11 +140,9 @@ const npmWalker = Class => class Walker extends Class {
     if (pkg.main)
       files.push('/' + pkg.main)
     if (pkg.bin) {
-      if (typeof pkg.bin === 'object')
-        for (const key in pkg.bin)
-          files.push('/' + pkg.bin[key])
-      else
-        files.push('/' + pkg.bin)
+      // always an object because normalized already
+      for (const key in pkg.bin)
+        files.push('/' + pkg.bin[key])
     }
     files.push(
       '/package.json',
@@ -155,7 +155,7 @@ const npmWalker = Class => class Walker extends Class {
 
   getPackageFiles (entries, pkg) {
     try {
-      pkg = JSON.parse(pkg.toString())
+      pkg = normalizePackageBin(JSON.parse(pkg.toString()))
     } catch (er) {
       // not actually a valid package.json
       return super.onReaddir(entries)
