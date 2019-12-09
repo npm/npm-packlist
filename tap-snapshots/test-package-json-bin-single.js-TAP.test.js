@@ -7,7 +7,6 @@
 'use strict'
 exports[`test/package-json-bin-single.js TAP follows npm package ignoring rules async > must match snapshot 1`] = `
 Array [
-  "__bin",
   "lib/elf.js",
   "package.json",
 ]
@@ -15,7 +14,6 @@ Array [
 
 exports[`test/package-json-bin-single.js TAP follows npm package ignoring rules sync > must match snapshot 1`] = `
 Array [
-  "__bin",
   "lib/elf.js",
   "package.json",
 ]
