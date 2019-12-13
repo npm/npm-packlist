@@ -170,6 +170,12 @@ const npmWalker = Class => class Walker extends Class {
 
     pkg.files.push(...this.mustHaveFilesFromPackage(pkg))
 
+    // when bundling _and_ explicitly filtering files,
+    // the root node_modules should always be allowed
+    if (this.bundled.length) {
+      pkg.files.push('/node_modules')
+    }
+
     const patterns = Array.from(new Set(pkg.files)).reduce((set, pattern) => {
       const excl = pattern.match(/^!+/)
       if (excl)
