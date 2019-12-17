@@ -42,5 +42,8 @@
       "--include=bin/index.js"
     ]
   },
-  "bin": "bin/index.js"
+  "bin": "bin/index.js",
+  "engines": {
+    "node": ">=10"
+  }
 }
