@@ -164,11 +164,19 @@ const npmWalker = Class => class Walker extends Class {
     const ig = path.resolve(this.path, 'package.json')
     this.packageJsonCache.set(ig, pkg)
 
-    // no files list
+    // no files list, just return the normal readdir() result
     if (!Array.isArray(pkg.files))
       return super.onReaddir(entries)
 
     pkg.files.push(...this.mustHaveFilesFromPackage(pkg))
+
+    // If the package has a files list, then it's unlikely to include
+    // node_modules, because why would you do that?  but since we use
+    // the files list as the effective readdir result, that means it
+    // looks like we don't have a node_modules folder at all unless we
+    // include it here.
+    if (pkg.bundleDependencies && entries.includes('node_modules'))
+      pkg.files.push('node_modules')
 
     const patterns = Array.from(new Set(pkg.files)).reduce((set, pattern) => {
       const excl = pattern.match(/^!+/)
