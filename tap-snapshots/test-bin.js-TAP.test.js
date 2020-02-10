@@ -14,6 +14,15 @@ Object {
 }
 `
 
+exports[`test/bin.js TAP -h > expect resolving Promise 1`] = `
+Object {
+  "code": 0,
+  "signal": null,
+  "stderr": "",
+  "stdout": "usage: npm-packlist [-s --sort] [directory, directory, ...]\\n",
+}
+`
+
 exports[`test/bin.js TAP -s > expect resolving Promise 1`] = `
 Object {
   "code": 0,

@@ -27,7 +27,9 @@ const pkg = t.testdir({
     '.npmrc': 'packaged=false',
     node_modules: {
       '@npmwombat': {
-        history: t.fixture('symlink', '../../../history'),
+        // tap's symlink fixture doesn't allow reading on windows, because
+        // it can't be created as a junction without specifying the type.
+        //history: t.fixture('symlink', '../../../history'),
       },
     },
   },
@@ -40,6 +42,8 @@ const pkg = t.testdir({
     'index.js': elfJS,
   }
 }) + '/pkg'
+
+fs.symlinkSync('../../../history', path.resolve(pkg, 'node_modules/@npmwombat/history'), 'dir')
 
 t.test('includes bundled dependency', function (t) {
   const check = (files, t) => {
