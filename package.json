@@ -22,7 +22,7 @@
     "mutate-fs": "^2.1.1",
     "require-inject": "^1.4.4",
     "rimraf": "^2.7.1",
-    "tap": "^14.7.0"
+    "tap": "^14.10.6"
   },
   "scripts": {
     "test": "tap",
