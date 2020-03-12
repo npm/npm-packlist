@@ -2,7 +2,6 @@
 const fs = require('fs')
 const path = require('path')
 
-const rimraf = require('rimraf')
 const t = require('tap')
 
 const pack = require('..')
