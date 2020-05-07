@@ -14,7 +14,7 @@ const pkg = t.testdir({
   'elf.js': elfJS,
   'link.js': t.fixture('symlink', 'elf.js'),
   '.npmrc': 'packaged=false',
-  '.npmignore': '.npmignore\ndummy\npackage.json\n',
+  '.npmignore': '.npmignore\ndummy\n/package.json\n',
   // empty dir should be ignored
   'this': { dir: { is: { empty: { and: { ignored: {}}}}}},
   dummy: 'foo',
@@ -37,6 +37,27 @@ const pkg = t.testdir({
       'README.md': "please don't include me",
     },
   },
+
+  // ljharb's monorepo test goober that blew up
+  test: { resolver: { multirepo: { packages: {
+    a: {
+      README: 'included',
+      node_modules: {
+        some_dep: {
+          'package.json': JSON.stringify({ version: '1.2.3' }),
+        },
+        '@scope': {
+          b: t.fixture('symlink', '../../../b'),
+        },
+      },
+    },
+    b: {
+      'index.js': 'console.log("woop")',
+      node_modules: {
+        a: t.fixture('symlink', '../../a'),
+      },
+    },
+  }}}},
 })
 
 t.test('follows npm package ignoring rules', function (t) {
