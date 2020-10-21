@@ -234,11 +234,13 @@ const npmWalker = Class => class Walker extends Class {
       for (const {negate, fileList} of results) {
         if (negate) {
           fileList.forEach(f => {
+            f = f.replace(/\/+$/, '')
             set.delete(f)
             negates.add(f)
           })
         } else {
           fileList.forEach(f => {
+            f = f.replace(/\/+$/, '')
             set.add(f)
             negates.delete(f)
           })
