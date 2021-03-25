@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`test/bundled.js TAP includes bundled dependency async > must match snapshot 1`] = `
+exports[`test/bundled.js TAP includes bundled dependency using bundleDependencies async > must match snapshot 1`] = `
 Array [
   "elf.js",
   "node_modules/history/index.js",
@@ -14,7 +14,25 @@ Array [
 ]
 `
 
-exports[`test/bundled.js TAP includes bundled dependency sync > must match snapshot 1`] = `
+exports[`test/bundled.js TAP includes bundled dependency using bundleDependencies sync > must match snapshot 1`] = `
+Array [
+  "elf.js",
+  "node_modules/history/index.js",
+  "node_modules/history/package.json",
+  "package.json",
+]
+`
+
+exports[`test/bundled.js TAP includes bundled dependency using bundledDependencies async > must match snapshot 1`] = `
+Array [
+  "elf.js",
+  "node_modules/history/index.js",
+  "node_modules/history/package.json",
+  "package.json",
+]
+`
+
+exports[`test/bundled.js TAP includes bundled dependency using bundledDependencies sync > must match snapshot 1`] = `
 Array [
   "elf.js",
   "node_modules/history/index.js",
