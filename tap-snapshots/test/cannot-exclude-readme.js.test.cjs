@@ -9,12 +9,8 @@ exports[`test/cannot-exclude-readme.js TAP try to exclude package.json but canno
 Array [
   ".npmignore",
   "package.json",
-  "changes.md",
-  "history.md",
   "license.md",
-  "notice.md",
   "readme.md",
-  "changelog.xyz",
 ]
 `
 
@@ -22,11 +18,7 @@ exports[`test/cannot-exclude-readme.js TAP try to exclude package.json but canno
 Array [
   ".npmignore",
   "package.json",
-  "changes.md",
-  "history.md",
   "license.md",
-  "notice.md",
   "readme.md",
-  "changelog.xyz",
 ]
 `
