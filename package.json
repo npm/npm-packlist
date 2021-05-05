@@ -20,7 +20,7 @@
   "devDependencies": {
     "mutate-fs": "^2.1.1",
     "require-inject": "^1.4.4",
-    "tap": "^14.10.8"
+    "tap": "^15.0.6"
   },
   "scripts": {
     "test": "tap",
