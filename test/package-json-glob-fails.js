@@ -16,10 +16,9 @@ const pkg = t.testdir({
   },
 })
 
-const requireInject = require('require-inject')
 const glob = (pattern, opt, cb) => cb(new Error('no glob for you'))
 glob.sync = (pattern, opt) => { throw new Error('no glob for you') }
-const packlist = requireInject('../', { glob })
+const packlist = t.mock('../', { glob })
 
 t.test('package with busted glob', async t => {
   await t.rejects(packlist({path: pkg}), { message: 'no glob for you' })

@@ -37,10 +37,10 @@ t.test('seeded with invalid JSON falls back to filesystem', t => {
     path: pkg,
     packageJsonCache: new Map().set(rootManifestPath, "c'est ne pas une j'son")
   }))
-  t.done()
+  t.end()
 })
 
 t.test('when empty', t => {
   t.matchSnapshot(packlist.sync({ path: pkg, packageJsonCache: new Map() }))
-  t.done()
+  t.end()
 })

@@ -10,7 +10,14 @@ Object {
   "code": 0,
   "signal": null,
   "stderr": "",
-  "stdout": "index.js\\nlib/index.js\\nLICENSE.txt\\npackage.json\\nREADME.md\\n",
+  "stdout": String(
+    index.js
+    lib/index.js
+    LICENSE.txt
+    package.json
+    README.md
+    
+  ),
 }
 `
 
@@ -28,7 +35,14 @@ Object {
   "code": 0,
   "signal": null,
   "stderr": "",
-  "stdout": "index.js\\nlib/index.js\\nLICENSE.txt\\npackage.json\\nREADME.md\\n",
+  "stdout": String(
+    index.js
+    lib/index.js
+    LICENSE.txt
+    package.json
+    README.md
+    
+  ),
 }
 `
 
@@ -37,7 +51,15 @@ Object {
   "code": 0,
   "signal": null,
   "stderr": "",
-  "stdout": "> .\\nindex.js\\nlib/index.js\\npackage.json\\nREADME.md\\nLICENSE.txt\\n",
+  "stdout": String(
+    > .
+    index.js
+    lib/index.js
+    package.json
+    README.md
+    LICENSE.txt
+    
+  ),
 }
 `
 
@@ -46,6 +68,13 @@ Object {
   "code": 0,
   "signal": null,
   "stderr": "",
-  "stdout": "index.js\\nlib/index.js\\npackage.json\\nREADME.md\\nLICENSE.txt\\n",
+  "stdout": String(
+    index.js
+    lib/index.js
+    package.json
+    README.md
+    LICENSE.txt
+    
+  ),
 }
 `
