@@ -4,8 +4,13 @@ const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: ['.npmignore', '!readme.md']
   }),
-  '.npmignore': 'readme.md',
+  '.npmignore': 'readme.md\nlicense.md\nhistory.md\n*.xyz',
   'readme.md': 'hello',
+  'license.md': 'hello',
+  'history.md': 'hello',
+  'changes.md': 'hello',
+  'changelog.xyz': 'hello',
+  'notice.md': 'hello',
 })
 
 const packlist = require('../')
