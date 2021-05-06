@@ -19,15 +19,25 @@
     "index.js"
   ],
   "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^5.0.0",
     "mutate-fs": "^2.1.1",
     "tap": "^15.0.6"
   },
   "scripts": {
     "test": "tap",
+    "posttest": "npm run lint",
     "snap": "tap",
+    "postsnap": "npm run lintfix",
     "preversion": "npm test",
     "postversion": "npm publish",
-    "prepublishOnly": "git push origin --follow-tags"
+    "prepublishOnly": "git push origin --follow-tags",
+    "eslint": "eslint",
+    "lint": "npm run eslint -- index.js bin/index.js \"test/**/*.js\"",
+    "lintfix": "npm run lint -- --fix"
   },
   "repository": {
     "type": "git",

@@ -10,7 +10,7 @@ const pkg = t.testdir({
     'package.json': JSON.stringify({
       name: 'nested-package',
       version: '1.2.3',
-      files: [ 'index.js' ],
+      files: ['index.js'],
     }),
     'index.js': 'console.log("hi")',
     'foo.js': 'console.log("no")',

@@ -19,30 +19,30 @@ t.test('should strip / from package.json files array entry results', t => {
         // exclude without slash, then include with it
         '!dist',
         'dist/',
-        '!dist/foo/*.src'
-      ]
+        '!dist/foo/*.src',
+      ],
     }),
     otherdir: {
-      donotinclude: ''
+      donotinclude: '',
     },
     somedir: {
-      donotinclude: ''
+      donotinclude: '',
     },
     incldir: {
-      yesinclude: ''
+      yesinclude: '',
     },
     foo: '',
     dist: {
       foo: {
         'foo.src': '',
-        'foo.result': ''
+        'foo.result': '',
       },
       bar: '',
       baz: {
         boo: '',
-        'boo.src': ''
-      }
-    }
+        'boo.src': '',
+      },
+    },
   })
   return packlist({path}).then(res => t.strictSame(res, [
     'dist/bar',
@@ -50,6 +50,6 @@ t.test('should strip / from package.json files array entry results', t => {
     'incldir/yesinclude',
     'package.json',
     'dist/foo/foo.result',
-    'dist/baz/boo.src'
+    'dist/baz/boo.src',
   ]))
 })

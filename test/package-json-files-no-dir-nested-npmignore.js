@@ -3,7 +3,7 @@ const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: [
       'lib/*.js',
-    ]
+    ],
   }),
   lib: {
     'one.js': 'one',

@@ -10,5 +10,5 @@ t.matchSnapshot([
   'asdf.js',
   'node_modules/a/b/c',
   'a/b/c/d/e/f/g',
-  'a/b/x/y'
+  'a/b/x/y',
 ].sort(sort))

@@ -9,18 +9,18 @@ const pkg = t.testdir({
   'package.json': JSON.stringify({
     name: 'test-package',
     version: '3.1.4',
-    main: 'elf.js'
+    main: 'elf.js',
   }),
   'elf.js': elfJS,
   'link.js': t.fixture('symlink', 'elf.js'),
   '.npmrc': 'packaged=false',
   '.npmignore': '.npmignore\ndummy\n/package.json\n',
   // empty dir should be ignored
-  'this': { dir: { is: { empty: { and: { ignored: {}}}}}},
+  this: { dir: { is: { empty: { and: { ignored: {}}}}}},
   dummy: 'foo',
   build: {
     'config.gypi': "i_wont_be_included='with any luck'",
-    'npm-debug.log': '0 lol\n'
+    'npm-debug.log': '0 lol\n',
   },
   deps: {
     foo: {

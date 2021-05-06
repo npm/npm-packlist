@@ -10,9 +10,9 @@ module.exports = elf =>
 
 const pkg = t.testdir({
   'package.json': JSON.stringify({
-    'name': 'test-package',
-    'version': '3.1.4',
-    'main': 'elf.js',
+    name: 'test-package',
+    version: '3.1.4',
+    main: 'elf.js',
   }),
   'archived-packages': {
     ignoreme: 'this should be ignored',
@@ -37,7 +37,7 @@ readme.md
   },
   'readme.md': 'Elf package readme included even if ignored',
   'readme.md~': 'Editor backup file should not be auto-included',
-  'this': {
+  this: {
     dir: {
       is: {
         empty: {
@@ -58,7 +58,7 @@ readme.md
         'config.gypi': "i_will_be_included='with any luck'",
       },
     },
-    '.git': 'do not include me'
+    '.git': 'do not include me',
   },
   '.git': {
     gitstub: 'wont fool git, also wont be included',

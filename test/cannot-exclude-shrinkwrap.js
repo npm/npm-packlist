@@ -2,7 +2,7 @@
 const t = require('tap')
 const pkg = t.testdir({
   'package.json': JSON.stringify({
-    files: ['.npmignore', '!npm-shrinkwrap.json']
+    files: ['.npmignore', '!npm-shrinkwrap.json'],
   }),
   '.npmignore': 'npm-shrinkwrap.json',
   'npm-shrinkwrap.json': '{}',

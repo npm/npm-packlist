@@ -5,7 +5,7 @@ const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: [
       'lib',
-    ]
+    ],
   }),
   lib: {
     'one.js': 'one',
@@ -14,7 +14,7 @@ const pkg = t.testdir({
     'for.js': 'for',
     '.npmignore': 'two.js',
     '.DS_Store': 'a store of ds',
-  }
+  },
 })
 
 const packlist = require('../')

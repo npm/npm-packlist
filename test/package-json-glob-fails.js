@@ -4,20 +4,22 @@ const pkg = t.testdir({
     files: [
       'lib',
       '!lib/one',
-    ]
+    ],
   }),
   lib: {
-    'one': 'one',
-    'two': 'two',
-    'tre': 'tre',
-    'for': 'for',
+    one: 'one',
+    two: 'two',
+    tre: 'tre',
+    for: 'for',
     '.npmignore': 'two',
     '.DS_Store': 'a store of ds',
   },
 })
 
 const glob = (pattern, opt, cb) => cb(new Error('no glob for you'))
-glob.sync = (pattern, opt) => { throw new Error('no glob for you') }
+glob.sync = (pattern, opt) => {
+  throw new Error('no glob for you')
+}
 const packlist = t.mock('../', { glob })
 
 t.test('package with busted glob', async t => {

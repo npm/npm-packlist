@@ -4,13 +4,13 @@ const pkg = t.testdir({
     files: [
       'lib',
       '!lib/one',
-    ]
+    ],
   }),
   lib: {
-    'one': 'one',
-    'two': 'two',
-    'tre': 'tre',
-    'for': 'for',
+    one: 'one',
+    two: 'two',
+    tre: 'tre',
+    for: 'for',
     '.npmignore': 'two',
     '.DS_Store': 'a store of ds',
   },

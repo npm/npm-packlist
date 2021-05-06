@@ -15,8 +15,8 @@ const pkg = t.testdir({
     version: '1.6.2',
     bin: '__bin',
     files: [
-      'lib'
-    ]
+      'lib',
+    ],
   }),
   __bin: bin,
   lib: {

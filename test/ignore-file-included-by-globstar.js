@@ -5,7 +5,7 @@ t.test('include a globstar, then exclude one of them', t => {
     'foo.js': '',
     'bar.js': '',
     bar: {
-      'bar.js': ''
+      'bar.js': '',
     },
     'glorp.txt': '',
     'package.json': JSON.stringify({
@@ -13,9 +13,9 @@ t.test('include a globstar, then exclude one of them', t => {
       version: '1.0.0',
       files: [
         '**/*.js',
-        '!foo.js'
-      ]
-    })
+        '!foo.js',
+      ],
+    }),
   })
   const expect = ['bar.js', 'bar/bar.js', 'package.json']
   return packlist({path}).then(actual => t.strictSame(actual, expect))

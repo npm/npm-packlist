@@ -8,10 +8,10 @@ module.exports = elf =>
 
 const pkg = t.testdir({
   'package.json': JSON.stringify({
-    'name': 'test-package',
-    'version': '3.1.4',
-    'main': 'elf.js',
-    'files': []
+    name: 'test-package',
+    version: '3.1.4',
+    main: 'elf.js',
+    files: [],
   }),
   'index.js': elfJS,
   'elf.js': elfJS,
@@ -59,7 +59,7 @@ t.test('follows npm package ignoring rules', function (t) {
   t.test('async', t => pack({
     path: pkg,
     packageJsonCache: packageJsonCache,
-    nodeModulesCache: nodeModulesCache
+    nodeModulesCache: nodeModulesCache,
   }).then(files => check(files, t)))
 
   t.end()

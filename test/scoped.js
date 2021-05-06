@@ -38,10 +38,10 @@ t.test('includes bundledDependencies', function (t) {
     t.end()
   }
 
-  const bundled = [ '@npmwombat/scoped' ]
+  const bundled = ['@npmwombat/scoped']
   const options = {
     path: pkg,
-    bundled: bundled
+    bundled: bundled,
   }
 
   t.test('sync', t => check(pack.sync(options), t))

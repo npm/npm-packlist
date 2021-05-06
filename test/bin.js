@@ -16,7 +16,7 @@ const run = (...args) => new Promise(res => {
 const t = require('tap')
 const me = t.testdir({
   'package.json': JSON.stringify({
-    files: ['index.js', 'lib']
+    files: ['index.js', 'lib'],
   }),
   'README.md': 'hello',
   'LICENSE.txt': 'you can use it but you gotta pay me',

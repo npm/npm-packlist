@@ -10,7 +10,7 @@ const pkg = t.testdir({
       '/lib/one.js',
       'lib/one.js',
       'lib/one.*',
-    ]
+    ],
   }),
   lib: {
     'one.js': 'one',

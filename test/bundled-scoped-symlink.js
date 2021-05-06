@@ -14,12 +14,12 @@ module.exports = elf =>
 const pkg = t.testdir({
   pkg: {
     'package.json': JSON.stringify({
-      'name': 'test-package',
-      'version': '3.1.4',
-      'main': 'elf.js',
-      'bundleDependencies': [
-        '@npmwombat/history'
-      ]
+      name: 'test-package',
+      version: '3.1.4',
+      main: 'elf.js',
+      bundleDependencies: [
+        '@npmwombat/history',
+      ],
     }),
     'elf.js': elfJS,
     '.npmrc': 'packaged=false',
@@ -27,7 +27,7 @@ const pkg = t.testdir({
       '@npmwombat': {
         // tap's symlink fixture doesn't allow reading on windows, because
         // it can't be created as a junction without specifying the type.
-        //history: t.fixture('symlink', '../../../history'),
+        // history: t.fixture('symlink', '../../../history'),
       },
     },
   },
@@ -35,10 +35,10 @@ const pkg = t.testdir({
     'package.json': JSON.stringify({
       name: '@npmwombat/history',
       version: '1.0.0',
-      main: 'index.js'
+      main: 'index.js',
     }),
     'index.js': elfJS,
-  }
+  },
 }) + '/pkg'
 
 fs.symlinkSync('../../../history', path.resolve(pkg, 'node_modules/@npmwombat/history'), 'dir')

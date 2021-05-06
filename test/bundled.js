@@ -1,6 +1,4 @@
 'use strict'
-const fs = require('fs')
-const path = require('path')
 
 const t = require('tap')
 
@@ -14,12 +12,12 @@ module.exports = elf =>
 t.test('includes bundled dependency using bundleDependencies', function (t) {
   const pkg = t.testdir({
     'package.json': JSON.stringify({
-      'name': 'test-package',
-      'version': '3.1.4',
-      'main': 'elf.js',
-      'bundleDependencies': [
-        'history'
-      ]
+      name: 'test-package',
+      version: '3.1.4',
+      main: 'elf.js',
+      bundleDependencies: [
+        'history',
+      ],
     }),
     'elf.js': elfJS,
     '.npmrc': 'packaged=false',
@@ -28,11 +26,11 @@ t.test('includes bundled dependency using bundleDependencies', function (t) {
         'package.json': JSON.stringify({
           name: '@npmwombat/history',
           version: '1.0.0',
-          main: 'index.js'
+          main: 'index.js',
         }),
         'index.js': elfJS,
-      }
-    }
+      },
+    },
   })
 
   const check = (files, t) => {
@@ -49,12 +47,12 @@ t.test('includes bundled dependency using bundleDependencies', function (t) {
 t.test('includes bundled dependency using bundledDependencies', function (t) {
   const pkg = t.testdir({
     'package.json': JSON.stringify({
-      'name': 'test-package',
-      'version': '3.1.4',
-      'main': 'elf.js',
-      'bundledDependencies': [
-        'history'
-      ]
+      name: 'test-package',
+      version: '3.1.4',
+      main: 'elf.js',
+      bundledDependencies: [
+        'history',
+      ],
     }),
     'elf.js': elfJS,
     '.npmrc': 'packaged=false',
@@ -63,11 +61,11 @@ t.test('includes bundled dependency using bundledDependencies', function (t) {
         'package.json': JSON.stringify({
           name: '@npmwombat/history',
           version: '1.0.0',
-          main: 'index.js'
+          main: 'index.js',
         }),
         'index.js': elfJS,
-      }
-    }
+      },
+    },
   })
 
   const check = (files, t) => {

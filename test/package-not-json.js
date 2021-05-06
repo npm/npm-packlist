@@ -15,7 +15,7 @@ const pkg = t.testdir({
   dummy: 'foo',
   build: {
     'config.gypi': "i_wont_be_included='with any luck'",
-    'npm-debug.log': '0 lol\n'
+    'npm-debug.log': '0 lol\n',
   },
   deps: {
     foo: {
@@ -30,8 +30,8 @@ const pkg = t.testdir({
   node_modules: {
     history: {
       'README.md': "please don't include me",
-    }
-  }
+    },
+  },
 })
 
 t.test('follows npm package ignoring rules', function (t) {

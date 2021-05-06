@@ -19,11 +19,11 @@ const pkg = t.testdir({
     version: '1.6.2',
     bin: {
       bar: '__bin_bar',
-      foo: '__bin_foo'
+      foo: '__bin_foo',
     },
     files: [
-      'lib'
-    ]
+      'lib',
+    ],
   }),
   __bin_foo: bin,
   __bin_bar: bin,

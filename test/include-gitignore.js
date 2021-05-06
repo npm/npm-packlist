@@ -12,7 +12,7 @@ const pkg = t.testdir({
   'package.json': JSON.stringify({
     name: 'test-package',
     version: '3.1.4',
-    main: 'elf.js'
+    main: 'elf.js',
   }),
   z: {
     '.gitignore': '!.gitignore',

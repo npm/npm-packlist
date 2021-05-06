@@ -4,7 +4,7 @@ const pkg = t.testdir({
     files: [
       'lib/sub/*.js',
       '.npmignore',
-    ]
+    ],
   }),
   lib: {
     sub: {

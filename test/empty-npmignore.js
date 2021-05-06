@@ -11,7 +11,7 @@ const pkg = t.testdir({
   'package.json': JSON.stringify({
     name: 'test-package',
     version: '3.1.4',
-    main: 'elf.js'
+    main: 'elf.js',
   }),
   'elf.js': elfJS,
   '.gitignore': '*',
@@ -20,8 +20,8 @@ const pkg = t.testdir({
     node_modules: {
       foo: {
         'package.json': '{"name":"just a test","version":"bugbear"}',
-      }
-    }
+      },
+    },
   },
   '.npmrc': 'packaged=false',
   build: {
@@ -32,8 +32,8 @@ const pkg = t.testdir({
     foo: {
       config: {
         'config.gypi': "i_will_be_included='with any luck'",
-      }
-    }
+      },
+    },
   },
   '.git': {
     gitstub: "won't fool git, also won't be included",
@@ -41,8 +41,8 @@ const pkg = t.testdir({
   node_modules: {
     history: {
       'README.md': "please don't include me",
-    }
-  }
+    },
+  },
 })
 
 t.test('follows npm package ignoring rules', function (t) {

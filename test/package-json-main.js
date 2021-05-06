@@ -16,8 +16,8 @@ const pkg = t.testdir({
     browser: 'browser.js',
     files: [
       'elf.js',
-      'deps/foo/config/config.gypi'
-    ]
+      'deps/foo/config/config.gypi',
+    ],
   }),
   'elf.js': elfJS,
   '__main.js': elfJS,
@@ -29,7 +29,7 @@ const pkg = t.testdir({
   dummy: 'foo',
   build: {
     'config.gypi': "i_wont_be_included='with any luck'",
-    'npm-debug.log': '0 lol\n'
+    'npm-debug.log': '0 lol\n',
   },
   deps: {
     foo: {

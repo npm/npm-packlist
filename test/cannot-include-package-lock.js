@@ -2,7 +2,7 @@
 const t = require('tap')
 const pkg = t.testdir({
   'package.json': JSON.stringify({
-    files: ['.npmignore', 'package-lock.json']
+    files: ['.npmignore', 'package-lock.json'],
   }),
   '.npmignore': `
 !package-lock.json

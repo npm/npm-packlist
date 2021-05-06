@@ -2,6 +2,7 @@
 /*
 /.*
 
+!.eslintrc.json
 !.github/
 !bin/
 !lib/
