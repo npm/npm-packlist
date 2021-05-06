@@ -448,9 +448,9 @@ const sort = (a, b) => {
   const basea = path.basename(a).toLowerCase()
   const baseb = path.basename(b).toLowerCase()
 
-  return exta.localeCompare(extb) ||
-    basea.localeCompare(baseb) ||
-    a.localeCompare(b)
+  return exta.localeCompare(extb, 'en') ||
+    basea.localeCompare(baseb, 'en') ||
+    a.localeCompare(b, 'en')
 }
 
 module.exports = walk

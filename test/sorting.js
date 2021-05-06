@@ -5,6 +5,9 @@ const sort = Walker.prototype.sort
 
 t.matchSnapshot([
   'a/b/1',
+  'cat',
+  'dog',
+  'chai',
   'package.json',
   'node_modules/b/c',
   'asdf.js',

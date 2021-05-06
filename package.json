@@ -44,6 +44,9 @@
     "url": "git+https://github.com/npm/npm-packlist.git"
   },
   "tap": {
+    "test-env": [
+      "LC_ALL=sk"
+    ],
     "check-coverage": true,
     "nyc-arg": [
       "--include=index.js",
