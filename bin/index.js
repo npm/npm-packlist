@@ -12,7 +12,7 @@ process.argv.slice(2).forEach(arg => {
     dirs.push(arg)
 })
 
-const sort = list => doSort ? list.sort((a, b) => a.localeCompare(b)) : list
+const sort = list => doSort ? list.sort((a, b) => a.localeCompare(b, 'en')) : list
 
 const packlist = require('../')
 if (!dirs.length)

@@ -23,6 +23,9 @@ const me = t.testdir({
   'index.js': 'console.log(/xss/)',
   lib: {
     'index.js': 'console.log(/xss/)',
+    'cat.js': 'console.log("meow")',
+    'dog.js': 'console.log("woof")',
+    'chai.js': 'console.log("blub")',
   },
   'ignore.js': 'throw new Error("dont look at me!")',
 })

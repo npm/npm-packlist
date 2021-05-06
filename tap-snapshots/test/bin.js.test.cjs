@@ -12,6 +12,9 @@ Object {
   "stderr": "",
   "stdout": String(
     index.js
+    lib/cat.js
+    lib/chai.js
+    lib/dog.js
     lib/index.js
     LICENSE.txt
     package.json
@@ -37,6 +40,9 @@ Object {
   "stderr": "",
   "stdout": String(
     index.js
+    lib/cat.js
+    lib/chai.js
+    lib/dog.js
     lib/index.js
     LICENSE.txt
     package.json
@@ -53,6 +59,9 @@ Object {
   "stderr": "",
   "stdout": String(
     > .
+    lib/cat.js
+    lib/chai.js
+    lib/dog.js
     index.js
     lib/index.js
     package.json
@@ -69,6 +78,9 @@ Object {
   "signal": null,
   "stderr": "",
   "stdout": String(
+    lib/cat.js
+    lib/chai.js
+    lib/dog.js
     index.js
     lib/index.js
     package.json
