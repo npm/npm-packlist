@@ -58,6 +58,7 @@ const defaultRules = [
   '*.orig',
   '/package-lock.json',
   '/yarn.lock',
+  '/pnpm-lock.yaml',
   '/archived-packages/**',
 ]
 
