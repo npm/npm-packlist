@@ -126,8 +126,9 @@ const npmWalker = Class => class Walker extends Class {
     // to be in the state the user wants to include them, and
     // a package.json somewhere else might be a template or
     // test or something else entirely.
-    if (this.parent || !entries.includes('package.json'))
+    if (this.parent || !entries.includes('package.json')) {
       return super.onReaddir(entries)
+    }
 
     // when the cache has been seeded with the root manifest,
     // we must respect that (it may differ from the filesystem)
@@ -137,8 +138,9 @@ const npmWalker = Class => class Walker extends Class {
       const pkg = this.packageJsonCache.get(ig)
 
       // fall back to filesystem when seeded manifest is invalid
-      if (!pkg || typeof pkg !== 'object')
+      if (!pkg || typeof pkg !== 'object') {
         return this.readPackageJson(entries)
+      }
 
       // feels wonky, but this ensures package bin is _always_
       // normalized, as well as guarding against invalid JSON
@@ -149,22 +151,26 @@ const npmWalker = Class => class Walker extends Class {
   }
 
   onReadPackageJson (entries, er, pkg) {
-    if (er)
+    if (er) {
       this.emit('error', er)
-    else
+    } else {
       this.getPackageFiles(entries, pkg)
+    }
   }
 
   mustHaveFilesFromPackage (pkg) {
     const files = []
-    if (pkg.browser)
+    if (pkg.browser) {
       files.push('/' + pkg.browser)
-    if (pkg.main)
+    }
+    if (pkg.main) {
       files.push('/' + pkg.main)
+    }
     if (pkg.bin) {
       // always an object because normalized already
-      for (const key in pkg.bin)
+      for (const key in pkg.bin) {
         files.push('/' + pkg.bin[key])
+      }
     }
     files.push(
       '/package.json',
@@ -194,8 +200,9 @@ const npmWalker = Class => class Walker extends Class {
     this.packageJsonCache.set(ig, pkg)
 
     // no files list, just return the normal readdir() result
-    if (!Array.isArray(pkg.files))
+    if (!Array.isArray(pkg.files)) {
       return super.onReaddir(entries)
+    }
 
     pkg.files.push(...this.mustHaveFilesFromPackage(pkg))
 
@@ -204,13 +211,15 @@ const npmWalker = Class => class Walker extends Class {
     // the files list as the effective readdir result, that means it
     // looks like we don't have a node_modules folder at all unless we
     // include it here.
-    if ((pkg.bundleDependencies || pkg.bundledDependencies) && entries.includes('node_modules'))
+    if ((pkg.bundleDependencies || pkg.bundledDependencies) && entries.includes('node_modules')) {
       pkg.files.push('node_modules')
+    }
 
     const patterns = Array.from(new Set(pkg.files)).reduce((set, pattern) => {
       const excl = pattern.match(/^!+/)
-      if (excl)
+      if (excl) {
         pattern = pattern.substr(excl[0].length)
+      }
       // strip off any / from the start of the pattern.  /foo => foo
       pattern = pattern.replace(/^\/+/, '')
       // an odd number of ! means a negated pattern.  !!foo ==> foo
@@ -224,12 +233,14 @@ const npmWalker = Class => class Walker extends Class {
     const negates = new Set()
     const results = []
     const then = (pattern, negate, er, fileList, i) => {
-      if (er)
+      if (er) {
         return this.emit('error', er)
+      }
 
       results[i] = { negate, fileList }
-      if (--n === 0)
+      if (--n === 0) {
         processResults(results)
+      }
     }
     const processResults = results => {
       for (const {negate, fileList} of results) {
@@ -310,20 +321,22 @@ const npmWalker = Class => class Walker extends Class {
   }
 
   filterEntries () {
-    if (this.ignoreRules['.npmignore'])
+    if (this.ignoreRules['.npmignore']) {
       this.ignoreRules['.gitignore'] = null
+    }
     this.filterEntries = super.filterEntries
     super.filterEntries()
   }
 
   addIgnoreFile (file, then) {
     const ig = path.resolve(this.path, file)
-    if (file === 'package.json' && this.parent)
+    if (file === 'package.json' && this.parent) {
       then()
-    else if (this.packageJsonCache.has(ig))
+    } else if (this.packageJsonCache.has(ig)) {
       this.onPackageJson(ig, this.packageJsonCache.get(ig), then)
-    else
+    } else {
       super.addIgnoreFile(file, then)
+    }
   }
 
   onPackageJson (ig, pkg, then) {
@@ -348,18 +361,20 @@ const npmWalker = Class => class Walker extends Class {
   // that will break windows entirely.
   // XXX(isaacs) Next major version should make this an error instead.
   stat (entry, file, dir, then) {
-    if (nameIsBadForWindows(entry))
+    if (nameIsBadForWindows(entry)) {
       then()
-    else
+    } else {
       super.stat(entry, file, dir, then)
+    }
   }
 
   // override parent onstat function to nix all symlinks
   onstat (st, entry, file, dir, then) {
-    if (st.isSymbolicLink())
+    if (st.isSymbolicLink()) {
       then()
-    else
+    } else {
       super.onstat(st, entry, file, dir, then)
+    }
   }
 
   onReadIgnoreFile (file, data, then) {
@@ -371,8 +386,9 @@ const npmWalker = Class => class Walker extends Class {
         // ignore package.json files that are not json
         then()
       }
-    } else
+    } else {
       super.onReadIgnoreFile(file, data, then)
+    }
   }
 
   sort (a, b) {

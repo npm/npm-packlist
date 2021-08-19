@@ -4,10 +4,11 @@ const fs = require('fs')
 const readdir = fs.readdir
 fs.readdir = (path, cb) => {
   readdir(path, (er, entries) => {
-    if (er)
+    if (er) {
       cb(er)
-    else
+    } else {
       cb(null, entries.concat('made*of*stars'))
+    }
   })
 }
 
