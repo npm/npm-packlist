@@ -97,13 +97,14 @@ const npmWalker = Class => class Walker extends Class {
     // ignore a bunch of things by default at the root level.
     // also ignore anything in the main project node_modules hierarchy,
     // except bundled dependencies
-    if (!this.parent) {
+    if (this.isProject) {
       this.bundled = opt.bundled || []
       this.bundledScopes = Array.from(new Set(
         this.bundled.filter(f => /^@/.test(f))
           .map(f => f.split('/')[0])))
       const rules = defaultRules.join('\n') + '\n'
-      this.packageJsonCache = opt.packageJsonCache || new Map()
+      this.packageJsonCache = this.parent ? this.parent.packageJsonCache
+        : (opt.packageJsonCache || new Map())
       super.onReadIgnoreFile(rootBuiltinRules, rules, _ => _)
     } else {
       this.bundled = []
@@ -112,8 +113,12 @@ const npmWalker = Class => class Walker extends Class {
     }
   }
 
+  get isProject () {
+    return !this.parent || this.parent.follow && this.isSymbolicLink
+  }
+
   onReaddir (entries) {
-    if (!this.parent) {
+    if (this.isProject) {
       entries = entries.filter(e =>
         e !== '.git' &&
         !(e === 'node_modules' && this.bundled.length === 0)
@@ -126,7 +131,7 @@ const npmWalker = Class => class Walker extends Class {
     // to be in the state the user wants to include them, and
     // a package.json somewhere else might be a template or
     // test or something else entirely.
-    if (this.parent || !entries.includes('package.json')) {
+    if (!this.isProject || !entries.includes('package.json')) {
       return super.onReaddir(entries)
     }
 
@@ -279,15 +284,15 @@ const npmWalker = Class => class Walker extends Class {
     // get the partial path from the root of the walk
     const p = this.path.substr(this.root.length + 1)
     const pkgre = /^node_modules\/(@[^/]+\/?[^/]+|[^/]+)(\/.*)?$/
-    const isRoot = !this.parent
-    const pkg = isRoot && pkgre.test(entry) ?
+    const { isProject } = this
+    const pkg = isProject && pkgre.test(entry) ?
       entry.replace(pkgre, '$1') : null
-    const rootNM = isRoot && entry === 'node_modules'
-    const rootPJ = isRoot && entry === 'package.json'
+    const rootNM = isProject && entry === 'node_modules'
+    const rootPJ = isProject && entry === 'package.json'
 
     return (
       // if we're in a bundled package, check with the parent.
-      /^node_modules($|\/)/i.test(p) ? this.parent.filterEntry(
+      /^node_modules($|\/)/i.test(p) && !this.isProject ? this.parent.filterEntry(
         this.basename + '/' + entry, partial)
 
       // if package is bundled, all files included
@@ -309,11 +314,11 @@ const npmWalker = Class => class Walker extends Class {
       : packageMustHavesRE.test(entry) ? true
 
       // npm-shrinkwrap and package.json always included in the root pkg
-      : isRoot && (entry === 'npm-shrinkwrap.json' || entry === 'package.json')
+      : isProject && (entry === 'npm-shrinkwrap.json' || entry === 'package.json')
         ? true
 
       // package-lock never included
-        : isRoot && entry === 'package-lock.json' ? false
+        : isProject && entry === 'package-lock.json' ? false
 
         // otherwise, follow ignore-walk's logic
         : super.filterEntry(entry, partial)
@@ -330,7 +335,7 @@ const npmWalker = Class => class Walker extends Class {
 
   addIgnoreFile (file, then) {
     const ig = path.resolve(this.path, file)
-    if (file === 'package.json' && this.parent) {
+    if (file === 'package.json' && !this.isProject) {
       then()
     } else if (this.packageJsonCache.has(ig)) {
       this.onPackageJson(ig, this.packageJsonCache.get(ig), then)
@@ -360,20 +365,21 @@ const npmWalker = Class => class Walker extends Class {
   // override parent stat function to completely skip any filenames
   // that will break windows entirely.
   // XXX(isaacs) Next major version should make this an error instead.
-  stat (entry, file, dir, then) {
+  stat ({ entry, file, dir }, then) {
     if (nameIsBadForWindows(entry)) {
       then()
     } else {
-      super.stat(entry, file, dir, then)
+      super.stat({ entry, file, dir }, then)
     }
   }
 
-  // override parent onstat function to nix all symlinks
-  onstat (st, entry, file, dir, then) {
+  // override parent onstat function to nix all symlinks, other than
+  // those coming out of the followed bundled symlink deps
+  onstat ({ st, entry, file, dir, isSymbolicLink }, then) {
     if (st.isSymbolicLink()) {
       then()
     } else {
-      super.onstat(st, entry, file, dir, then)
+      super.onstat({ st, entry, file, dir, isSymbolicLink }, then)
     }
   }
 
@@ -406,8 +412,8 @@ class Walker extends npmWalker(IgnoreWalker) {
       this.onReadPackageJson(entries, er, pkg))
   }
 
-  walker (entry, then) {
-    new Walker(this.walkerOpt(entry)).on('done', then).start()
+  walker (entry, opt, then) {
+    new Walker(this.walkerOpt(entry, opt)).on('done', then).start()
   }
 }
 
@@ -425,8 +431,8 @@ class WalkerSync extends npmWalker(IgnoreWalkerSync) {
     }
   }
 
-  walker (entry, then) {
-    new WalkerSync(this.walkerOpt(entry)).start()
+  walker (entry, opt, then) {
+    new WalkerSync(this.walkerOpt(entry, opt)).start()
     then()
   }
 }

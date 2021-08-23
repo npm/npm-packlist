@@ -5,7 +5,7 @@
  * Make sure to inspect the output below.  Do not ignore changes!
  */
 'use strict'
-exports[`test/package-json-roots-and-nests.js TAP package with negated files > expect resolving Promise 1`] = `
+exports[`test/package-json-roots-and-nests.js TAP package with negated files > async 1`] = `
 Array [
   "node_modules/@foo/bar/.DS_Store",
   "inc/foo",
@@ -20,7 +20,7 @@ Array [
 ]
 `
 
-exports[`test/package-json-roots-and-nests.js TAP package with negated files > must match snapshot 1`] = `
+exports[`test/package-json-roots-and-nests.js TAP package with negated files > sync 1`] = `
 Array [
   "node_modules/@foo/bar/.DS_Store",
   "inc/foo",

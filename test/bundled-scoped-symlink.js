@@ -1,6 +1,4 @@
 'use strict'
-const fs = require('fs')
-const path = require('path')
 
 const t = require('tap')
 
@@ -25,9 +23,7 @@ const pkg = t.testdir({
     '.npmrc': 'packaged=false',
     node_modules: {
       '@npmwombat': {
-        // tap's symlink fixture doesn't allow reading on windows, because
-        // it can't be created as a junction without specifying the type.
-        // history: t.fixture('symlink', '../../../history'),
+        history: t.fixture('symlink', '../../../history'),
       },
     },
   },
@@ -36,12 +32,21 @@ const pkg = t.testdir({
       name: '@npmwombat/history',
       version: '1.0.0',
       main: 'index.js',
+      files: [
+        'index.js',
+        'lib/',
+      ],
     }),
     'index.js': elfJS,
+    tests: {
+      'test.js': 'please do not include me',
+    },
+    // this should not be followed, even though the bundled dep is
+    lib: {
+      linky: t.fixture('symlink', '../tests'),
+    },
   },
 }) + '/pkg'
-
-fs.symlinkSync('../../../history', path.resolve(pkg, 'node_modules/@npmwombat/history'), 'dir')
 
 t.test('includes bundled dependency', function (t) {
   const check = (files, t) => {
