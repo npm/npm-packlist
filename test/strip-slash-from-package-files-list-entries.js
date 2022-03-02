@@ -44,7 +44,7 @@ t.test('should strip / from package.json files array entry results', t => {
       },
     },
   })
-  return packlist({path}).then(res => t.strictSame(res, [
+  return packlist({ path }).then(res => t.strictSame(res, [
     'dist/bar',
     'dist/baz/boo',
     'incldir/yesinclude',

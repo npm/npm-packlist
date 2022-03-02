@@ -1,4 +1,4 @@
-const {spawn} = require('child_process')
+const { spawn } = require('child_process')
 const bin = require.resolve('../bin/index.js')
 const run = (...args) => new Promise(res => {
   const out = []

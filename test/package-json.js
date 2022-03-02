@@ -15,7 +15,7 @@ const pkg = t.testdir({
       'deps/foo/config/config.gypi',
     ],
   }),
-  'npm-shrinkwrap.json': JSON.stringify({shrink: 'wrap'}),
+  'npm-shrinkwrap.json': JSON.stringify({ shrink: 'wrap' }),
   'elf.js': elfJS,
   '.npmrc': 'packaged=false',
   // don't bother even reading this file, because we have files list

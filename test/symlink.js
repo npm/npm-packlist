@@ -16,7 +16,7 @@ const pkg = t.testdir({
   '.npmrc': 'packaged=false',
   '.npmignore': '.npmignore\ndummy\n/package.json\n',
   // empty dir should be ignored
-  this: { dir: { is: { empty: { and: { ignored: {}}}}}},
+  this: { dir: { is: { empty: { and: { ignored: {} } } } } },
   dummy: 'foo',
   build: {
     'config.gypi': "i_wont_be_included='with any luck'",
@@ -57,7 +57,7 @@ const pkg = t.testdir({
         a: t.fixture('symlink', '../../a'),
       },
     },
-  }}}},
+  } } } },
 })
 
 t.test('follows npm package ignoring rules', function (t) {

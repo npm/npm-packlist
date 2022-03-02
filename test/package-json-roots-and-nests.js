@@ -49,6 +49,6 @@ const pkg = t.testdir({
 
 const packlist = require('../')
 t.test('package with negated files', async t => {
-  t.matchSnapshot(packlist.sync({path: pkg}), 'sync')
-  t.matchSnapshot(await packlist({path: pkg}), 'async')
+  t.matchSnapshot(packlist.sync({ path: pkg }), 'sync')
+  t.matchSnapshot(await packlist({ path: pkg }), 'async')
 })
