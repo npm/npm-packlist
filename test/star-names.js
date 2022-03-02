@@ -39,7 +39,7 @@ const pkg = t.testdir({
   dummy: 'foo',
 
   // empty dir should be ignored
-  this: { dir: { is: { empty: { and: { ignored: {}}}}}},
+  this: { dir: { is: { empty: { and: { ignored: {} } } } } },
   build: {
     'config.gypi': "i_wont_be_included='with any luck'",
     'npm-debug.log': '0 lol\n',
