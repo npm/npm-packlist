@@ -19,7 +19,7 @@
     "lib"
   ],
   "devDependencies": {
-    "@npmcli/template-oss": "^2.9.1",
+    "@npmcli/template-oss": "^2.9.2",
     "mutate-fs": "^2.1.1",
     "tap": "^15.1.6"
   },
