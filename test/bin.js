@@ -4,8 +4,8 @@ const run = (...args) => new Promise(res => {
   const out = []
   const err = []
   const c = spawn(process.execPath, [bin, ...args], { cwd: me })
-  c.stdout.on('data', c => out.push(c))
-  c.stderr.on('data', c => err.push(c))
+  c.stdout.on('data', d => out.push(d))
+  c.stderr.on('data', d => err.push(d))
   c.on('close', (code, signal) => res({
     code,
     signal,
