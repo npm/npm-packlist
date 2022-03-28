@@ -15,11 +15,12 @@
   "author": "GitHub Inc.",
   "license": "ISC",
   "files": [
-    "bin",
-    "lib"
+    "bin/",
+    "lib/"
   ],
   "devDependencies": {
-    "@npmcli/template-oss": "^3.2.0",
+    "@npmcli/eslint-config": "^3.0.1",
+    "@npmcli/template-oss": "3.2.0",
     "mutate-fs": "^2.1.1",
     "tap": "^15.1.6"
   },
@@ -32,15 +33,15 @@
     "postversion": "npm publish",
     "prepublishOnly": "git push origin --follow-tags",
     "eslint": "eslint",
-    "lint": "eslint '**/*.js'",
+    "lint": "eslint \"**/*.js\"",
     "lintfix": "npm run lint -- --fix",
     "npmclilint": "npmcli-lint",
-    "postlint": "npm-template-check",
-    "template-copy": "npm-template-copy --force"
+    "postlint": "template-oss-check",
+    "template-oss-apply": "template-oss-apply --force"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/npm/npm-packlist.git"
+    "url": "https://github.com/npm/npm-packlist.git"
   },
   "tap": {
     "test-env": [
@@ -56,9 +57,10 @@
     "npm-packlist": "bin/index.js"
   },
   "engines": {
-    "node": "^12.13.0 || ^14.15.0 || >=16"
+    "node": "^12.13.0 || ^14.15.0 || >=16.0.0"
   },
   "templateOSS": {
-    "version": "2.9.2"
+    "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
+    "version": "3.2.0"
   }
 }
