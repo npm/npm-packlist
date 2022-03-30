@@ -1,5 +1,9 @@
 // include readme.* files anywhere in a package
+'use strict'
+
 const t = require('tap')
+const packlist = require('../')
+
 const pkg = t.testdir({
   'package.json': JSON.stringify({}),
   lib: {
@@ -37,13 +41,24 @@ const pkg = t.testdir({
     },
   },
   '.npmignore': `
-!*.js
-!**/*.js
-test
-`,
+  !*.js
+  !**/*.js
+  test
+  `,
 })
 
-const packlist = require('../')
-t.test('package with negated files', async t => {
-  await t.resolveMatchSnapshot(packlist({ path: pkg }))
+t.test('package with negated files', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'lib/a/a.js',
+    'lib/a/b/b.js',
+    'lib/a/b/c/c.js',
+    'package.json',
+    'lib/a/b/c/readme.md',
+    'lib/a/b/readme.md',
+    'lib/a/readme.md',
+    'lib/a/b/c/file.txt',
+    'lib/a/b/file.txt',
+    'lib/a/file.txt',
+  ])
 })

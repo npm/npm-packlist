@@ -1,6 +1,7 @@
 'use strict'
+
 const t = require('tap')
-const pack = require('../')
+const packlist = require('../')
 
 const elfJS = `
 module.exports = elf =>
@@ -32,13 +33,12 @@ const pkg = t.testdir({
   },
 })
 
-t.test('includes bundled dependency', function (t) {
-  const check = (files, t) => {
-    t.matchSnapshot(files)
-    t.end()
-  }
-
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
-
-  t.end()
+t.test('includes bundled dependency', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'elf.js',
+    'node_modules/@npmwombat/history/index.js',
+    'node_modules/@npmwombat/history/package.json',
+    'package.json',
+  ])
 })

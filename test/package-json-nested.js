@@ -1,6 +1,8 @@
 'use strict'
+
 const t = require('tap')
-const pack = require('../')
+const packlist = require('../')
+
 const pkg = t.testdir({
   'package.json': JSON.stringify({
     name: 'test-package',
@@ -16,13 +18,13 @@ const pkg = t.testdir({
     'foo.js': 'console.log("no")',
   },
 })
-t.test('includes nested package.json file', function (t) {
-  const check = (files, t) => {
-    t.matchSnapshot(files)
-    t.end()
-  }
 
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
-
-  t.end()
+t.test('includes nested package.json file', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'nest/foo.js',
+    'nest/index.js',
+    'nest/package.json',
+    'package.json',
+  ])
 })

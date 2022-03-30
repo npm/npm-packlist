@@ -1,15 +1,14 @@
 'use strict'
 
 const t = require('tap')
-
-const pack = require('../')
+const packlist = require('../')
 
 const elfJS = `
 module.exports = elf =>
   console.log("i'm a elf")
 `
 
-t.test('includes bundled dependency using bundleDependencies', function (t) {
+t.test('includes bundled dependency using bundleDependencies', async (t) => {
   const pkg = t.testdir({
     'package.json': JSON.stringify({
       name: 'test-package',
@@ -34,17 +33,16 @@ t.test('includes bundled dependency using bundleDependencies', function (t) {
     },
   })
 
-  const check = (files, t) => {
-    t.matchSnapshot(files)
-    t.end()
-  }
-
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
-
-  t.end()
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'elf.js',
+    'node_modules/history/index.js',
+    'node_modules/history/package.json',
+    'package.json',
+  ])
 })
 
-t.test('includes bundled dependency using bundledDependencies', function (t) {
+t.test('includes bundled dependency using bundledDependencies', async (t) => {
   const pkg = t.testdir({
     'package.json': JSON.stringify({
       name: 'test-package',
@@ -69,12 +67,11 @@ t.test('includes bundled dependency using bundledDependencies', function (t) {
     },
   })
 
-  const check = (files, t) => {
-    t.matchSnapshot(files)
-    t.end()
-  }
-
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
-
-  t.end()
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'elf.js',
+    'node_modules/history/index.js',
+    'node_modules/history/package.json',
+    'package.json',
+  ])
 })

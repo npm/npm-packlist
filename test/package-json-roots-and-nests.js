@@ -1,4 +1,8 @@
+'use strict'
+
 const t = require('tap')
+const packlist = require('../')
+
 const pkg = t.testdir({
   'package.json': JSON.stringify({
     bin: 'bin.js',
@@ -47,7 +51,18 @@ const pkg = t.testdir({
   'package-lock.json': 'sw',
 })
 
-const packlist = require('../')
-t.test('package with negated files', async t => {
-  t.matchSnapshot(await packlist({ path: pkg }), 'async')
+t.test('package with negated files', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'node_modules/@foo/bar/.DS_Store',
+    'inc/foo',
+    'bin.js',
+    'browser.js',
+    'main.js',
+    'npm-shrinkwrap.json',
+    'inc/package-lock.json',
+    'node_modules/foo/package-lock.json',
+    'inc/package.json',
+    'package.json',
+  ])
 })

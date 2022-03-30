@@ -1,7 +1,7 @@
 'use strict'
-const t = require('tap')
 
-const pack = require('../')
+const t = require('tap')
+const packlist = require('../')
 
 const pkg = t.testdir({
   'package.json': JSON.stringify({
@@ -32,13 +32,13 @@ const pkg = t.testdir({
   },
 })
 
-t.test('follows npm package ignoring rules', function (t) {
-  const check = (files, t) => {
-    t.matchSnapshot(files)
-    t.end()
-  }
-
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
-
-  t.end()
+t.test('follows npm package ignoring rules', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'lib/core',
+    'lib/package-lock.json',
+    'package.json',
+    'lib/yarn.lock',
+    'core/include-me.txt',
+  ])
 })

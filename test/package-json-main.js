@@ -1,7 +1,7 @@
 'use strict'
-const t = require('tap')
 
-const pack = require('../')
+const t = require('tap')
+const packlist = require('../')
 
 const elfJS = `
 module.exports = elf =>
@@ -48,13 +48,13 @@ const pkg = t.testdir({
   },
 })
 
-t.test('follows npm package ignoring rules', function (t) {
-  const check = (files, t) => {
-    t.matchSnapshot(files)
-    t.end()
-  }
-
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
-
-  t.end()
+t.test('follows npm package ignoring rules', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'deps/foo/config/config.gypi',
+    '__main.js',
+    'browser.js',
+    'elf.js',
+    'package.json',
+  ])
 })

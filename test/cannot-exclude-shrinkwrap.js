@@ -1,5 +1,9 @@
 // cannot exclude npm-shrinkwrap.json in the root
+'use strict'
+
 const t = require('tap')
+const packlist = require('../')
+
 const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: ['.npmignore', '!npm-shrinkwrap.json'],
@@ -8,7 +12,11 @@ const pkg = t.testdir({
   'npm-shrinkwrap.json': '{}',
 })
 
-const packlist = require('../')
-t.test('package with negated files', async t => {
-  await t.resolveMatchSnapshot(packlist({ path: pkg }))
+t.test('package with negated files', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    '.npmignore',
+    'npm-shrinkwrap.json',
+    'package.json',
+  ])
 })

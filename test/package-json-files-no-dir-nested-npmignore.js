@@ -1,4 +1,6 @@
 const t = require('tap')
+const packlist = require('../')
+
 const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: [
@@ -14,7 +16,14 @@ const pkg = t.testdir({
     '.DS_Store': 'a store of ds',
   },
 })
-const packlist = require('../')
-t.test('package with negated files', async t => {
-  await t.resolveMatchSnapshot(packlist({ path: pkg }))
+
+t.test('package with negated files', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'lib/for.js',
+    'lib/one.js',
+    'lib/tre.js',
+    'lib/two.js',
+    'package.json',
+  ])
 })
