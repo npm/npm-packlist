@@ -12,13 +12,6 @@ Array [
 ]
 `
 
-exports[`test/package-json-cache.js TAP seeded with root manifest > expect resolving Promise 1`] = `
-Array [
-  "elf.js",
-  "package.json",
-]
-`
-
 exports[`test/package-json-cache.js TAP seeded with root manifest > must match snapshot 1`] = `
 Array [
   "elf.js",
@@ -30,5 +23,15 @@ exports[`test/package-json-cache.js TAP when empty > must match snapshot 1`] = `
 Array [
   "quendi.js",
   "package.json",
+]
+`
+
+exports[`test/package-json-cache.js TAP when not provided at all > must match snapshot 1`] = `
+Array [
+  "LICENSE",
+  "bin/index.js",
+  "lib/index.js",
+  "package.json",
+  "README.md",
 ]
 `

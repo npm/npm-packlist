@@ -13,12 +13,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/include-gitignore.js TAP follows npm package ignoring rules sync > must match snapshot 1`] = `
-Array [
-  "z/.gitignore",
-  "deps/foo/config/config.gypi",
-  "elf.js",
-  "package.json",
-]
-`

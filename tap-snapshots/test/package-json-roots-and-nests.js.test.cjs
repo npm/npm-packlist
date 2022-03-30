@@ -19,18 +19,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/package-json-roots-and-nests.js TAP package with negated files > sync 1`] = `
-Array [
-  "node_modules/@foo/bar/.DS_Store",
-  "inc/foo",
-  "bin.js",
-  "browser.js",
-  "main.js",
-  "npm-shrinkwrap.json",
-  "inc/package-lock.json",
-  "node_modules/foo/package-lock.json",
-  "inc/package.json",
-  "package.json",
-]
-`

@@ -39,7 +39,6 @@ t.test('follows npm package ignoring rules', t => {
     t.end()
   }
 
-  t.test('sync', t => check(pack.sync({ path: pkg }), t))
   t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
 
   t.end()

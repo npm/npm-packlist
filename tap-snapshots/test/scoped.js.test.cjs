@@ -12,11 +12,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/scoped.js TAP includes bundledDependencies sync > must match snapshot 1`] = `
-Array [
-  "elf.js",
-  "node_modules/@npmwombat/scoped/index.js",
-  "package.json",
-]
-`

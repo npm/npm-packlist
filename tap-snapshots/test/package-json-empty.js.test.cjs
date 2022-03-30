@@ -11,10 +11,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/package-json-empty.js TAP follows npm package ignoring rules sync > must match snapshot 1`] = `
-Array [
-  "elf.js",
-  "package.json",
-]
-`

@@ -44,7 +44,6 @@ t.test('includes bundledDependencies', function (t) {
     bundled: bundled,
   }
 
-  t.test('sync', t => check(pack.sync(options), t))
   t.test('async', t => pack(options).then(files => check(files, t)))
 
   t.end()

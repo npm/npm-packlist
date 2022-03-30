@@ -13,12 +13,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/bundled-scoped-symlink.js TAP includes bundled dependency sync > must match snapshot 1`] = `
-Array [
-  "elf.js",
-  "node_modules/@npmwombat/history/index.js",
-  "node_modules/@npmwombat/history/package.json",
-  "package.json",
-]
-`

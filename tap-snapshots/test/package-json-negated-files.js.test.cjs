@@ -12,11 +12,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/package-json-negated-files.js TAP package with negated files > must match snapshot 1`] = `
-Array [
-  "lib/for",
-  "lib/tre",
-  "package.json",
-]
-`

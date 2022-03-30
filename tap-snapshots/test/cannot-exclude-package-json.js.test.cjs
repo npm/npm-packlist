@@ -11,10 +11,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/cannot-exclude-package-json.js TAP try to exclude package.json but cannot > must match snapshot 1`] = `
-Array [
-  ".npmignore",
-  "package.json",
-]
-`

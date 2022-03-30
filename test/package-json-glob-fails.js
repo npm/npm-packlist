@@ -17,12 +17,8 @@ const pkg = t.testdir({
 })
 
 const glob = (pattern, opt, cb) => cb(new Error('no glob for you'))
-glob.sync = (pattern, opt) => {
-  throw new Error('no glob for you')
-}
 const packlist = t.mock('../', { glob })
 
 t.test('package with busted glob', async t => {
   await t.rejects(packlist({ path: pkg }), { message: 'no glob for you' })
-  t.throws(() => packlist.sync({ path: pkg }), { message: 'no glob for you' })
 })

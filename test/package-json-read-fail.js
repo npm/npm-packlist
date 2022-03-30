@@ -10,6 +10,5 @@ t.test('read fails on package.json', async t => {
   const poop = new Error('poop')
   t.teardown(mutateFS.fail('readFile', poop))
 
-  t.rejects(packlist({ path: pkg }), poop)
-  t.throws(() => packlist.sync({ path: pkg }), poop)
+  await t.rejects(packlist({ path: pkg }), poop)
 })

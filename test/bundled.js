@@ -38,7 +38,6 @@ t.test('includes bundled dependency using bundleDependencies', function (t) {
     t.end()
   }
 
-  t.test('sync', t => check(pack.sync({ path: pkg }), t))
   t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
 
   t.end()
@@ -73,7 +72,6 @@ t.test('includes bundled dependency using bundledDependencies', function (t) {
     t.end()
   }
 
-  t.test('sync', t => check(pack.sync({ path: pkg }), t))
   t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
 
   t.end()

@@ -11,10 +11,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/cannot-include-package-lock.js TAP try to include package-lock.json but cannot > must match snapshot 1`] = `
-Array [
-  ".npmignore",
-  "package.json",
-]
-`

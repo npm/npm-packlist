@@ -14,25 +14,7 @@ Array [
 ]
 `
 
-exports[`test/bundled.js TAP includes bundled dependency using bundleDependencies sync > must match snapshot 1`] = `
-Array [
-  "elf.js",
-  "node_modules/history/index.js",
-  "node_modules/history/package.json",
-  "package.json",
-]
-`
-
 exports[`test/bundled.js TAP includes bundled dependency using bundledDependencies async > must match snapshot 1`] = `
-Array [
-  "elf.js",
-  "node_modules/history/index.js",
-  "node_modules/history/package.json",
-  "package.json",
-]
-`
-
-exports[`test/bundled.js TAP includes bundled dependency using bundledDependencies sync > must match snapshot 1`] = `
 Array [
   "elf.js",
   "node_modules/history/index.js",
