@@ -1,14 +1,18 @@
 'use strict'
+
 const t = require('tap')
-const pack = require('../')
+const packlist = require('../')
+
 const bin = `
 #!/usr/bin/env node
 require("../lib/elf")()
 `
+
 const elfJS = `
 module.exports = elf =>
   console.log("i'm angry about elves")
 `
+
 const pkg = t.testdir({
   'package.json': JSON.stringify({
     name: 'test-package',
@@ -25,13 +29,11 @@ const pkg = t.testdir({
   dummy: 'ignore',
 })
 
-t.test('follows npm package ignoring rules', t => {
-  const check = (files, t) => {
-    t.matchSnapshot(files)
-    t.end()
-  }
-
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
-
-  t.end()
+t.test('follows npm package ignoring rules', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    '__bin',
+    'lib/elf.js',
+    'package.json',
+  ])
 })

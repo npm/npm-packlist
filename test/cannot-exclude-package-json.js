@@ -1,5 +1,9 @@
 // cannot exclude package.json in the root
+'use strict'
+
 const t = require('tap')
+const packlist = require('../')
+
 const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: ['.npmignore', '!package.json'],
@@ -7,7 +11,10 @@ const pkg = t.testdir({
   '.npmignore': 'package.json',
 })
 
-const packlist = require('../')
-t.test('try to exclude package.json but cannot', async t => {
-  await t.resolveMatchSnapshot(packlist({ path: pkg }))
+t.test('try to exclude package.json but cannot', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    '.npmignore',
+    'package.json',
+  ])
 })

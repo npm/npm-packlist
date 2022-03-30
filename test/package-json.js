@@ -1,6 +1,8 @@
-const t = require('tap')
+'use strict'
 
-const pack = require('../')
+const t = require('tap')
+const packlist = require('../')
+
 const elfJS = `
 module.exports = elf =>
   console.log("i'm a elf")
@@ -42,20 +44,12 @@ const pkg = t.testdir({
   },
 })
 
-t.test('follows npm package ignoring rules', function (t) {
-  const check = (files, t) => {
-    t.matchSnapshot(files)
-    t.end()
-  }
-
-  // also, let's reuse the caches, why not
-  let packageJsonCache, nodeModulesCache
-
-  t.test('async', t => pack({
-    path: pkg,
-    packageJsonCache: packageJsonCache,
-    nodeModulesCache: nodeModulesCache,
-  }).then(files => check(files, t)))
-
-  t.end()
+t.test('follows npm package ignoring rules', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'deps/foo/config/config.gypi',
+    'elf.js',
+    'npm-shrinkwrap.json',
+    'package.json',
+  ])
 })

@@ -1,6 +1,9 @@
+'use strict'
+
 const t = require('tap')
 const packlist = require('../')
-t.test('include a globstar, then exclude one of them', t => {
+
+t.test('include a globstar, then exclude one of them', async (t) => {
   const path = t.testdir({
     'foo.js': '',
     'bar.js': '',
@@ -17,6 +20,11 @@ t.test('include a globstar, then exclude one of them', t => {
       ],
     }),
   })
-  const expect = ['bar.js', 'bar/bar.js', 'package.json']
-  return packlist({ path }).then(actual => t.strictSame(actual, expect))
+
+  const files = await packlist({ path })
+  t.same(files, [
+    'bar.js',
+    'bar/bar.js',
+    'package.json',
+  ])
 })

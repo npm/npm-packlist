@@ -1,7 +1,7 @@
 'use strict'
-const t = require('tap')
 
-const pack = require('../')
+const t = require('tap')
+const packlist = require('../')
 
 const bin = `
 #!/usr/bin/env node
@@ -33,13 +33,12 @@ const pkg = t.testdir({
   dummy: 'ignore this',
 })
 
-t.test('follows npm package ignoring rules', t => {
-  const check = (files, t) => {
-    t.matchSnapshot(files)
-    t.end()
-  }
-
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
-
-  t.end()
+t.test('follows npm package ignoring rules', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    '__bin_bar',
+    '__bin_foo',
+    'lib/elf.js',
+    'package.json',
+  ])
 })

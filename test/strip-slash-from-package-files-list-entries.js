@@ -1,7 +1,10 @@
+'use strict'
+
 const t = require('tap')
 const packlist = require('../')
-t.test('should strip / from package.json files array entry results', t => {
-  const path = t.testdir({
+
+t.test('should strip / from package.json files array entry results', async (t) => {
+  const pkg = t.testdir({
     'package.json': JSON.stringify({
       files: [
         // include without slash, then exclude with it
@@ -44,12 +47,14 @@ t.test('should strip / from package.json files array entry results', t => {
       },
     },
   })
-  return packlist({ path }).then(res => t.strictSame(res, [
+
+  const files = await packlist({ path: pkg })
+  t.same(files, [
     'dist/bar',
     'dist/baz/boo',
     'incldir/yesinclude',
     'package.json',
     'dist/foo/foo.result',
     'dist/baz/boo.src',
-  ]))
+  ])
 })

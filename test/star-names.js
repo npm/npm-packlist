@@ -1,32 +1,35 @@
 'use strict'
+
+const t = require('tap')
 const fs = require('fs')
 
-const readdir = fs.readdir
-fs.readdir = (path, cb) => {
-  readdir(path, (er, entries) => {
-    if (er) {
-      cb(er)
-    } else {
-      cb(null, entries.concat('made*of*stars'))
-    }
-  })
-}
+// the fs.readdir call takes place in ignore-walk, not npm-packlist, so we t.mock
+// ignore-walk first to clear its require cache and pick up the mocked fs
+const ignoreWalk = t.mock('ignore-walk', {
+  fs: {
+    ...fs,
+    readdir: (path, callback) => {
+      fs.readdir(path, (err, entries) => {
+        if (err) {
+          return callback(err)
+        }
 
-const readdirSync = fs.readdirSync
-fs.readdirSync = path => readdirSync(path).concat('made*of*stars')
+        return callback(null, entries.concat('made*of*stars'))
+      })
+    },
+  },
+})
+
+// then we t.mock npm-packlist itself so that we can pick up the mocked ignore-walk
+const packlist = t.mock('../', {
+  'ignore-walk': ignoreWalk,
+})
 
 const elfJS = `
 module.exports = elf =>
   console.log("i'm a elf")
 `
 
-const t = require('tap')
-const pack = require('../')
-const expect = [
-  'deps/foo/config/config.gypi',
-  'elf.js',
-  'package.json',
-]
 const pkg = t.testdir({
   'package.json': JSON.stringify({
     name: 'test-package',
@@ -61,13 +64,11 @@ const pkg = t.testdir({
   },
 })
 
-t.test('follows npm package ignoring rules', function (t) {
-  const check = (files, t) => {
-    t.same(files, expect)
-    t.end()
-  }
-
-  t.test('async', t => pack({ path: pkg }).then(files => check(files, t)))
-
-  t.end()
+t.test('follows npm package ignoring rules', async (t) => {
+  const files = await packlist({ path: pkg })
+  t.same(files, [
+    'deps/foo/config/config.gypi',
+    'elf.js',
+    'package.json',
+  ])
 })

@@ -1,20 +1,13 @@
-const { spawn } = require('child_process')
-const bin = require.resolve('../bin/index.js')
-const run = (...args) => new Promise(res => {
-  const out = []
-  const err = []
-  const c = spawn(process.execPath, [bin, ...args], { cwd: me })
-  c.stdout.on('data', d => out.push(d))
-  c.stderr.on('data', d => err.push(d))
-  c.on('close', (code, signal) => res({
-    code,
-    signal,
-    stdout: Buffer.concat(out).toString('utf8'),
-    stderr: Buffer.concat(err).toString('utf8'),
-  }))
-})
+// disabling the no-sparse-arrays rule because we use them for assertions
+/* eslint-disable no-sparse-arrays */
+'use strict'
+
 const t = require('tap')
-const me = t.testdir({
+const { spawnSync } = require('child_process')
+
+const binPath = require.resolve('../bin/index.js')
+
+const cwd = t.testdir({
   'package.json': JSON.stringify({
     files: ['index.js', 'lib'],
   }),
@@ -30,8 +23,69 @@ const me = t.testdir({
   'ignore.js': 'throw new Error("dont look at me!")',
 })
 
-t.test('no args', t => t.resolveMatchSnapshot(run()))
-t.test('--sort', t => t.resolveMatchSnapshot(run('--sort')))
-t.test('-s', t => t.resolveMatchSnapshot(run('-s')))
-t.test('dir argument', t => t.resolveMatchSnapshot(run('.')))
-t.test('-h', t => t.resolveMatchSnapshot(run('-h')))
+t.test('no args', async (t) => {
+  const result = spawnSync(binPath, [], { cwd, encoding: 'utf8' })
+  t.equal(result.status, 0, 'completed successfully')
+  t.same(result.stdout, [
+    'lib/cat.js',
+    'lib/chai.js',
+    'lib/dog.js',
+    'index.js',
+    'lib/index.js',
+    'package.json',
+    'README.md',
+    'LICENSE.txt',, // empty element at the end so we get a trailing \n
+  ].join('\n'))
+})
+
+t.test('--sort', async (t) => {
+  const result = spawnSync(binPath, ['--sort'], { cwd, encoding: 'utf8' })
+  t.equal(result.status, 0, 'completed successfully')
+  t.same(result.stdout, [
+    'index.js',
+    'lib/cat.js',
+    'lib/chai.js',
+    'lib/dog.js',
+    'lib/index.js',
+    'LICENSE.txt',
+    'package.json',
+    'README.md',, // empty element at the end so we get a trailing \n
+  ].join('\n'))
+})
+
+t.test('-s', async (t) => {
+  const result = spawnSync(binPath, ['-s'], { cwd, encoding: 'utf8' })
+  t.equal(result.status, 0, 'completed successfully')
+  t.same(result.stdout, [
+    'index.js',
+    'lib/cat.js',
+    'lib/chai.js',
+    'lib/dog.js',
+    'lib/index.js',
+    'LICENSE.txt',
+    'package.json',
+    'README.md',, // empty element at the end so we get a trailing \n
+  ].join('\n'))
+})
+
+t.test('dir argument', async (t) => {
+  const result = spawnSync(binPath, ['.'], { cwd, encoding: 'utf8' })
+  t.equal(result.status, 0, 'completed successfully')
+  t.same(result.stdout, [
+    '> .', // the directory name prefixed with "> "
+    '  lib/cat.js', // the files will all be indented
+    '  lib/chai.js',
+    '  lib/dog.js',
+    '  index.js',
+    '  lib/index.js',
+    '  package.json',
+    '  README.md',
+    '  LICENSE.txt',, // empty element at the end so we get a trailing \n
+  ].join('\n'))
+})
+
+t.test('-h', async (t) => {
+  const result = spawnSync(binPath, ['-h'], { cwd, encoding: 'utf8' })
+  t.equal(result.status, 0, 'completed successfully')
+  t.match(result.stdout, /^usage: npm-packlist/, 'printed help')
+})
