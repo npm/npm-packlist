@@ -2,7 +2,6 @@
 
 const t = require('tap')
 const fs = require('fs')
-const { join } = require('path')
 
 const pkg = t.testdir({
   'package.json': 'no json here',
@@ -14,7 +13,8 @@ const packlist = t.mock('../', {
   fs: {
     ...fs,
     readFile: (path, options, callback) => {
-      if (path === join(pkg, 'package.json')) {
+      // this is _not_ an os specific path
+      if (path === `${pkg}/package.json`) {
         if (typeof options === 'function') {
           callback = options
           options = undefined
