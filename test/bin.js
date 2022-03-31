@@ -5,6 +5,7 @@
 const t = require('tap')
 const { spawnSync } = require('child_process')
 
+const nodePath = process.execPath
 const binPath = require.resolve('../bin/index.js')
 
 const cwd = t.testdir({
@@ -24,7 +25,7 @@ const cwd = t.testdir({
 })
 
 t.test('no args', async (t) => {
-  const result = spawnSync(binPath, [], { cwd, encoding: 'utf8' })
+  const result = spawnSync(nodePath, [binPath], { cwd, encoding: 'utf8' })
   t.equal(result.status, 0, 'completed successfully')
   t.same(result.stdout, [
     'lib/cat.js',
@@ -39,7 +40,7 @@ t.test('no args', async (t) => {
 })
 
 t.test('--sort', async (t) => {
-  const result = spawnSync(binPath, ['--sort'], { cwd, encoding: 'utf8' })
+  const result = spawnSync(nodePath, [binPath, '--sort'], { cwd, encoding: 'utf8' })
   t.equal(result.status, 0, 'completed successfully')
   t.same(result.stdout, [
     'index.js',
@@ -54,7 +55,7 @@ t.test('--sort', async (t) => {
 })
 
 t.test('-s', async (t) => {
-  const result = spawnSync(binPath, ['-s'], { cwd, encoding: 'utf8' })
+  const result = spawnSync(nodePath, [binPath, '-s'], { cwd, encoding: 'utf8' })
   t.equal(result.status, 0, 'completed successfully')
   t.same(result.stdout, [
     'index.js',
@@ -69,7 +70,7 @@ t.test('-s', async (t) => {
 })
 
 t.test('dir argument', async (t) => {
-  const result = spawnSync(binPath, ['.'], { cwd, encoding: 'utf8' })
+  const result = spawnSync(nodePath, [binPath, '.'], { cwd, encoding: 'utf8' })
   t.equal(result.status, 0, 'completed successfully')
   t.same(result.stdout, [
     '> .', // the directory name prefixed with "> "
@@ -85,7 +86,7 @@ t.test('dir argument', async (t) => {
 })
 
 t.test('-h', async (t) => {
-  const result = spawnSync(binPath, ['-h'], { cwd, encoding: 'utf8' })
+  const result = spawnSync(nodePath, [binPath, '-h'], { cwd, encoding: 'utf8' })
   t.equal(result.status, 0, 'completed successfully')
   t.match(result.stdout, /^usage: npm-packlist/, 'printed help')
 })
