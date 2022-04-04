@@ -49,12 +49,6 @@ t.test('follows npm package ignoring rules', function (t) {
 
   // also, let's reuse the caches, why not
   let packageJsonCache, nodeModulesCache
-  t.test('sync', t => {
-    const ws = new pack.WalkerSync({ path: pkg })
-    packageJsonCache = ws.packageJsonCache
-    nodeModulesCache = ws.nodeModulesCache
-    check(ws.start().result, t)
-  })
 
   t.test('async', t => pack({
     path: pkg,

@@ -14,13 +14,3 @@ Array [
   "core/include-me.txt",
 ]
 `
-
-exports[`test/nested-lock-and-core.js TAP follows npm package ignoring rules sync > must match snapshot 1`] = `
-Array [
-  "lib/core",
-  "lib/package-lock.json",
-  "package.json",
-  "lib/yarn.lock",
-  "core/include-me.txt",
-]
-`

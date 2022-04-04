@@ -15,14 +15,3 @@ Array [
   "test/resolver/multirepo/packages/a/node_modules/some_dep/package.json",
 ]
 `
-
-exports[`test/symlink.js TAP follows npm package ignoring rules sync > must match snapshot 1`] = `
-Array [
-  "test/resolver/multirepo/packages/a/README",
-  "deps/foo/config/config.gypi",
-  "elf.js",
-  "test/resolver/multirepo/packages/b/index.js",
-  "package.json",
-  "test/resolver/multirepo/packages/a/node_modules/some_dep/package.json",
-]
-`

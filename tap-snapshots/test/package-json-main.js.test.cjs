@@ -14,13 +14,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/package-json-main.js TAP follows npm package ignoring rules sync > must match snapshot 1`] = `
-Array [
-  "deps/foo/config/config.gypi",
-  "__main.js",
-  "browser.js",
-  "elf.js",
-  "package.json",
-]
-`

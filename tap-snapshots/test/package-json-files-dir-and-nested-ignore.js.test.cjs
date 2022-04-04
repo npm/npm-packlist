@@ -13,12 +13,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/package-json-files-dir-and-nested-ignore.js TAP package with negated files > must match snapshot 1`] = `
-Array [
-  "lib/for.js",
-  "lib/one.js",
-  "lib/tre.js",
-  "package.json",
-]
-`

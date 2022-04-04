@@ -16,15 +16,3 @@ Array [
   "lib/a/readme.md",
 ]
 `
-
-exports[`test/package-json-nested-readme-include-npmignore.js TAP package with negated files > must match snapshot 1`] = `
-Array [
-  "lib/a/a.js",
-  "lib/a/b/b.js",
-  "lib/a/b/c/c.js",
-  "package.json",
-  "lib/a/b/c/readme.md",
-  "lib/a/b/readme.md",
-  "lib/a/readme.md",
-]
-`

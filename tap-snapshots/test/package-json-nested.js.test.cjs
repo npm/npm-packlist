@@ -13,12 +13,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/package-json-nested.js TAP includes nested package.json file sync > must match snapshot 1`] = `
-Array [
-  "nest/foo.js",
-  "nest/index.js",
-  "nest/package.json",
-  "package.json",
-]
-`

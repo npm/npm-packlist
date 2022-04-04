@@ -13,12 +13,3 @@ Array [
   "readme.md",
 ]
 `
-
-exports[`test/cannot-exclude-readme.js TAP try to exclude package.json but cannot > must match snapshot 1`] = `
-Array [
-  ".npmignore",
-  "package.json",
-  "license.md",
-  "readme.md",
-]
-`

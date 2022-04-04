@@ -13,12 +13,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/package-json-bin-multiple.js TAP follows npm package ignoring rules sync > must match snapshot 1`] = `
-Array [
-  "__bin_bar",
-  "__bin_foo",
-  "lib/elf.js",
-  "package.json",
-]
-`

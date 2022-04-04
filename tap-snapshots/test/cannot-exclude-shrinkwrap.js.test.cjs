@@ -12,11 +12,3 @@ Array [
   "package.json",
 ]
 `
-
-exports[`test/cannot-exclude-shrinkwrap.js TAP package with negated files > must match snapshot 1`] = `
-Array [
-  ".npmignore",
-  "npm-shrinkwrap.json",
-  "package.json",
-]
-`

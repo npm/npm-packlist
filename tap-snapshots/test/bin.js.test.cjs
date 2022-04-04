@@ -59,14 +59,14 @@ Object {
   "stderr": "",
   "stdout": String(
     > .
-    lib/cat.js
-    lib/chai.js
-    lib/dog.js
-    index.js
-    lib/index.js
-    package.json
-    README.md
-    LICENSE.txt
+      lib/cat.js
+      lib/chai.js
+      lib/dog.js
+      index.js
+      lib/index.js
+      package.json
+      README.md
+      LICENSE.txt
     
   ),
 }

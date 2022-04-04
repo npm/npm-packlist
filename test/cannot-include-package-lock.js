@@ -12,6 +12,5 @@ const pkg = t.testdir({
 
 const packlist = require('../')
 t.test('try to include package-lock.json but cannot', async t => {
-  t.matchSnapshot(packlist.sync({ path: pkg }))
   await t.resolveMatchSnapshot(packlist({ path: pkg }))
 })

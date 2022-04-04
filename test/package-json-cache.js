@@ -28,19 +28,30 @@ t.test('seeded with root manifest', async t => {
       'elf.js',
     ],
   })
-  t.matchSnapshot(packlist.sync({ path: pkg, packageJsonCache }))
-  await t.resolveMatchSnapshot(packlist({ path: pkg, packageJsonCache }))
+  const list = await packlist({ path: pkg, packageJsonCache })
+  t.matchSnapshot(list)
 })
 
-t.test('seeded with invalid JSON falls back to filesystem', t => {
-  t.matchSnapshot(packlist.sync({
-    path: pkg,
-    packageJsonCache: new Map().set(rootManifestPath, "c'est ne pas une j'son"),
-  }))
-  t.end()
+t.test('seeded with invalid JSON falls back to filesystem', async t => {
+  const packageJsonCache = new Map().set(rootManifestPath, "c'est ne pas une j'son")
+  const list = await packlist({ path: pkg, packageJsonCache })
+  t.matchSnapshot(list)
 })
 
-t.test('when empty', t => {
-  t.matchSnapshot(packlist.sync({ path: pkg, packageJsonCache: new Map() }))
-  t.end()
+t.test('when empty', async t => {
+  const packageJsonCache = new Map()
+  const list = await packlist({ path: pkg, packageJsonCache })
+  t.matchSnapshot(list)
+})
+
+t.test('when not provided at all', async t => {
+  // can't use the exported function to provide no cache, have to create a Walker instance
+  const walker = new packlist.Walker()
+  const list = await new Promise((resolve, reject) => {
+    walker
+      .on('done', resolve)
+      .on('error', reject)
+      .start()
+  })
+  t.matchSnapshot(list)
 })

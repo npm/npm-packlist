@@ -14,13 +14,3 @@ Array [
   "readme.md",
 ]
 `
-
-exports[`test/ignores.js TAP follows npm package ignoring rules sync > must match snapshot 1`] = `
-Array [
-  "core",
-  "deps/foo/config/config.gypi",
-  "elf.js",
-  "package.json",
-  "readme.md",
-]
-`
