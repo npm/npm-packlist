@@ -14,6 +14,9 @@ const pkg = t.testdir({
       name: 'test-package',
       version: '3.1.4',
       main: 'elf.js',
+      dependencies: {
+        '@npmwombat/history': '1.0.0',
+      },
       bundleDependencies: [
         '@npmwombat/history',
       ],

@@ -8,6 +8,10 @@ const pkg = t.testdir({
     bin: 'bin.js',
     main: 'main.js',
     browser: 'browser.js',
+    dependencies: {
+      foo: '1.0.0',
+      '@foo/bar': '1.0.0',
+    },
     bundleDependencies: [
       'foo',
       '@foo/bar',

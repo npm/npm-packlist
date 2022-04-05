@@ -14,6 +14,9 @@ t.test('includes bundled dependency using bundleDependencies', async (t) => {
       name: 'test-package',
       version: '3.1.4',
       main: 'elf.js',
+      dependencies: {
+        history: '1.0.0',
+      },
       bundleDependencies: [
         'history',
       ],
@@ -24,7 +27,7 @@ t.test('includes bundled dependency using bundleDependencies', async (t) => {
     node_modules: {
       history: {
         'package.json': JSON.stringify({
-          name: '@npmwombat/history',
+          name: 'history',
           version: '1.0.0',
           main: 'index.js',
         }),
@@ -48,6 +51,9 @@ t.test('includes bundled dependency using bundledDependencies', async (t) => {
       name: 'test-package',
       version: '3.1.4',
       main: 'elf.js',
+      dependencies: {
+        history: '1.0.0',
+      },
       bundledDependencies: [
         'history',
       ],
@@ -58,7 +64,7 @@ t.test('includes bundled dependency using bundledDependencies', async (t) => {
     node_modules: {
       history: {
         'package.json': JSON.stringify({
-          name: '@npmwombat/history',
+          name: 'history',
           version: '1.0.0',
           main: 'index.js',
         }),
