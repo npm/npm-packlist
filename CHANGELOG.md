@@ -1,5 +1,27 @@
 # Changelog
 
+## [5.0.0](https://github.com/npm/npm-packlist/compare/v4.0.0...v5.0.0) (2022-04-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* this module no longer supports synchronous usage
+
+### Features
+
+* remove synchronous interface ([#80](https://github.com/npm/npm-packlist/issues/80)) ([eb68f64](https://github.com/npm/npm-packlist/commit/eb68f64fe7d70d4776922246dd9cea5da6f1e21a))
+
+
+### Bug Fixes
+
+* remove polynomial regex ([b2e2f7b](https://github.com/npm/npm-packlist/commit/b2e2f7b9122b15c8f8041953aa07b5436232b903))
+* replace deprecated String.prototype.substr() ([#85](https://github.com/npm/npm-packlist/issues/85)) ([79d6f7e](https://github.com/npm/npm-packlist/commit/79d6f7ebd5b881b3a3ec393769dd132a9a438778))
+
+
+### Dependencies
+
+* bump ignore-walk from 4.0.1 to 5.0.1 ([#87](https://github.com/npm/npm-packlist/issues/87)) ([0e241f5](https://github.com/npm/npm-packlist/commit/0e241f50e57b95274cd988e09763e205020c5b84))
+
 ## [4.0.0](https://www.github.com/npm/npm-packlist/compare/v3.0.0...v4.0.0) (2022-03-03)
 
 
