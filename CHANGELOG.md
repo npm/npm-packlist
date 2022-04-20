@@ -1,5 +1,12 @@
 # Changelog
 
+### [5.0.1](https://github.com/npm/npm-packlist/compare/v5.0.0...v5.0.1) (2022-04-20)
+
+
+### Dependencies
+
+* bump glob from 7.2.0 to 8.0.1 ([#90](https://github.com/npm/npm-packlist/issues/90)) ([dc3d40a](https://github.com/npm/npm-packlist/commit/dc3d40a1b89019e5343f76c184cd2fbb296fdb27))
+
 ## [5.0.0](https://github.com/npm/npm-packlist/compare/v4.0.0...v5.0.0) (2022-04-06)
 
 
