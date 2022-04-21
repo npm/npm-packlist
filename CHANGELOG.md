@@ -1,5 +1,12 @@
 # Changelog
 
+### [5.0.2](https://github.com/npm/npm-packlist/compare/v5.0.1...v5.0.2) (2022-04-21)
+
+
+### Bug Fixes
+
+* normalize win32 paths before globbing ([16f1343](https://github.com/npm/npm-packlist/commit/16f13436ebe31144ea86e3d2c7f1f16022f82885))
+
 ### [5.0.1](https://github.com/npm/npm-packlist/compare/v5.0.0...v5.0.1) (2022-04-20)
 
 
