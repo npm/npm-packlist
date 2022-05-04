@@ -13,7 +13,7 @@ const pkg = t.testdir({
       '/lib/one.js',
       '/lib/two.js',
       '/lib/tre.js',
-      '/lib/for.js',
+      './lib/for.js',
     ],
   }),
   lib: {
