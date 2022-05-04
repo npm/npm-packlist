@@ -1,5 +1,12 @@
 # Changelog
 
+### [5.0.3](https://github.com/npm/npm-packlist/compare/v5.0.2...v5.0.3) (2022-05-04)
+
+
+### Bug Fixes
+
+* strip leading ./ from files array entries ([#97](https://github.com/npm/npm-packlist/issues/97)) ([9f519b7](https://github.com/npm/npm-packlist/commit/9f519b7d38ee46e08dc77b3b730842a2ca0e7500))
+
 ### [5.0.2](https://github.com/npm/npm-packlist/compare/v5.0.1...v5.0.2) (2022-04-21)
 
 
