@@ -10,10 +10,10 @@ t.test('respects workspace root ignore files', async (t) => {
     'package.json': JSON.stringify({
       name: 'workspace-root',
       version: '1.0.0',
-      main: 'index.js',
+      main: 'root.js',
       workspaces: ['./workspaces/foo'],
     }),
-    'index.js': `console.log('hello')`,
+    'root.js': `console.log('hello')`,
     '.gitignore': 'ignore-me',
     'ignore-me': 'should be ignored',
     workspaces: {
@@ -24,9 +24,9 @@ t.test('respects workspace root ignore files', async (t) => {
         'package.json': JSON.stringify({
           name: 'workspace-child',
           version: '1.0.0',
-          main: 'index.js',
+          main: 'child.js',
         }),
-        'index.js': `console.log('hello')`,
+        'child.js': `console.log('hello')`,
         'ignore-me': 'should be ignored',
         'ignore-me-also': 'should also be ignored',
       },
@@ -41,7 +41,71 @@ t.test('respects workspace root ignore files', async (t) => {
     workspaces: [workspacePath],
   })
   t.same(files, [
-    'index.js',
+    'child.js',
     'package.json',
+  ])
+
+  // here we leave off workspaces to satisfy coverage
+  const secondFiles = await packlist({
+    path: workspacePath,
+    prefix: root,
+  })
+  t.same(secondFiles, [
+    'ignore-me',
+    'ignore-me-also',
+    'child.js',
+    'package.json',
+  ])
+})
+
+t.test('packing a workspace root does not include children', async (t) => {
+  const root = t.testdir({
+    'package.json': JSON.stringify({
+      name: 'workspace-root',
+      version: '1.0.0',
+      main: 'root.js',
+      workspaces: ['./workspaces/foo'],
+    }),
+    'root.js': `console.log('hello')`,
+    '.gitignore': 'ignore-me',
+    'ignore-me': 'should be ignored',
+    workspaces: {
+      '.gitignore': 'ignore-me-also',
+      'ignore-me': 'should be ignored',
+      'ignore-me-also': 'should also be ignored',
+      foo: {
+        'package.json': JSON.stringify({
+          name: 'workspace-child',
+          version: '1.0.0',
+          main: 'child.js',
+        }),
+        'child.js': `console.log('hello')`,
+        'ignore-me': 'should be ignored',
+        'ignore-me-also': 'should also be ignored',
+      },
+    },
+  })
+
+  const workspacePath = path.join(root, 'workspaces', 'foo')
+  // this simulates what it looks like when a user does i.e. npm pack from a workspace root
+  const files = await packlist({
+    path: root,
+    prefix: root,
+    workspaces: [workspacePath],
+  })
+  t.same(files, [
+    'root.js',
+    'package.json',
+  ])
+
+  const secondFiles = await packlist({
+    path: root,
+    prefix: root,
+  })
+  t.same(secondFiles, [
+    'workspaces/foo/child.js',
+    'root.js',
+    'package.json',
+    'workspaces/foo/package.json',
   ])
 })
