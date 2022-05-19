@@ -1,5 +1,13 @@
 # Changelog
 
+### [5.0.4](https://github.com/npm/npm-packlist/compare/v5.0.3...v5.0.4) (2022-05-19)
+
+
+### Bug Fixes
+
+* do not pack workspaces by default ([0f31f71](https://github.com/npm/npm-packlist/commit/0f31f71ab652c1bc9250bcb1603357ee7b4fbf28))
+* respect gitignore and npmignore files in workspace roots ([839e6e8](https://github.com/npm/npm-packlist/commit/839e6e8b13dc8c5ec14fab79509649d081c3ef54))
+
 ### [5.0.3](https://github.com/npm/npm-packlist/compare/v5.0.2...v5.0.3) (2022-05-04)
 
 
