@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://github.com/npm/npm-packlist/compare/v5.0.4...v5.1.0) (2022-05-25)
+
+
+### Features
+
+* correctly handle workspace roots ([#104](https://github.com/npm/npm-packlist/issues/104)) ([d74bdd1](https://github.com/npm/npm-packlist/commit/d74bdd157ef6a701c9aeef902be9e0e51f388c98))
+
 ### [5.0.4](https://github.com/npm/npm-packlist/compare/v5.0.3...v5.0.4) (2022-05-19)
 
 
