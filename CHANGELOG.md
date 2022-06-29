@@ -1,5 +1,12 @@
 # Changelog
 
+### [5.1.1](https://github.com/npm/npm-packlist/compare/v5.1.0...v5.1.1) (2022-05-31)
+
+
+### Bug Fixes
+
+* correctly ignore .gitignore when a .npmignore is present ([#108](https://github.com/npm/npm-packlist/issues/108)) ([da1ba4a](https://github.com/npm/npm-packlist/commit/da1ba4a3051ea822d9625347e00c186677247a45))
+
 ## [5.1.0](https://github.com/npm/npm-packlist/compare/v5.0.4...v5.1.0) (2022-05-25)
 
 
