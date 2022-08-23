@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.2](https://github.com/npm/npm-packlist/compare/v5.1.1...v5.1.2) (2022-08-23)
+
+
+### Dependencies
+
+* bump npm-normalize-package-bin from 1.0.1 to 2.0.0 ([#110](https://github.com/npm/npm-packlist/issues/110)) ([c97d1a8](https://github.com/npm/npm-packlist/commit/c97d1a8b0d61ed76422bd7da0adaa4285c2a1cb7))
+
 ### [5.1.1](https://github.com/npm/npm-packlist/compare/v5.1.0...v5.1.1) (2022-05-31)
 
 
