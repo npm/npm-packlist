@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.3](https://github.com/npm/npm-packlist/compare/v5.1.2...v5.1.3) (2022-08-25)
+
+
+### Dependencies
+
+* bump npm-bundled from 1.1.2 to 2.0.0 ([#113](https://github.com/npm/npm-packlist/issues/113)) ([de5e96b](https://github.com/npm/npm-packlist/commit/de5e96bbdd9ccf345104715fe3080c4d239b7f3b))
+
 ## [5.1.2](https://github.com/npm/npm-packlist/compare/v5.1.1...v5.1.2) (2022-08-23)
 
 
