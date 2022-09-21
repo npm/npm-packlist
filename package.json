@@ -5,12 +5,10 @@
   "directories": {
     "test": "test"
   },
-  "main": "lib",
+  "main": "lib/index.js",
   "dependencies": {
-    "glob": "^8.0.1",
-    "ignore-walk": "^5.0.1",
-    "npm-bundled": "^2.0.0",
-    "npm-normalize-package-bin": "^2.0.0"
+    "@npmcli/arborist": "^5.0.4",
+    "ignore-walk": "^5.0.1"
   },
   "author": "GitHub Inc.",
   "license": "ISC",

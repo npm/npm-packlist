@@ -13,6 +13,9 @@ const pkg = t.testdir({
     name: 'test-package-scoped',
     version: '3.1.4',
     main: 'elf.js',
+    dependencies: {
+      '@npmwombat/scoped': '1.0.0',
+    },
     bundledDependencies: [
       '@npmwombat/scoped',
     ],

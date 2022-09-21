@@ -7,10 +7,11 @@ const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: [
       'lib/sub/*.js',
-      '.npmignore',
+      'lib/.npmignore',
     ],
   }),
   lib: {
+    '.npmignore': 'two.js',
     sub: {
       'one.js': 'one',
       'two.js': 'two',
@@ -19,13 +20,12 @@ const pkg = t.testdir({
     },
     '.DS_Store': 'a store of ds',
   },
-  '.npmignore': 'two.js',
 })
 
 t.test('package with negated files', async (t) => {
   const files = await packlist({ path: pkg })
   t.same(files, [
-    '.npmignore',
+    'lib/.npmignore',
     'lib/sub/for.js',
     'lib/sub/one.js',
     'lib/sub/tre.js',

@@ -45,7 +45,8 @@ t.test('respects workspace root ignore files', async (t) => {
     'package.json',
   ])
 
-  // here we leave off workspaces to satisfy coverage
+  // leave off workspaces to prove that when prefix and root differ there is no change
+  // in behavior without also specifying workspaces
   const secondFiles = await packlist({
     path: workspacePath,
     prefix: root,
@@ -87,7 +88,7 @@ t.test('packing a workspace root does not include children', async (t) => {
   })
 
   const workspacePath = path.join(root, 'workspaces', 'foo')
-  // this simulates what it looks like when a user does i.e. npm pack from a workspace root
+  // this simulates what it looks like when a user does `npm pack` from a workspace root
   const files = await packlist({
     path: root,
     prefix: root,
@@ -98,6 +99,7 @@ t.test('packing a workspace root does not include children', async (t) => {
     'package.json',
   ])
 
+  // prove if we leave off workspaces we do not omit them
   const secondFiles = await packlist({
     path: root,
     prefix: root,

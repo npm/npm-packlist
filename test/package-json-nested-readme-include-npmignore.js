@@ -9,6 +9,12 @@ const pkg = t.testdir({
     files: ['.npmignore', 'lib'],
   }),
   lib: {
+    '.npmignore': `
+    *
+    !*.js
+    !**/*.js
+    test
+    `,
     a: {
       b: {
         c: {
@@ -42,12 +48,6 @@ const pkg = t.testdir({
       'a.js': 'one',
     },
   },
-  '.npmignore': `
-  *
-  !*.js
-  !**/*.js
-  test
-  `,
 })
 
 t.test('package with negated files', async (t) => {
