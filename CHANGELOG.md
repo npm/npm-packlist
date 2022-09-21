@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.0.0](https://github.com/npm/npm-packlist/compare/v5.1.3...v6.0.0) (2022-09-21)
+
+### ⚠️ BREAKING CHANGES
+
+* this module now follows a strict order of operations when applying ignore rules. if a `files` array is present in the package.json, then rules in `.gitignore` and `.npmignore` files from the root will be ignored.
+* `npm-packlist` is now compatible with the following semver range for node: `^14.17.0 || ^16.13.0 || >=18.0.0`
+
+### Features
+
+* [`c37371b`](https://github.com/npm/npm-packlist/commit/c37371b060ee42ebaebf134f37471c8330fc4d27) [#88](https://github.com/npm/npm-packlist/pull/88) change interactions between `files` array and ignore files to be more consistent (#88) (@nlf)
+* [`a2c96ef`](https://github.com/npm/npm-packlist/commit/a2c96effdadd1cee1d6b584b92a45a7d09b260cb) [#123](https://github.com/npm/npm-packlist/pull/123) postinstall for dependabot template-oss PR (@lukekarrys)
+
 ## [5.1.3](https://github.com/npm/npm-packlist/compare/v5.1.2...v5.1.3) (2022-08-25)
 
 
