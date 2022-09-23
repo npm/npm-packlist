@@ -83,7 +83,7 @@ readme.md
 t.test('follows npm package ignoring rules', async (t) => {
   const arborist = new Arborist({ path: pkg })
   const tree = await arborist.loadActual()
-  const files = await packlist({ path: pkg, tree })
+  const files = await packlist(tree)
   t.same(files, [
     'core',
     'deps/foo/config/config.gypi',

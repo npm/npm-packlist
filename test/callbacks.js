@@ -15,7 +15,7 @@ t.test('export supports callbacks', async (t) => {
   const tree = await arborist.loadActual()
 
   return new Promise((resolve, reject) => {
-    packlist({ path: pkg, tree }, (err, files) => {
+    packlist(tree, (err, files) => {
       if (err) {
         reject(err)
       }

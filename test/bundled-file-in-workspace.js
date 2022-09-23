@@ -32,7 +32,7 @@ t.test('correctly filters files from workspace subdirectory', async (t) => {
 
   const arborist = new Arborist({ path: pkg })
   const tree = await arborist.loadActual()
-  const files = await packlist({ path: pkg, tree })
+  const files = await packlist(tree)
   t.same(files, [
     'index.js',
     'package.json',
@@ -81,7 +81,7 @@ t.test('does not filter based on package.json if subdirectory is not a workspace
 
   const arborist = new Arborist({ path: pkg })
   const tree = await arborist.loadActual()
-  const files = await packlist({ path: pkg, tree })
+  const files = await packlist(tree)
   t.same(files, [
     'index.js',
     'package.json',

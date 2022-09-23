@@ -24,7 +24,7 @@ t.test('include a globstar, then exclude one of them', async (t) => {
 
   const arborist = new Arborist({ path })
   const tree = await arborist.loadActual()
-  const files = await packlist({ path, tree })
+  const files = await packlist(tree)
   t.same(files, [
     'bar.js',
     'bar/bar.js',

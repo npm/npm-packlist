@@ -51,7 +51,7 @@ t.test('should strip / from package.json files array entry results', async (t) =
 
   const arborist = new Arborist({ path: pkg })
   const tree = await arborist.loadActual()
-  const files = await packlist({ path: pkg, tree })
+  const files = await packlist(tree)
   t.same(files, [
     'dist/bar',
     'dist/baz/boo',

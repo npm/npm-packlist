@@ -42,7 +42,7 @@ const pkg = t.testdir({
 t.test('includes bundledDependencies', async (t) => {
   const arborist = new Arborist({ path: pkg })
   const tree = await arborist.loadActual()
-  const files = await packlist({ path: pkg, bundled: ['@npmwombat/scoped'], tree })
+  const files = await packlist(tree, { bundled: ['@npmwombat/scoped'] })
   t.same(files, [
     'elf.js',
     'node_modules/@npmwombat/scoped/index.js',

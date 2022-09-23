@@ -28,7 +28,7 @@ t.test('skips bundling deps with missing edges', async (t) => {
   const arborist = new Arborist({ path: pkg })
   const tree = await arborist.loadActual()
 
-  const files = await packlist({ path: pkg, tree })
+  const files = await packlist(tree)
   t.same(files, [
     'index.js',
     'package.json',

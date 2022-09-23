@@ -24,14 +24,14 @@ const main = async () => {
     const path = process.cwd()
     const arborist = new Arborist({ path })
     const tree = await arborist.loadActual()
-    const results = await packlist({ path, tree })
+    const results = await packlist(tree)
     console.log(sort(results).join('\n'))
   } else {
     for (const dir of dirs) {
       const arborist = new Arborist({ path: dir })
       const tree = await arborist.loadActual()
       console.group(`> ${dir}`)
-      const results = await packlist({ path: dir, tree })
+      const results = await packlist(tree)
       console.log(sort(results).join('\n'))
       console.groupEnd()
     }
