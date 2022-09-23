@@ -1,5 +1,6 @@
 'use strict'
 
+const Arborist = require('@npmcli/arborist')
 const t = require('tap')
 const packlist = require('../')
 
@@ -42,7 +43,9 @@ t.test('packs workspace dependencies correctly', async (t) => {
     },
   })
 
-  const files = await packlist({ path: pkg })
+  const arborist = new Arborist({ path: pkg })
+  const tree = await arborist.loadActual()
+  const files = await packlist({ path: pkg, tree })
   t.same(files, [
     'index.js',
     'node_modules/bar/index.js',

@@ -1,5 +1,6 @@
 'use strict'
 
+const Arborist = require('@npmcli/arborist')
 const t = require('tap')
 const packlist = require('../')
 
@@ -48,7 +49,9 @@ t.test('should strip / from package.json files array entry results', async (t) =
     },
   })
 
-  const files = await packlist({ path: pkg })
+  const arborist = new Arborist({ path: pkg })
+  const tree = await arborist.loadActual()
+  const files = await packlist({ path: pkg, tree })
   t.same(files, [
     'dist/bar',
     'dist/baz/boo',

@@ -1,5 +1,6 @@
 'use strict'
 
+const Arborist = require('@npmcli/arborist')
 const t = require('tap')
 const packlist = require('../')
 
@@ -9,15 +10,20 @@ const pkg = t.testdir({
   }),
 })
 
-t.test('export supports callbacks', (t) => {
-  packlist({ path: pkg }, (err, files) => {
-    if (err) {
-      throw err
-    }
+t.test('export supports callbacks', async (t) => {
+  const arborist = new Arborist({ path: pkg })
+  const tree = await arborist.loadActual()
 
-    t.same(files, [
-      'package.json',
-    ])
-    t.end()
+  return new Promise((resolve, reject) => {
+    packlist({ path: pkg, tree }, (err, files) => {
+      if (err) {
+        reject(err)
+      }
+
+      t.same(files, [
+        'package.json',
+      ])
+      resolve(files)
+    })
   })
 })

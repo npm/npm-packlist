@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 'use strict'
 
-const packlist = require('../')
+const Arborist = require('@npmcli/arborist')
+const packlist = require('../../')
 
 const dirs = []
 let doSort = false
@@ -20,12 +21,17 @@ const sort = list => doSort ? list.sort((a, b) => a.localeCompare(b, 'en')) : li
 
 const main = async () => {
   if (!dirs.length) {
-    const results = await packlist({ path: process.cwd() })
+    const path = process.cwd()
+    const arborist = new Arborist({ path })
+    const tree = await arborist.loadActual()
+    const results = await packlist({ path, tree })
     console.log(sort(results).join('\n'))
   } else {
     for (const dir of dirs) {
+      const arborist = new Arborist({ path: dir })
+      const tree = await arborist.loadActual()
       console.group(`> ${dir}`)
-      const results = await packlist({ path: dir })
+      const results = await packlist({ path: dir, tree })
       console.log(sort(results).join('\n'))
       console.groupEnd()
     }

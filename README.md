@@ -6,20 +6,24 @@ These can be handed to [tar](http://npm.im/tar) like so to make an npm
 package tarball:
 
 ```js
+const Arborist = require('@npmcli/arborist')
 const packlist = require('npm-packlist')
 const tar = require('tar')
 const packageDir = '/path/to/package'
 const packageTarball = '/path/to/package.tgz'
 
-packlist({ path: packageDir })
-  .then(files => tar.create({
-    prefix: 'package/',
-    cwd: packageDir,
-    file: packageTarball,
-    gzip: true
-  }, files))
-  .then(_ => {
-    // tarball has been created, continue with your day
+const arborist = new Arborist({ path: packageDir })
+arborist.loadActual().then((tree) => {
+  packlist({ path: packageDir, tree })
+    .then(files => tar.create({
+      prefix: 'package/',
+      cwd: packageDir,
+      file: packageTarball,
+      gzip: true
+    }, files))
+    .then(_ => {
+      // tarball has been created, continue with your day
+    })
   })
 ```
 
@@ -97,7 +101,6 @@ Any specific file matched by an exact filename in the package.json `files` list 
 
 ## API
 
-Same API as [ignore-walk](http://npm.im/ignore-walk), just hard-coded
-file list and rule sets.
+Same API as [ignore-walk](http://npm.im/ignore-walk), except providing a `tree` is required and there are hard-coded file list and rule sets.
 
-The `Walker` class will load an [arborist](https://github.com/npm/cli/tree/latest/workspaces/arborist) tree, and if any bundled dependencies are found will include them as well as their own dependencies in the resulting file set.
+The `Walker` class requires an [arborist](https://github.com/npm/cli/tree/latest/workspaces/arborist) tree, and if any bundled dependencies are found will include them as well as their own dependencies in the resulting file set.

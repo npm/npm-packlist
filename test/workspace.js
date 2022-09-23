@@ -1,5 +1,6 @@
 'use strict'
 
+const Arborist = require('@npmcli/arborist')
 const path = require('path')
 const t = require('tap')
 
@@ -34,11 +35,14 @@ t.test('respects workspace root ignore files', async (t) => {
   })
 
   const workspacePath = path.join(root, 'workspaces', 'foo')
+  const arborist = new Arborist({ path: workspacePath })
+  const tree = await arborist.loadActual()
   // this simulates what it looks like when a user does i.e. npm pack -w ./workspaces/foo
   const files = await packlist({
     path: workspacePath,
     prefix: root,
     workspaces: [workspacePath],
+    tree,
   })
   t.same(files, [
     'child.js',
@@ -50,6 +54,7 @@ t.test('respects workspace root ignore files', async (t) => {
   const secondFiles = await packlist({
     path: workspacePath,
     prefix: root,
+    tree,
   })
   t.same(secondFiles, [
     'ignore-me',
@@ -89,10 +94,13 @@ t.test('packing a workspace root does not include children', async (t) => {
 
   const workspacePath = path.join(root, 'workspaces', 'foo')
   // this simulates what it looks like when a user does `npm pack` from a workspace root
+  const arborist = new Arborist({ path: root })
+  const tree = await arborist.loadActual()
   const files = await packlist({
     path: root,
     prefix: root,
     workspaces: [workspacePath],
+    tree,
   })
   t.same(files, [
     'root.js',
@@ -103,6 +111,7 @@ t.test('packing a workspace root does not include children', async (t) => {
   const secondFiles = await packlist({
     path: root,
     prefix: root,
+    tree,
   })
   t.same(secondFiles, [
     'workspaces/foo/child.js',
@@ -149,10 +158,13 @@ t.test('.gitignore is discarded if .npmignore exists outside of tree', async (t)
 
   const workspacePath = path.join(root, 'workspaces', 'foo')
   // this simulates what it looks like when a user does i.e. npm pack -w ./workspaces/foo
+  const arborist = new Arborist({ path: workspacePath })
+  const tree = await arborist.loadActual()
   const files = await packlist({
     path: workspacePath,
     prefix: root,
     workspaces: [workspacePath],
+    tree,
   })
   t.same(files, [
     'dont-ignore-me',
@@ -165,6 +177,7 @@ t.test('.gitignore is discarded if .npmignore exists outside of tree', async (t)
   const secondFiles = await packlist({
     path: workspacePath,
     prefix: root,
+    tree,
   })
   t.same(secondFiles, [
     'dont-ignore-me',

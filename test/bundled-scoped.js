@@ -1,5 +1,6 @@
 'use strict'
 
+const Arborist = require('@npmcli/arborist')
 const t = require('tap')
 const packlist = require('../')
 
@@ -37,7 +38,9 @@ const pkg = t.testdir({
 })
 
 t.test('includes bundled dependency', async (t) => {
-  const files = await packlist({ path: pkg })
+  const arborist = new Arborist({ path: pkg })
+  const tree = await arborist.loadActual()
+  const files = await packlist({ path: pkg, tree })
   t.same(files, [
     'elf.js',
     'node_modules/@npmwombat/history/index.js',
