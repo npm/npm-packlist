@@ -1,5 +1,11 @@
 # Changelog
 
+## [6.0.1](https://github.com/npm/npm-packlist/compare/v6.0.0...v6.0.1) (2022-09-23)
+
+### Dependencies
+
+* [`f823be6`](https://github.com/npm/npm-packlist/commit/f823be6e9bc9239acbb8e8b6149f0a8b457a0d0a) [#125](https://github.com/npm/npm-packlist/pull/125) arborist@5||6||6.pre
+
 ## [6.0.0](https://github.com/npm/npm-packlist/compare/v5.1.3...v6.0.0) (2022-09-21)
 
 ### ⚠️ BREAKING CHANGES
