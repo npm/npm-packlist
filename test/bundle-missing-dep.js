@@ -1,5 +1,6 @@
 'use strict'
 
+const Arborist = require('@npmcli/arborist')
 const t = require('tap')
 const packlist = require('../')
 
@@ -24,8 +25,10 @@ t.test('skips bundling deps with missing edges', async (t) => {
       },
     },
   })
+  const arborist = new Arborist({ path: pkg })
+  const tree = await arborist.loadActual()
 
-  const files = await packlist({ path: pkg })
+  const files = await packlist({ path: pkg, tree })
   t.same(files, [
     'index.js',
     'package.json',

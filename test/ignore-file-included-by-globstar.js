@@ -1,5 +1,6 @@
 'use strict'
 
+const Arborist = require('@npmcli/arborist')
 const t = require('tap')
 const packlist = require('../')
 
@@ -21,7 +22,9 @@ t.test('include a globstar, then exclude one of them', async (t) => {
     }),
   })
 
-  const files = await packlist({ path })
+  const arborist = new Arborist({ path })
+  const tree = await arborist.loadActual()
+  const files = await packlist({ path, tree })
   t.same(files, [
     'bar.js',
     'bar/bar.js',

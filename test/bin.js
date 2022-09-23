@@ -6,7 +6,7 @@ const t = require('tap')
 const { spawnSync } = require('child_process')
 
 const nodePath = process.execPath
-const binPath = require.resolve('../bin/index.js')
+const binPath = require.resolve('./utils/bin.js')
 
 const cwd = t.testdir({
   'package.json': JSON.stringify({

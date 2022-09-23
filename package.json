@@ -7,7 +7,6 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "@npmcli/arborist": "^5.0.4 || ^6.0.0 || ^6.0.0-pre.0",
     "ignore-walk": "^5.0.1"
   },
   "author": "GitHub Inc.",
@@ -17,6 +16,7 @@
     "lib/"
   ],
   "devDependencies": {
+    "@npmcli/arborist": "^5.0.4 || ^6.0.0 || ^6.0.0-pre.0",
     "@npmcli/eslint-config": "^3.0.1",
     "@npmcli/template-oss": "4.4.2",
     "mutate-fs": "^2.1.1",
@@ -45,10 +45,8 @@
     "nyc-arg": [
       "--exclude",
       "tap-snapshots/**"
-    ]
-  },
-  "bin": {
-    "npm-packlist": "bin/index.js"
+    ],
+    "files": ["test/*.js"]
   },
   "engines": {
     "node": "^14.17.0 || ^16.13.0 || >=18.0.0"

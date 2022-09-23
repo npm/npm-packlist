@@ -1,5 +1,6 @@
 'use strict'
 
+const Arborist = require('@npmcli/arborist')
 const t = require('tap')
 const packlist = require('../')
 
@@ -44,7 +45,9 @@ t.test('follows npm package ignoring rules', async (t) => {
   t.teardown(() => process.chdir(cwd))
   process.chdir(pkg)
 
-  const files = await packlist()
+  const arborist = new Arborist({ path: pkg })
+  const tree = await arborist.loadActual()
+  const files = await packlist({ tree })
   t.same(files, [
     'deps/foo/config/config.gypi',
     'elf.js',
