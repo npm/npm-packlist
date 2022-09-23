@@ -33,7 +33,7 @@ const pkg = t.testdir({
 t.test('follows npm package ignoring rules', async (t) => {
   const arborist = new Arborist({ path: pkg })
   const tree = await arborist.loadActual()
-  const files = await packlist({ path: pkg, tree })
+  const files = await packlist(tree)
   t.same(files, [
     '__bin',
     'lib/elf.js',

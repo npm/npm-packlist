@@ -52,7 +52,7 @@ const pkg = t.testdir({
 t.test('includes bundled dependency', async (t) => {
   const arborist = new Arborist({ path: pkg })
   const tree = await arborist.loadActual()
-  const files = await packlist({ path: pkg, tree })
+  const files = await packlist(tree)
   t.same(files, [
     'elf.js',
     'node_modules/history/index.js',

@@ -14,7 +14,7 @@ const packageTarball = '/path/to/package.tgz'
 
 const arborist = new Arborist({ path: packageDir })
 arborist.loadActual().then((tree) => {
-  packlist({ path: packageDir, tree })
+  packlist(tree)
     .then(files => tar.create({
       prefix: 'package/',
       cwd: packageDir,

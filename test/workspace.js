@@ -38,11 +38,9 @@ t.test('respects workspace root ignore files', async (t) => {
   const arborist = new Arborist({ path: workspacePath })
   const tree = await arborist.loadActual()
   // this simulates what it looks like when a user does i.e. npm pack -w ./workspaces/foo
-  const files = await packlist({
-    path: workspacePath,
+  const files = await packlist(tree, {
     prefix: root,
     workspaces: [workspacePath],
-    tree,
   })
   t.same(files, [
     'child.js',
@@ -51,10 +49,8 @@ t.test('respects workspace root ignore files', async (t) => {
 
   // leave off workspaces to prove that when prefix and root differ there is no change
   // in behavior without also specifying workspaces
-  const secondFiles = await packlist({
-    path: workspacePath,
+  const secondFiles = await packlist(tree, {
     prefix: root,
-    tree,
   })
   t.same(secondFiles, [
     'ignore-me',
@@ -96,11 +92,9 @@ t.test('packing a workspace root does not include children', async (t) => {
   // this simulates what it looks like when a user does `npm pack` from a workspace root
   const arborist = new Arborist({ path: root })
   const tree = await arborist.loadActual()
-  const files = await packlist({
-    path: root,
+  const files = await packlist(tree, {
     prefix: root,
     workspaces: [workspacePath],
-    tree,
   })
   t.same(files, [
     'root.js',
@@ -108,10 +102,8 @@ t.test('packing a workspace root does not include children', async (t) => {
   ])
 
   // prove if we leave off workspaces we do not omit them
-  const secondFiles = await packlist({
-    path: root,
+  const secondFiles = await packlist(tree, {
     prefix: root,
-    tree,
   })
   t.same(secondFiles, [
     'workspaces/foo/child.js',
@@ -160,11 +152,9 @@ t.test('.gitignore is discarded if .npmignore exists outside of tree', async (t)
   // this simulates what it looks like when a user does i.e. npm pack -w ./workspaces/foo
   const arborist = new Arborist({ path: workspacePath })
   const tree = await arborist.loadActual()
-  const files = await packlist({
-    path: workspacePath,
+  const files = await packlist(tree, {
     prefix: root,
     workspaces: [workspacePath],
-    tree,
   })
   t.same(files, [
     'dont-ignore-me',
@@ -174,10 +164,8 @@ t.test('.gitignore is discarded if .npmignore exists outside of tree', async (t)
   ])
 
   // here we leave off workspaces to satisfy coverage
-  const secondFiles = await packlist({
-    path: workspacePath,
+  const secondFiles = await packlist(tree, {
     prefix: root,
-    tree,
   })
   t.same(secondFiles, [
     'dont-ignore-me',

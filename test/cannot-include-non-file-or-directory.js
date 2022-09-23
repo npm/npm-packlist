@@ -57,7 +57,7 @@ t.test('cannot include something that exists but is neither a file nor a directo
 
   const arborist = new Arborist({ path: pkg })
   const tree = await arborist.loadActual()
-  const files = await packlist({ path: pkg, tree })
+  const files = await packlist(tree)
   t.same(files, [
     'index.js',
     'package.json',
