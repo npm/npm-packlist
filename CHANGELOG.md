@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.0.0-pre.0](https://github.com/npm/npm-packlist/compare/v6.0.1...v7.0.0-pre.0) (2022-09-26)
+
+### ⚠️ BREAKING CHANGES
+
+* `tree` is now the first parameter
+* the arborist tree must now be provided in the options and will not be generated for you. the npm-packlist bin has also been removed.
+
+### Features
+
+* [`87c778e`](https://github.com/npm/npm-packlist/commit/87c778eb0f89101ff5ef4a488e614fb9e7773480) make the required tree the first parameter (@lukekarrys)
+* [`123875a`](https://github.com/npm/npm-packlist/commit/123875a9db0d18c2ba91e9841ab8e15df3057e18) remove dependency on arborist, require tree to be passed in (@nlf)
+
 ## [6.0.1](https://github.com/npm/npm-packlist/compare/v6.0.0...v6.0.1) (2022-09-23)
 
 ### Dependencies
