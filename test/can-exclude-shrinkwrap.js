@@ -1,4 +1,4 @@
-// cannot exclude npm-shrinkwrap.json in the root
+// can exclude npm-shrinkwrap.json in the root
 'use strict'
 
 const Arborist = require('@npmcli/arborist')
@@ -19,7 +19,6 @@ t.test('package with negated files', async (t) => {
   const files = await packlist(tree)
   t.same(files, [
     '.npmignore',
-    'npm-shrinkwrap.json',
     'package.json',
   ])
 })
