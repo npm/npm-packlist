@@ -1,5 +1,15 @@
 # Changelog
 
+## [7.0.0-pre.1](https://github.com/npm/npm-packlist/compare/v7.0.0-pre.0...v7.0.0-pre.1) (2022-10-03)
+
+### ⚠️ BREAKING CHANGES
+
+* if npm-shrinkwrap.json is included in your .npmignore, the shrinkwrap will now be excluded from your packlist.
+
+### Features
+
+* [`5e80968`](https://github.com/npm/npm-packlist/commit/5e8096883080d8d1650d4558fb62e34ce61d0dda) [#131](https://github.com/npm/npm-packlist/pull/131) npm-shrinkwrap.json files can now be ignored (#131) (@fritzy)
+
 ## [7.0.0-pre.0](https://github.com/npm/npm-packlist/compare/v6.0.1...v7.0.0-pre.0) (2022-09-26)
 
 ### ⚠️ BREAKING CHANGES
