@@ -52,7 +52,6 @@ t.test('follows npm package ignoring rules', async (t) => {
   t.same(files, [
     'deps/foo/config/config.gypi',
     'elf.js',
-    'npm-shrinkwrap.json',
     'package.json',
   ])
 })
