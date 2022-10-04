@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.0.0](https://github.com/npm/npm-packlist/compare/v7.0.0-pre.1...v7.0.0) (2022-10-04)
+
+### Features
+
+* [`b83e0aa`](https://github.com/npm/npm-packlist/commit/b83e0aaa31936496499283fc44b773645d3dd969) [#133](https://github.com/npm/npm-packlist/pull/133) set as release (@fritzy)
+
 ## [7.0.0-pre.1](https://github.com/npm/npm-packlist/compare/v7.0.0-pre.0...v7.0.0-pre.1) (2022-10-03)
 
 ### ⚠️ BREAKING CHANGES
