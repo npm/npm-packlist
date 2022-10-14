@@ -7,7 +7,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "ignore-walk": "^5.0.1"
+    "ignore-walk": "^6.0.0"
   },
   "author": "GitHub Inc.",
   "license": "ISC",
