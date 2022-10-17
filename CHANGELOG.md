@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.0.1](https://github.com/npm/npm-packlist/compare/v7.0.0...v7.0.1) (2022-10-17)
+
+### Dependencies
+
+* [`250d589`](https://github.com/npm/npm-packlist/commit/250d5896669e2fc84e2512124c28541e5396aad8) [#136](https://github.com/npm/npm-packlist/pull/136) bump ignore-walk from 5.0.1 to 6.0.0
+
 ## [7.0.0](https://github.com/npm/npm-packlist/compare/v7.0.0-pre.1...v7.0.0) (2022-10-04)
 
 ### Features
