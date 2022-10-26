@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.0.2](https://github.com/npm/npm-packlist/compare/v7.0.1...v7.0.2) (2022-10-26)
+
+### Bug Fixes
+
+* [`d5b653c`](https://github.com/npm/npm-packlist/commit/d5b653ce860f6601fb5007c7fcec903c8d58c1c8) [#140](https://github.com/npm/npm-packlist/pull/140) account for directories and files prefixed with `./` (#140) (@wraithgar)
+
 ## [7.0.1](https://github.com/npm/npm-packlist/compare/v7.0.0...v7.0.1) (2022-10-17)
 
 ### Dependencies
