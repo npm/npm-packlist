@@ -20,6 +20,7 @@ const createTestdir = (...files) => t.testdir({
 
 t.test('package json directory glob', async (t) => {
   const pkgFiles = [
+    'folder',
     'folder/',
     'folder/*',
     'folder/**',
