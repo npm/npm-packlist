@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.0.3](https://github.com/npm/npm-packlist/compare/v7.0.2...v7.0.3) (2022-12-07)
+
+### Bug Fixes
+
+* [`c6f2b69`](https://github.com/npm/npm-packlist/commit/c6f2b69b025575dc683f26f3d098e23a22c462da) [#147](https://github.com/npm/npm-packlist/pull/147) treat glob the same as globstar (#147) (@lukekarrys)
+
 ## [7.0.2](https://github.com/npm/npm-packlist/compare/v7.0.1...v7.0.2) (2022-10-26)
 
 ### Bug Fixes
