@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.0.4](https://github.com/npm/npm-packlist/compare/v7.0.3...v7.0.4) (2022-12-07)
+
+### Bug Fixes
+
+* [`e5256de`](https://github.com/npm/npm-packlist/commit/e5256de99776ab243ab40653e960a20a8ab6a2ab) [#149](https://github.com/npm/npm-packlist/pull/149) skip missing optional deps when bundling, closes npm/cli#5924 (#149) (@nlf)
+
 ## [7.0.3](https://github.com/npm/npm-packlist/compare/v7.0.2...v7.0.3) (2022-12-07)
 
 ### Bug Fixes
