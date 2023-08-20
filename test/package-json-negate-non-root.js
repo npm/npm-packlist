@@ -13,36 +13,42 @@ const pkg = t.testdir({
       '!readme.md',
       '!licence',
       '!license',
+      '!copying',
     ],
 
   }),
   'readme.md': 'one',
   licence: 'two',
   license: 'tre',
+  copying: 'for',
   lib: {
     'readme.md': 'one',
     licence: 'two',
     license: 'tre',
+    copying: 'for',
     a: {
       'readme.md': 'one',
       licence: 'two',
       license: 'tre',
+      copying: 'for',
       b: {
         'readme.md': 'one',
-        licence: 'one',
-        license: 'one',
+        licence: 'two',
+        license: 'tre',
+        copying: 'for',
         c: {
           'readme.md': 'one',
-          licence: 'one',
-          license: 'one',
+          licence: 'two',
+          license: 'tre',
+          copying: 'for',
           'file.txt': 'one',
-          'c.js': 'one',
+          'c.js': 'two',
         },
         'file.txt': 'one',
-        'b.js': 'one',
+        'b.js': 'two',
       },
       'file.txt': 'one',
-      'a.js': 'one',
+      'a.js': 'two',
     },
   } })
 
@@ -51,6 +57,7 @@ t.test('package with negated readme, licence and license files', async (t) => {
   const tree = await arborist.loadActual()
   const files = await packlist(tree)
   t.same(files, [
+    'copying',
     'licence',
     'license',
     'lib/a/a.js',
