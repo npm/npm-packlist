@@ -30,9 +30,11 @@ arborist.loadActual().then((tree) => {
 This uses the following rules:
 
 1. If a `package.json` file is found, and it has a `files` list,
-   then ignore everything that isn't in `files`.  Always include the
+   then ignore everything that isn't in `files`.  Always include the root
    readme, license, licence and copying files, if they exist, as well
-   as the package.json file itself.
+   as the package.json file itself. Non-root readme, license, licence and
+   copying files are included by default, but can be excluded using the 
+   `files` list e.g. `"!readme"`.
 2. If there's no `package.json` file (or it has no `files` list), and
    there is a `.npmignore` file, then ignore all the files in the
    `.npmignore` file.
