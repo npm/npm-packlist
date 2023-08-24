@@ -1,5 +1,15 @@
 # Changelog
 
+## [8.0.0](https://github.com/npm/npm-packlist/compare/v7.0.4...v8.0.0) (2023-08-24)
+
+### ⚠️ BREAKING CHANGES
+
+* The files array can now be used to exclude non-root readme, license, licence, and copying files.
+
+### Bug Fixes
+
+* [`24344a2`](https://github.com/npm/npm-packlist/commit/24344a2ce2f5a860d8c6048c642bae8db50b9618) [#173](https://github.com/npm/npm-packlist/pull/173) exclude non-root README.md/LICENSE files (#173) (@AaronHamilton965, @rahulio96)
+
 ## [7.0.4](https://github.com/npm/npm-packlist/compare/v7.0.3...v7.0.4) (2022-12-07)
 
 ### Bug Fixes
