@@ -36,7 +36,6 @@ t.test('correctly filters files from workspace subdirectory', async (t) => {
   t.same(files, [
     'index.js',
     'package.json',
-    'docs/readme.md', // readme.md is always included
     'docs/bar.txt',
     'docs/foo.txt',
   ])
@@ -85,7 +84,6 @@ t.test('does not filter based on package.json if subdirectory is not a workspace
   t.same(files, [
     'index.js',
     'package.json',
-    'docs/readme.md', // readme.md is always included
     'docs/bar.txt',
     'docs/baz.txt', // was _not_ filtered
     'docs/foo.txt',

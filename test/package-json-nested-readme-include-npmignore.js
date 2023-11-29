@@ -1,4 +1,4 @@
-// include readme.* files anywhere in a package
+// readme rules can be overridden by files array
 'use strict'
 
 const Arborist = require('@npmcli/arborist')
@@ -60,8 +60,5 @@ t.test('package with negated files', async (t) => {
     'lib/a/b/b.js',
     'lib/a/b/c/c.js',
     'package.json',
-    'lib/a/b/c/readme.md',
-    'lib/a/b/readme.md',
-    'lib/a/readme.md',
   ])
 })
