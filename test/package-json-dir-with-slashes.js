@@ -13,6 +13,7 @@ const pkg = t.testdir({
     files: [
       '/lib',
       './lib2',
+      './lib3/*',
     ],
   }),
   lib: {
@@ -26,6 +27,7 @@ const pkg = t.testdir({
     'fiv.js': 'fiv',
     '.DS_Store': 'a store of ds',
   },
+  lib3: 'not a dir',
 })
 
 t.test('package with slash directories', async (t) => {
