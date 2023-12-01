@@ -11,17 +11,20 @@ const packlist = require('../')
 const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: [
+      './fiv.js',
       '/lib/one.js',
       '/lib/two.js',
       '/lib/tre.js',
       './lib/for.js',
     ],
   }),
+  'fiv.js': 'fiv',
   lib: {
     'one.js': 'one',
     'two.js': 'two',
     'tre.js': 'tre',
     'for.js': 'for',
+    'fiv.js': 'fiv',
     '.npmignore': 'two.js',
     '.DS_Store': 'a store of ds',
   },
@@ -32,6 +35,7 @@ t.test('package with slash files', async (t) => {
   const tree = await arborist.loadActual()
   const files = await packlist(tree)
   t.same(files, [
+    'fiv.js',
     'lib/for.js',
     'lib/one.js',
     'lib/tre.js',
