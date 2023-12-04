@@ -28,7 +28,7 @@
     "snap": "tap",
     "postsnap": "npm run lintfix --",
     "eslint": "eslint",
-    "lint": "eslint \"**/*.js\"",
+    "lint": "eslint \"**/*.{js,cjs,ts,mjs,jsx,tsx}\"",
     "lintfix": "npm run lint -- --fix",
     "npmclilint": "npmcli-lint",
     "postlint": "template-oss-check",
@@ -55,7 +55,7 @@
   },
   "templateOSS": {
     "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
-    "version": "4.19.0",
+    "version": "4.21.1",
     "publish": true
   }
 }
