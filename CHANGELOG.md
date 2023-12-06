@@ -1,5 +1,26 @@
 # Changelog
 
+## [8.0.1](https://github.com/npm/npm-packlist/compare/v8.0.0...v8.0.1) (2023-12-06)
+
+### Bug Fixes
+
+* [`8fc4df1`](https://github.com/npm/npm-packlist/commit/8fc4df1b01ddfa99c476c1108f557ab6e172b28c) [#204](https://github.com/npm/npm-packlist/pull/204) always ignore .npmrc files at every level (@wraithgar)
+* [`cd5ddbd`](https://github.com/npm/npm-packlist/commit/cd5ddbd9fc7069d62fd89e0de741523e408c889b) [#205](https://github.com/npm/npm-packlist/pull/205) preserve slashes in specified files (#205) (@mohd-akram)
+
+### Dependencies
+
+* [`6058cc5`](https://github.com/npm/npm-packlist/commit/6058cc5ffd8850c0bc7d0235586d21d5724f1c78) [#204](https://github.com/npm/npm-packlist/pull/204) `ignore-walk@6.0.4`
+
+### Chores
+
+* [`20fe0cd`](https://github.com/npm/npm-packlist/commit/20fe0cdfbf0d4b447745c6149b502510f5a9655a) [#207](https://github.com/npm/npm-packlist/pull/207) bump @npmcli/template-oss from 4.21.1 to 4.21.2 (#207) (@dependabot[bot], @lukekarrys)
+* [`f8be7bd`](https://github.com/npm/npm-packlist/commit/f8be7bd0d4954b675c3da9f4954df15fb60dc071) [#202](https://github.com/npm/npm-packlist/pull/202) bump @npmcli/template-oss from 4.19.0 to 4.21.1 (#202) (@dependabot[bot], @lukekarrys)
+* [`8e1d900`](https://github.com/npm/npm-packlist/commit/8e1d9008cf8ead74a27530d3cda89200fe40f28c) [#204](https://github.com/npm/npm-packlist/pull/204) tests reflect fixed ignore-walk rules (@wraithgar)
+* [`6d7cbe9`](https://github.com/npm/npm-packlist/commit/6d7cbe9719fc16115d622398f64e588445fecfad) [#181](https://github.com/npm/npm-packlist/pull/181) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`80ec501`](https://github.com/npm/npm-packlist/commit/80ec50165e98050988c0bbb935faf43163fcb5af) [#181](https://github.com/npm/npm-packlist/pull/181) bump @npmcli/template-oss from 4.18.1 to 4.19.0 (@dependabot[bot])
+* [`f327738`](https://github.com/npm/npm-packlist/commit/f327738576e0076592880633df358a4b9f76f3b4) [#179](https://github.com/npm/npm-packlist/pull/179) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`a770a96`](https://github.com/npm/npm-packlist/commit/a770a96ba042b2221aa909a172bb3ffb51f8fb22) [#179](https://github.com/npm/npm-packlist/pull/179) bump @npmcli/template-oss from 4.18.0 to 4.18.1 (@dependabot[bot])
+
 ## [8.0.0](https://github.com/npm/npm-packlist/compare/v7.0.4...v8.0.0) (2023-08-24)
 
 ### ⚠️ BREAKING CHANGES
