@@ -1,4 +1,4 @@
-// exclude readme, license, and licnce files if package.json
+// exclude readme, license, and licence files if package.json
 // files array includes !readme, !license, or !licence
 'use strict'
 
@@ -9,7 +9,7 @@ const packlist = require('../')
 const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: [
-      '**/*.js',
+      'lib',
       '!readme.md',
       '!licence',
       '!license',
@@ -65,5 +65,8 @@ t.test('package with negated readme, licence and license files', async (t) => {
     'lib/a/b/c/c.js',
     'package.json',
     'readme.md',
+    'lib/a/b/c/file.txt',
+    'lib/a/b/file.txt',
+    'lib/a/file.txt',
   ])
 })
