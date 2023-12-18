@@ -111,7 +111,6 @@ t.test('follows gitignore and npmignore rules', async (t) => {
   const arborist = new Arborist({ path: pkg + '/packages/pkg1' })
   const tree = await arborist.loadActual()
   const files = await packlist(tree)
-  console.log(files)
   t.match(files, [
     'package.json',
     'dist/file1.md',
