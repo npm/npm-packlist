@@ -73,6 +73,19 @@ readme.md
       },
     },
   },
+  packages: {
+    pkg1: {
+      dist: {
+        'file1.md': 'new file',
+      },
+      '.npmignore': 'test*\n*.gz',
+      'package.json': JSON.stringify({
+        name: 'pkg1',
+        version: '1.0.0',
+        main: 'index.js',
+      }),
+    },
+  },
   node_modules: {
     history: {
       'README.md': "please don't include me",
@@ -89,6 +102,18 @@ t.test('follows npm package ignoring rules', async (t) => {
     'deps/foo/config/config.gypi',
     'elf.js',
     'package.json',
+    'packages/pkg1/dist/file1.md',
     'readme.md',
+  ])
+})
+
+t.test('follows gitignore and npmignore rules', async (t) => {
+  const arborist = new Arborist({ path: pkg + '/packages/pkg1' })
+  const tree = await arborist.loadActual()
+  const files = await packlist(tree)
+  console.log(files)
+  t.match(files, [
+    'package.json',
+    'dist/file1.md',
   ])
 })
