@@ -24,6 +24,8 @@ t.test('package json directory glob', async (t) => {
     'folder/',
     'folder/*',
     'folder/**',
+    'folder/**/*',
+    './folder/*',
   ]
 
   for (const files of pkgFiles) {
