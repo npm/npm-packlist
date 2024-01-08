@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.0.2](https://github.com/npm/npm-packlist/compare/v8.0.1...v8.0.2) (2024-01-03)
+
+### Bug Fixes
+
+* [`728d68a`](https://github.com/npm/npm-packlist/commit/728d68ad3dfeb86de6d319f05435a6ac7319232e) [#214](https://github.com/npm/npm-packlist/pull/214) handling of directory glob (#214) (@mohd-akram)
+* [`837af58`](https://github.com/npm/npm-packlist/commit/837af580e4b5623afdc1d034b533290bc0a93ebb) [#210](https://github.com/npm/npm-packlist/pull/210) avoid modifying singleton variable (#210) (@mohd-akram)
+
 ## [8.0.1](https://github.com/npm/npm-packlist/compare/v8.0.0...v8.0.1) (2023-12-06)
 
 ### Bug Fixes
