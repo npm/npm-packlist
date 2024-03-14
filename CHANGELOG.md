@@ -1,5 +1,11 @@
 # Changelog
 
+## [8.0.3](https://github.com/npm/npm-packlist/compare/v8.0.2...v8.0.3) (2024-03-14)
+
+### Chores
+
+* [`68fa4d1`](https://github.com/npm/npm-packlist/commit/68fa4d1002e07acc19ce655adae783ec672ed7b6) [#209](https://github.com/npm/npm-packlist/pull/209) bump @npmcli/template-oss from 4.21.2 to 4.21.3 (#209) (@dependabot[bot], @jumoel)
+
 ## [8.0.2](https://github.com/npm/npm-packlist/compare/v8.0.1...v8.0.2) (2024-01-03)
 
 ### Bug Fixes
