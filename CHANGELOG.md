@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.0.3](https://github.com/npm/npm-packlist/compare/v8.0.2...v8.0.3) (2024-04-21)
+
+### Chores
+
+* [`e5adb40`](https://github.com/npm/npm-packlist/commit/e5adb40cf85f8d42a917b8a30e2367d4cf1214ae) [#226](https://github.com/npm/npm-packlist/pull/226) postinstall for dependabot template-oss PR (@lukekarrys)
+* [`6016e7a`](https://github.com/npm/npm-packlist/commit/6016e7a0a195e0a850fe5fb74b010f3f4d0b95f0) [#226](https://github.com/npm/npm-packlist/pull/226) bump @npmcli/template-oss from 4.21.3 to 4.21.4 (@dependabot[bot])
+
 ## [8.0.2](https://github.com/npm/npm-packlist/compare/v8.0.1...v8.0.2) (2024-01-03)
 
 ### Bug Fixes
