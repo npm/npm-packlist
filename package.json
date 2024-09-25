@@ -1,6 +1,6 @@
 {
   "name": "npm-packlist",
-  "version": "8.0.2",
+  "version": "9.0.0",
   "description": "Get a list of the files to add from a folder into an npm package",
   "directories": {
     "test": "test"
@@ -17,7 +17,6 @@
   ],
   "devDependencies": {
     "@npmcli/arborist": "^7.5.4",
-    "@npmcli/eslint-config": "^5.0.0",
     "@npmcli/eslint-config": "^4.0.0",
     "@npmcli/template-oss": "4.23.3",
     "mutate-fs": "^2.1.1",

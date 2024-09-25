@@ -1,5 +1,20 @@
 # Changelog
 
+## [9.0.0](https://github.com/npm/npm-packlist/compare/v8.0.2...v9.0.0) (2024-09-25)
+### ⚠️ BREAKING CHANGES
+* `npm-packlist` now supports node `^18.17.0 || >=20.5.0`
+### Bug Fixes
+* [`4679b12`](https://github.com/npm/npm-packlist/commit/4679b12aabbcd524a4b6ccd42601297a51b6bd7e) [#247](https://github.com/npm/npm-packlist/pull/247) align to npm 10 node engine range (@hashtagchris)
+### Dependencies
+* [`b0500f4`](https://github.com/npm/npm-packlist/commit/b0500f4cb6a2e2e30d7c9df33dc367d6632f2d0a) [#247](https://github.com/npm/npm-packlist/pull/247) `ignore-walk@7.0.0`
+### Chores
+* [`46ed801`](https://github.com/npm/npm-packlist/commit/46ed8013989409ab1f50354bcb6e3c0f989bd245) [#245](https://github.com/npm/npm-packlist/pull/245) bump @npmcli/eslint-config from 4.0.5 to 5.0.0 (#245) (@dependabot[bot])
+* [`625ddca`](https://github.com/npm/npm-packlist/commit/625ddca24b20a0934b4a5b9ae14fee2232be979f) [#240](https://github.com/npm/npm-packlist/pull/240) bump @npmcli/arborist from 6.5.1 to 7.5.4 (#240) (@dependabot[bot])
+* [`e2eb28d`](https://github.com/npm/npm-packlist/commit/e2eb28dec2f8abf75357564cca683c049006be50) [#247](https://github.com/npm/npm-packlist/pull/247) run template-oss-apply (@hashtagchris)
+* [`3c27bb3`](https://github.com/npm/npm-packlist/commit/3c27bb305d769ad0f8fd128a8b99787162444de2) [#230](https://github.com/npm/npm-packlist/pull/230) bump @npmcli/template-oss to 4.22.0 (@lukekarrys)
+* [`fa9e80d`](https://github.com/npm/npm-packlist/commit/fa9e80ddfa348daf690b548a22a887f3c7fadeec) [#242](https://github.com/npm/npm-packlist/pull/242) bump @npmcli/template-oss from 4.22.0 to 4.23.3 (#242) (@dependabot[bot])
+* [`cb4a823`](https://github.com/npm/npm-packlist/commit/cb4a823cd42d50475a8e1e7582b95b15766f5ca2) [#230](https://github.com/npm/npm-packlist/pull/230) postinstall for dependabot template-oss PR (@lukekarrys)
+
 ## [8.0.2](https://github.com/npm/npm-packlist/compare/v8.0.1...v8.0.2) (2024-01-03)
 
 ### Bug Fixes
