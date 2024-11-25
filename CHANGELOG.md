@@ -1,5 +1,18 @@
 # Changelog
 
+## [10.0.0](https://github.com/npm/npm-packlist/compare/v9.0.0...v10.0.0) (2024-11-25)
+### ⚠️ BREAKING CHANGES
+* this module is now compatible with the following node versions: ^20.17.0 || >=22.9.0
+* `bun.lockb` is now included in the strict ignorelist
+### Features
+* [`9f74fd3`](https://github.com/npm/npm-packlist/commit/9f74fd37c857840a8c361a8ada8a9e9524136658) [#168](https://github.com/npm/npm-packlist/pull/168) add `bun.lockb` to ignorelist (#168) (@antongolub)
+### Bug Fixes
+* [`67fef03`](https://github.com/npm/npm-packlist/commit/67fef031feea8990a8a288c71d35a8a96e7d9e8e) update engines to ^20.17.0 || >=22.9.0 (#254) (@wraithgar)
+### Chores
+* [`fd425fa`](https://github.com/npm/npm-packlist/commit/fd425fa70c15d14c2356656c67deb660680f714d) bump @npmcli/eslint-config from 4.0.5 to 5.0.1 (#250) (@dependabot[bot])
+* [`3b66b5a`](https://github.com/npm/npm-packlist/commit/3b66b5a16cf0b23a39487c17cc5e755b57c89496) [#252](https://github.com/npm/npm-packlist/pull/252) bump @npmcli/arborist from 7.5.4 to 8.0.0 (#252) (@dependabot[bot])
+* [`e688d26`](https://github.com/npm/npm-packlist/commit/e688d26302629e0b6eb7b1e8ee3d152d06306913) bump @npmcli/template-oss from 4.23.3 to 4.23.4 (#251) (@dependabot[bot], @npm-cli-bot)
+
 ## [9.0.0](https://github.com/npm/npm-packlist/compare/v8.0.2...v9.0.0) (2024-09-25)
 ### ⚠️ BREAKING CHANGES
 * `npm-packlist` now supports node `^18.17.0 || >=20.5.0`
