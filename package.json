@@ -16,7 +16,7 @@
     "lib/"
   ],
   "devDependencies": {
-    "@npmcli/arborist": "^8.0.0",
+    "@npmcli/arborist": "^9.0.0",
     "@npmcli/eslint-config": "^5.0.1",
     "@npmcli/template-oss": "4.23.4",
     "mutate-fs": "^2.1.1",
