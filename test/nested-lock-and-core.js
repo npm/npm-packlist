@@ -21,6 +21,10 @@ const pkg = t.testdir({
     lock: 'file',
     include: false,
   }),
+  'bun.lock': JSON.stringify({
+    lock: 'file',
+    include: false,
+  }),
   lib: {
     core: 'no longer excluded dump file',
     'package-lock.json': JSON.stringify({
@@ -32,6 +36,10 @@ const pkg = t.testdir({
       include: true,
     }),
     'bun.lockb': JSON.stringify({
+      lock: 'file',
+      include: true,
+    }),
+    'bun.lock': JSON.stringify({
       lock: 'file',
       include: true,
     }),
@@ -51,6 +59,7 @@ t.test('follows npm package ignoring rules', async (t) => {
     'package.json',
     'lib/yarn.lock',
     'lib/bun.lockb',
+    'lib/bun.lock',
     'core/include-me.txt',
   ])
 })
