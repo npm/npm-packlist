@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.1](https://github.com/npm/npm-packlist/compare/v10.0.0...v10.0.1) (2025-07-24)
+### Dependencies
+* [`4bd0838`](https://github.com/npm/npm-packlist/commit/4bd08382015ce15989cf634d60b491648418280e) [#262](https://github.com/npm/npm-packlist/pull/262) `ignore-walk@8.0.0`
+### Chores
+* [`7e5f43b`](https://github.com/npm/npm-packlist/commit/7e5f43bcab016a62d406c3ad4c391ee436fb76d3) [#256](https://github.com/npm/npm-packlist/pull/256) bump @npmcli/arborist from 8.0.0 to 9.0.0 (#256) (@dependabot[bot])
+* [`7e3cd57`](https://github.com/npm/npm-packlist/commit/7e3cd572c111d02ca6e1fdf55bcfa1e6ae77b7a2) [#261](https://github.com/npm/npm-packlist/pull/261) bump @npmcli/template-oss from 4.24.4 to 4.25.0 (#261) (@dependabot[bot], @owlstronaut)
+
 ## [10.0.0](https://github.com/npm/npm-packlist/compare/v9.0.0...v10.0.0) (2024-11-25)
 ### ⚠️ BREAKING CHANGES
 * this module is now compatible with the following node versions: ^20.17.0 || >=22.9.0
