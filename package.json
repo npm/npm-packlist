@@ -7,7 +7,8 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "ignore-walk": "^8.0.0"
+    "ignore-walk": "^8.0.0",
+    "proc-log": "^5.0.0"
   },
   "author": "GitHub Inc.",
   "license": "ISC",
@@ -20,7 +21,6 @@
     "@npmcli/eslint-config": "^5.0.1",
     "@npmcli/template-oss": "4.25.0",
     "mutate-fs": "^2.1.1",
-    "proc-log": "^5.0.0",
     "tap": "^16.0.1"
   },
   "scripts": {
