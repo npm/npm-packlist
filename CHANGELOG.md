@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.0.2](https://github.com/npm/npm-packlist/compare/v10.0.1...v10.0.2) (2025-09-22)
+### Bug Fixes
+* [`566ffc2`](https://github.com/npm/npm-packlist/commit/566ffc25998c356ceb578adf2a57b89997b27ff4) [#265](https://github.com/npm/npm-packlist/pull/265) log warning for .gitignore versus .npmignore logic (#265) (@simwai)
+### Chores
+* [`5d905ef`](https://github.com/npm/npm-packlist/commit/5d905ef11c814c4ac6badf92ab8057f4b624c2b1) [#266](https://github.com/npm/npm-packlist/pull/266) bump @npmcli/template-oss from 4.25.0 to 4.25.1 (#266) (@dependabot[bot], @npm-cli-bot)
+
 ## [10.0.1](https://github.com/npm/npm-packlist/compare/v10.0.0...v10.0.1) (2025-07-24)
 ### Dependencies
 * [`4bd0838`](https://github.com/npm/npm-packlist/commit/4bd08382015ce15989cf634d60b491648418280e) [#262](https://github.com/npm/npm-packlist/pull/262) `ignore-walk@8.0.0`
