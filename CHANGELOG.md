@@ -1,5 +1,11 @@
 # Changelog
 
+## [10.0.3](https://github.com/npm/npm-packlist/compare/v10.0.2...v10.0.3) (2025-10-22)
+### Dependencies
+* [`7b4c677`](https://github.com/npm/npm-packlist/commit/7b4c6774b65e8bee0c4fe7de8b282d673037a361) [#270](https://github.com/npm/npm-packlist/pull/270) bump proc-log from 5.0.0 to 6.0.0 (#270) (@dependabot[bot])
+### Chores
+* [`c23dea8`](https://github.com/npm/npm-packlist/commit/c23dea831f8aac9a38366e61c0355197a30ff84d) [#269](https://github.com/npm/npm-packlist/pull/269) bump @npmcli/template-oss from 4.26.0 to 4.27.1 (#269) (@dependabot[bot], @npm-cli-bot)
+
 ## [10.0.2](https://github.com/npm/npm-packlist/compare/v10.0.1...v10.0.2) (2025-09-22)
 ### Bug Fixes
 * [`566ffc2`](https://github.com/npm/npm-packlist/commit/566ffc25998c356ceb578adf2a57b89997b27ff4) [#265](https://github.com/npm/npm-packlist/pull/265) log warning for .gitignore versus .npmignore logic (#265) (@simwai)
