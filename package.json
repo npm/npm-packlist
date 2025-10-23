@@ -1,6 +1,6 @@
 {
   "name": "npm-packlist",
-  "version": "10.0.2",
+  "version": "10.0.3",
   "description": "Get a list of the files to add from a folder into an npm package",
   "directories": {
     "test": "test"
