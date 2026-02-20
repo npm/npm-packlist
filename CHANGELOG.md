@@ -1,5 +1,12 @@
 # Changelog
 
+## [10.0.4](https://github.com/npm/npm-packlist/compare/v10.0.3...v10.0.4) (2026-02-20)
+### Bug Fixes
+* [`ae8cbee`](https://github.com/npm/npm-packlist/commit/ae8cbeebad57c5d08996d7b5228be0e76a27316d) [#276](https://github.com/npm/npm-packlist/pull/276) only warn about gitignore fallback at package root, not subdirectories (#276) (@umeshmore45)
+### Chores
+* [`de1e875`](https://github.com/npm/npm-packlist/commit/de1e87546d9c036a171f8191970eed58484563f9) [#272](https://github.com/npm/npm-packlist/pull/272) bump @npmcli/eslint-config from 5.1.0 to 6.0.0 (#272) (@dependabot[bot])
+* [`04102d9`](https://github.com/npm/npm-packlist/commit/04102d93f7e6605fd05eb205006ab4681df10d0a) [#275](https://github.com/npm/npm-packlist/pull/275) bump @npmcli/template-oss from 4.28.1 to 4.29.0 (#275) (@dependabot[bot], @npm-cli-bot, @owlstronaut)
+
 ## [10.0.3](https://github.com/npm/npm-packlist/compare/v10.0.2...v10.0.3) (2025-10-22)
 ### Dependencies
 * [`7b4c677`](https://github.com/npm/npm-packlist/commit/7b4c6774b65e8bee0c4fe7de8b282d673037a361) [#270](https://github.com/npm/npm-packlist/pull/270) bump proc-log from 5.0.0 to 6.0.0 (#270) (@dependabot[bot])
