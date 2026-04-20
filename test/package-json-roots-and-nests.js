@@ -44,7 +44,6 @@ const pkg = t.testdir({
   'bin.js': 'bin',
   'main.js': 'main',
   'browser.js': 'browser',
-  'npm-shrinkwrap.json': 'sw',
   inc: {
     'package.json': JSON.stringify({ files: [] }),
     'package-lock.json': 'include me plz',
@@ -66,7 +65,6 @@ t.test('package with negated files', async (t) => {
     'bin.js',
     'browser.js',
     'main.js',
-    'npm-shrinkwrap.json',
     'inc/package-lock.json',
     'node_modules/foo/package-lock.json',
     'inc/package.json',
