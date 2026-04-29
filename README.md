@@ -30,11 +30,9 @@ arborist.loadActual().then((tree) => {
 This uses the following rules:
 
 1. If a `package.json` file is found, and it has a `files` list,
-   then ignore everything that isn't in `files`.  Always include the root
-   readme, license, licence and copying files, if they exist, as well
-   as the package.json file itself. Non-root readme, license, licence and
-   copying files are included by default, but can be excluded using the 
-   `files` list e.g. `"!readme"`.
+   then ignore everything that isn't matched by `files`.  Always include the
+   root readme, license, licence and copying files, if they exist, as well
+   as the package.json file itself.
 2. If there's no `package.json` file (or it has no `files` list), and
    there is a `.npmignore` file, then ignore all the files in the
    `.npmignore` file.
@@ -45,7 +43,7 @@ This uses the following rules:
    bundled dependency.  If it IS a bundled dependency, and it's a
    symbolic link, then the target of the link is included, not the
    symlink itself.
-4. Unless they're explicitly included (by being in a `files` list, or
+5. Unless they're explicitly included (by being in a `files` list, or
    a `!negated` rule in a relevant `.npmignore` or `.gitignore`),
    always ignore certain common cruft files:
 
@@ -58,26 +56,54 @@ This uses the following rules:
     6. Darwin's `.DS_Store` files because wtf are those even
     7. `npm-debug.log` files at the root of a project
 
-    You can explicitly re-include any of these with a `files` list in
-    `package.json` or a negated ignore file rule.
+    You can explicitly re-include most of these with a negated ignore file rule.
+    A small set of files are always ignored regardless of `files` rules:
+    `.git`, `.npmrc`, and `node_modules`.
 
 Only the `package.json` file in the very root of the project is ever
 inspected for a `files` list.  Below the top level of the root package,
 `package.json` is treated as just another file, and no package-specific
 semantics are applied.
 
-### Interaction between `package.json` and `.npmignore` rules
+### Interpretation of the `files` list
 
-In previous versions of this library, the `files` list in `package.json`
-was used as an initial filter to drive further tree walking. That is no
-longer the case as of version 6.0.0.
+Each entry in the `package.json` `files` list is interpreted as a glob
+pattern, expanded against the package root using node's built-in
+[`fs.globSync`](https://nodejs.org/api/fs.html#fsglobsyncpattern-options).
+Literal paths (`lib`, `src/index.js`) are valid globs and resolve to
+themselves; pattern entries (`dist-*`, `**/*.js`) resolve to every
+matching entry on disk; entries that match nothing are silently dropped.
 
-If you have a `package.json` file with a `files` array within, any top
-level `.npmignore` and `.gitignore` files *will be ignored*.
+When an entry matches a directory, the directory and all of its contents
+are included.  This is a documented convenience: writing
+`"files": ["dist"]` does not require also writing `"dist/**"`.
 
-If a _directory_ is listed in `files`, then any rules in nested `.npmignore` files within that directory will be honored.
+A leading `!` makes the entry a negation, removing matches from the
+result.  Negations are evaluated in order, so a later positive entry
+can re-include something a previous negation excluded.
 
-For example, with this package.json:
+#### Pattern semantics are anchored to the package root
+
+Glob patterns are evaluated as paths relative to the package root, not as
+basename-anywhere matchers.  In particular:
+
+* `"*.js"` matches `.js` files at the package root, not at every depth.
+  Use `"**/*.js"` to match at every depth.
+* `"!readme.md"` removes only the root `readme.md`.  Use
+  `"!**/readme.md"` to remove `readme.md` at every depth.
+
+Negations only exclude paths that exist on disk at packlist time: a `!path`
+entry that matches nothing is silently dropped, same as a positive entry
+that matches nothing.  A typo'd negation has no effect.
+
+#### Interaction with `.npmignore`
+
+If a `package.json` `files` array is present, any **top-level**
+`.npmignore` and `.gitignore` files are ignored: the `files` array is
+the sole source of inclusion at the package root.
+
+`.npmignore` files in subdirectories are still honored within their
+subtree.  For example, with this package.json:
 
 ```json
 {
@@ -85,21 +111,10 @@ For example, with this package.json:
 }
 ```
 
-a `.npmignore` file at `dir/.npmignore` (and any subsequent
-sub-directories) will be honored.  However, a `.npmignore` at the root
-level will be skipped.
-
-Additionally, with this package.json:
-
-```
-{
-  "files": ["dir/subdir"]
-}
-```
-
-a `.npmignore` file at `dir/.npmignore` will be honored, as well as `dir/subdir/.npmignore`.
-
-Any specific file matched by an exact filename in the package.json `files` list will be included, and cannot be excluded, by any `.npmignore` files.
+a `.npmignore` at `dir/.npmignore` (and any nested subdirectory) will
+be applied.  This means a file listed both in `files` and excluded by a
+nested `.npmignore` will be excluded from the tarball; if you need such
+a file to ship, remove the `.npmignore` rule.
 
 ## API
 

@@ -41,16 +41,27 @@ t.test('cannot include something that exists but is neither a file nor a directo
     },
   })
 
+  // mock glob so the Path object for `device` reports as neither file nor
+  // directory; this is the path through which packlist now resolves `files[]`
+  // entries (no separate lstatSync probe), so the test must intercept here.
+  const realGlob = require('glob')
   const packlist = t.mock('../', {
     'ignore-walk': ignoreWalk,
-    fs: {
-      ...fs,
-      lstatSync: (path) => {
-        if (path === join(pkg, 'device').replace(/\\/g, '/')) {
-          return { isFile: () => false, isDirectory: () => false }
-        }
-
-        return fs.lstatSync(path)
+    glob: {
+      ...realGlob,
+      globSync: (pattern, options) => {
+        const real = realGlob.globSync(pattern, options)
+        return real.map((entry) => {
+          if (typeof entry === 'string') {
+            return entry
+          }
+          if (entry.name === 'device') {
+            entry.isFile = () => false
+            entry.isDirectory = () => false
+            entry.isSymbolicLink = () => false
+          }
+          return entry
+        })
       },
     },
   })
