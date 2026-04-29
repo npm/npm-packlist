@@ -1,5 +1,7 @@
-// exclude readme, license, and licence files if package.json
-// files array includes !readme, !license, or !licence
+// exclude readme, license, and licence files at any depth via globstar
+// negations. this is a behavior change in npm-packlist v11: with real glob
+// semantics, an unanchored pattern only matches the package root, so users
+// who want to exclude nested files must use globstar (**/...) patterns.
 'use strict'
 
 const Arborist = require('@npmcli/arborist')
@@ -10,10 +12,10 @@ const pkg = t.testdir({
   'package.json': JSON.stringify({
     files: [
       'lib',
-      '!readme.md',
-      '!licence',
-      '!license',
-      '!copying',
+      '!**/readme.md',
+      '!**/licence',
+      '!**/license',
+      '!**/copying',
     ],
 
   }),
