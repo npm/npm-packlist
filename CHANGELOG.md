@@ -1,5 +1,28 @@
 # Changelog
 
+## [11.0.0](https://github.com/npm/npm-packlist/compare/v10.0.4...v11.0.0) (2026-05-15)
+### ⚠️ BREAKING CHANGES
+* `npm-packlist` now supports node `^22.22.2 || ^24.15.0 || >=26.0.0`
+* template-oss-apply
+* Entries in `files[]` are now interpreted as glob patterns anchored to the package root, with no special-case overrides. Slashless negations like `!readme.md` only match at the root — use `!**/readme.md` to remove at every depth. An exact file path in `files[]` no longer overrides a nested `.npmignore` rule that excludes it; remove the rule from `.npmignore` if you need such a file to ship. Listing a default-ignored file (e.g. `.npmignore`, `.npmrc`) in `files[]` no longer forces it to be packed.
+* `npm-shrinkwrap.json` is no longer included in published tarballs by default. Publishers who need to ship a locked dependency tree should use `bundleDependencies`; publishers with a legitimate reason to include a file literally named `npm-shrinkwrap.json` can still opt back in with a negated `files` entry.
+* bun.lock is now excluded from package contents by default. If you need to include it, add "bun.lock" to the "files" array in your package.json.
+### Features
+* [`da9502e`](https://github.com/npm/npm-packlist/commit/da9502e78bfeec87a561ae2cef97791932d5f45b) [#286](https://github.com/npm/npm-packlist/pull/286) bump to new node engine range (@owlstronaut)
+* [`943b8ec`](https://github.com/npm/npm-packlist/commit/943b8ec16c635531211b2a5a8c96fb3054db83c7) [#286](https://github.com/npm/npm-packlist/pull/286) template-oss-apply (@owlstronaut)
+* [`2ec1c00`](https://github.com/npm/npm-packlist/commit/2ec1c00ea3556669dc90cf1e202a14d6dd3d1c3b) [#281](https://github.com/npm/npm-packlist/pull/281) exclude npm-shrinkwrap.json from package contents (@owlstronaut)
+* [`59a8d0f`](https://github.com/npm/npm-packlist/commit/59a8d0f9375fc5a5ed0f81c54e059c5212fa91d2) [#279](https://github.com/npm/npm-packlist/pull/279) exclude bun.lock from package contents (@owlstronaut)
+### Bug Fixes
+* [`8e8d6ee`](https://github.com/npm/npm-packlist/commit/8e8d6eea4faa0171a6f08e1feb838dcd905cb049) [#282](https://github.com/npm/npm-packlist/pull/282) use real glob semantics for `package.json` files array (@owlstronaut)
+### Dependencies
+* [`cda441f`](https://github.com/npm/npm-packlist/commit/cda441f28d1823b328ef287b0c7303908acad8dd) [#286](https://github.com/npm/npm-packlist/pull/286) `proc-log@7.0.0`
+* [`356d0b6`](https://github.com/npm/npm-packlist/commit/356d0b61d21c28c2011f26a9af7b0e4207ec9212) [#286](https://github.com/npm/npm-packlist/pull/286) `ignore-walk@9.0.0`
+### Chores
+* [`e768b3a`](https://github.com/npm/npm-packlist/commit/e768b3aa73de00c53ffbea8a857595eaeed0f366) [#286](https://github.com/npm/npm-packlist/pull/286) template-oss-apply (@owlstronaut)
+* [`b1c2c16`](https://github.com/npm/npm-packlist/commit/b1c2c16b54d27978743591c55be01e1d1b041ea1) [#286](https://github.com/npm/npm-packlist/pull/286) bumping @npmcli/template-oss from 4.30.0 to 5.1.0 (@owlstronaut)
+* [`13f4e2b`](https://github.com/npm/npm-packlist/commit/13f4e2b2ef524545d2dee17ac5960c3c45f66a27) [#279](https://github.com/npm/npm-packlist/pull/279) template-oss-apply (@owlstronaut)
+* [`261224f`](https://github.com/npm/npm-packlist/commit/261224fe7b4eaa4bfb2350247ccd265ed2bce57a) [#278](https://github.com/npm/npm-packlist/pull/278) bump @npmcli/template-oss from 4.29.0 to 4.30.0 (#278) (@dependabot[bot], @npm-cli-bot)
+
 ## [10.0.4](https://github.com/npm/npm-packlist/compare/v10.0.3...v10.0.4) (2026-02-20)
 ### Bug Fixes
 * [`ae8cbee`](https://github.com/npm/npm-packlist/commit/ae8cbeebad57c5d08996d7b5228be0e76a27316d) [#276](https://github.com/npm/npm-packlist/pull/276) only warn about gitignore fallback at package root, not subdirectories (#276) (@umeshmore45)
