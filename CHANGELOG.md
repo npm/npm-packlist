@@ -1,5 +1,11 @@
 # Changelog
 
+## [11.1.0](https://github.com/npm/npm-packlist/compare/v11.0.0...v11.1.0) (2026-05-22)
+### Features
+* [`1369ec3`](https://github.com/npm/npm-packlist/commit/1369ec372bdef50e88ba055516fbd5c4cfb7ab83) [#287](https://github.com/npm/npm-packlist/pull/287) support a user level ignore file via globalIgnoreFile (#287) (@ljharb)
+### Chores
+* [`e1f3d11`](https://github.com/npm/npm-packlist/commit/e1f3d11c35cdf1948fe2f60205041b4f34f6ca32) [#289](https://github.com/npm/npm-packlist/pull/289) bump @npmcli/eslint-config from 6.0.1 to 7.0.0 (#289) (@dependabot[bot])
+
 ## [11.0.0](https://github.com/npm/npm-packlist/compare/v10.0.4...v11.0.0) (2026-05-15)
 ### ⚠️ BREAKING CHANGES
 * `npm-packlist` now supports node `^22.22.2 || ^24.15.0 || >=26.0.0`
