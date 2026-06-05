@@ -1,5 +1,9 @@
 # Changelog
 
+## [11.2.0](https://github.com/npm/npm-packlist/compare/v11.1.0...v11.2.0) (2026-06-05)
+### Features
+* [`7e2513d`](https://github.com/npm/npm-packlist/commit/7e2513d077519476e282ed1b0f9203e5f08a7554) [#291](https://github.com/npm/npm-packlist/pull/291) exclude patchedDependencies patch files from the package tarball (#291) (@manzoorwanijk)
+
 ## [11.1.0](https://github.com/npm/npm-packlist/compare/v11.0.0...v11.1.0) (2026-05-22)
 ### Features
 * [`1369ec3`](https://github.com/npm/npm-packlist/commit/1369ec372bdef50e88ba055516fbd5c4cfb7ab83) [#287](https://github.com/npm/npm-packlist/pull/287) support a user level ignore file via globalIgnoreFile (#287) (@ljharb)
