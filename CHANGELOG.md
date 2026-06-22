@@ -1,5 +1,11 @@
 # Changelog
 
+## [11.3.0](https://github.com/npm/npm-packlist/compare/v11.2.0...v11.3.0) (2026-06-22)
+### Features
+* [`ec0f6c4`](https://github.com/npm/npm-packlist/commit/ec0f6c476144e1b774aa5198936321878e51f9dd) [#294](https://github.com/npm/npm-packlist/pull/294) exclude root `.npm-extension.mjs`/`.cjs` from package tarballs (#294) (@manzoorwanijk)
+### Chores
+* [`d5ab08c`](https://github.com/npm/npm-packlist/commit/d5ab08cfaf3ff87be26c2def239c55e6207825cd) [#293](https://github.com/npm/npm-packlist/pull/293) bump @npmcli/template-oss from 5.1.0 to 5.1.1 (#293) (@dependabot[bot], @npm-cli-bot)
+
 ## [11.2.0](https://github.com/npm/npm-packlist/compare/v11.1.0...v11.2.0) (2026-06-05)
 ### Features
 * [`7e2513d`](https://github.com/npm/npm-packlist/commit/7e2513d077519476e282ed1b0f9203e5f08a7554) [#291](https://github.com/npm/npm-packlist/pull/291) exclude patchedDependencies patch files from the package tarball (#291) (@manzoorwanijk)
