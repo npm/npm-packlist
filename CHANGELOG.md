@@ -1,5 +1,9 @@
 # Changelog
 
+## [11.3.1](https://github.com/npm/npm-packlist/compare/v11.3.0...v11.3.1) (2026-11-11)
+### Dependencies
+* [`ee16eb4`](https://github.com/npm/npm-packlist/commit/ee16eb459baf815ede0e456b16eaa9acaf13eb81) [#303](https://github.com/npm/npm-packlist/pull/303) bump glob from 13.0.6 to 14.0.3 (#303) (@jeffkl, @Copilot)
+
 ## [11.3.0](https://github.com/npm/npm-packlist/compare/v11.2.0...v11.3.0) (2026-06-22)
 ### Features
 * [`ec0f6c4`](https://github.com/npm/npm-packlist/commit/ec0f6c476144e1b774aa5198936321878e51f9dd) [#294](https://github.com/npm/npm-packlist/pull/294) exclude root `.npm-extension.mjs`/`.cjs` from package tarballs (#294) (@manzoorwanijk)
