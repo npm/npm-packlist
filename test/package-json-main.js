@@ -61,3 +61,33 @@ t.test('follows npm package ignoring rules', async (t) => {
     'package.json',
   ])
 })
+
+t.test('includes main with a leading ./', async (t) => {
+  for (const [main, rules, expected] of [
+    ['./example.js', { files: [] }, ['example.js']],
+    ['./lib/example.js', { files: [] }, ['lib/example.js']],
+    ['./example.js', {}, ['example.js']],
+    ['././example.js', { files: [] }, ['example.js']],
+    ['./', { files: [] }, []],
+  ]) {
+    await t.test(`${main} with ${rules.files ? 'files' : '.npmignore'}`, async (t) => {
+      const path = t.testdir({
+        'package.json': JSON.stringify({
+          name: 'test-package',
+          version: '1.0.0',
+          main,
+          ...rules,
+        }),
+        '.npmignore': '*',
+        'example.js': elfJS,
+        'other.js': elfJS,
+        lib: {
+          'example.js': elfJS,
+          'other.js': elfJS,
+        },
+      })
+      const tree = await new Arborist({ path }).loadActual()
+      t.same(await packlist(tree), [...expected, 'package.json'])
+    })
+  }
+})
