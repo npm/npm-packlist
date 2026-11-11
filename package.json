@@ -7,7 +7,7 @@
   },
   "main": "lib/index.js",
   "dependencies": {
-    "glob": "^13.0.6",
+    "glob": "^14.0.3",
     "ignore-walk": "^9.0.0",
     "proc-log": "^7.0.0"
   },
