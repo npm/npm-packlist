@@ -176,3 +176,49 @@ t.test('.gitignore is discarded if .npmignore exists outside of tree', async (t)
     'package.json',
   ])
 })
+
+t.test('workspace npmignore overrides inherited gitignore rules', async t => {
+  for (const npmignore of ['', 'local-secret\n']) {
+    for (const inheritedNpmignore of [false, true]) {
+      await t.test(JSON.stringify({ npmignore, inheritedNpmignore }), async t => {
+        const root = t.testdir({
+          'package.json': JSON.stringify({
+            name: 'workspace-root',
+            version: '1.0.0',
+            workspaces: ['packages/*'],
+          }),
+          '.gitignore': 'dist\n',
+          ...(inheritedNpmignore ? { '.npmignore': 'root-secret\n' } : {}),
+          packages: {
+            '.gitignore': 'intermediate-secret\n',
+            pkg: {
+              'package.json': JSON.stringify({ name: 'workspace-child', version: '1.0.0' }),
+              '.npmignore': npmignore,
+              '.gitignore': 'dist\n',
+              '.npmrc': 'always excluded',
+              'root-secret': 'still follows inherited npmignore',
+              'local-secret': 'follows workspace npmignore',
+              'intermediate-secret': 'not excluded by inherited gitignore',
+              dist: { 'index.js': 'module.exports = 42' },
+              nested: {
+                '.gitignore': 'nested-secret\n',
+                'nested-secret': 'still follows nested gitignore',
+                'index.js': 'module.exports = 1',
+              },
+            },
+          },
+        })
+        const workspacePath = path.join(root, 'packages', 'pkg')
+        const tree = await new Arborist({ path: workspacePath }).loadActual()
+        const files = await packlist(tree, { prefix: root, workspaces: [workspacePath] })
+        t.ok(files.includes('dist/index.js'), 'includes built output ignored by parent gitignore')
+        t.ok(files.includes('intermediate-secret'), 'ignores intermediate gitignore')
+        t.equal(files.includes('root-secret'), !inheritedNpmignore, 'retains inherited npmignore')
+        t.equal(files.includes('local-secret'), !npmignore, 'honors workspace npmignore')
+        t.ok(files.includes('nested/index.js'), 'includes unrelated nested output')
+        t.notOk(files.includes('nested/nested-secret'), 'honors nested gitignore')
+        t.notOk(files.includes('.npmrc'), 'preserves mandatory exclusions')
+      })
+    }
+  }
+})
