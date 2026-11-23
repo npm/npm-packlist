@@ -1,5 +1,9 @@
 # Changelog
 
+## [11.3.2](https://github.com/npm/npm-packlist/compare/v11.3.1...v11.3.2) (2026-11-23)
+### Dependencies
+* [`26c03c8`](https://github.com/npm/npm-packlist/commit/26c03c86c8ed0f3ced041e0167a4169fa90e1a7e) [#310](https://github.com/npm/npm-packlist/pull/310) `ignore-walk@9.0.1` (#310) (@jeffkl, @Copilot)
+
 ## [11.3.1](https://github.com/npm/npm-packlist/compare/v11.3.0...v11.3.1) (2026-11-11)
 ### Dependencies
 * [`ee16eb4`](https://github.com/npm/npm-packlist/commit/ee16eb459baf815ede0e456b16eaa9acaf13eb81) [#303](https://github.com/npm/npm-packlist/pull/303) bump glob from 13.0.6 to 14.0.3 (#303) (@jeffkl, @Copilot)
